@@ -22,25 +22,58 @@
 <!-- Diese Vorlage ist für eine README.md im Repository gedacht. Abschnitte mit [Optional] können weggelassen werden, wenn in den Übungen nichts anderes verlangt wird. -->
 
 ## 1. Ausgangslage
-Kurz beschreiben, welches Problem adressiert wird und welches Ergebnis angestrebt ist. Wem nützt die Lösung, wer ist beteiligt oder betroffen?
-- **Problem:** _[Das Problem ist identifiziert, verständlich beschrieben und optional mit Beispielen illustriert]_  
-- **Ziele:** _[stichwortartig oder einige Sätze]_  
-- **Primäre Zielgruppe:** _[kurz beschreiben]_  
-- **Weitere Stakeholder [Optional]:** _[z. B. Verwaltung, Geschäftsleitung]_  
-
-
+- **Problem:** Viele Sportler:innen und Studierende verbringen unverhältnismässig viel Zeit damit, passende Übungen zu recherchieren und einen sinnvollen Trainingsplan zusammenzustellen. Die schiere Menge an Trainingsmethoden – von klassischem Krafttraining über Mobility und Plyometrics bis hin zu Kettlebell und Agility – führt zu Entscheidungsmüdigkeit und Unsicherheit. Bestehende Lösungen sind entweder zu komplex und abo-basiert (z. B. Freeletics, Fitbod), zu starr mit vorgefertigten Plänen, oder reine Nachschlagewerke ohne interaktive Planungsfunktion (z. B. MuscleWiki, ExRx.net). Es fehlt ein schlankes Tool, das Übungen nach Muskelgruppe *und* Trainingskategorie filterbar macht und mit wenigen Klicks einen individuellen Trainingsplan generiert.
+- **Ziele:**
+  - Eine Web-App entwickeln, mit der Nutzer:innen in unter 2 Minuten einen individuellen Trainingsplan zusammenstellen können
+  - Übungen sind filterbar nach Muskelgruppe und Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation, Explosiveness)
+  - Per Klick werden Übungen in eine visuelle Trainingsplan-Übersicht übernommen
+  - Jede Trainingskategorie verfügt über eine eigene Detailseite mit allen zugehörigen Übungen
+  - Minimalistisches, intuitives UI – keine Registrierung, kein Abo, keine Überfrachtung
+- **Primäre Zielgruppe:** Ambitionierte Hobby-Athlet:innen und Studierende mit Fitness-Interesse, die mehrere Trainingsstile kombinieren und sich beim Planen Zeit sparen möchten. Sekundär auch Fitness-Einsteiger:innen, die eine übersichtliche, gefilterte Übungsauswahl mit tiefer Einstiegshürde suchen.
+- **Weitere Stakeholder [Optional]:** Trainer:innen und Coaches, die das Tool nutzen könnten, um schnell Trainingsvorlagen für ihre Klient:innen zu erstellen.
 ## 2. Lösungsidee
-Beschreibt die Lösungsidee.
-- **Kernfunktionalität:** _[Workflows kurz nennen und optional illustrieren]_  
-- **Annahmen [Optional]:** _[welche Hypothesen werden geprüft?]_
-- **Abgrenzung [Optional]:** _[Was gehört explizit nicht zum Umfang?]_
-
+ 
+- **Kernfunktionalität:** Der zentrale Workflow der Web-App gliedert sich in drei Schritte:
+  1. **Filtern** – Nutzer:innen wählen eine oder mehrere Muskelgruppen und/oder Trainingskategorien aus.
+  2. **Auswählen** – Alle passenden Übungen werden angezeigt. Per Klick auf eine Übung wird diese direkt in die Trainingsplan-Übersicht aufgenommen.
+  3. **Übersicht** – Der zusammengestellte Trainingsplan wird als kompakte visuelle Übersicht dargestellt, die alle gewählten Übungen für die aktuelle Session enthält.
+  Ergänzend verfügt jede Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation, Explosiveness) über eine eigene Detailseite, auf der alle Übungen dieser Kategorie aufgelistet und beschrieben sind.
+- **Annahmen [Optional]:**
+  - Nutzer:innen wissen grundsätzlich, welche Muskelgruppe(n) sie trainieren möchten, benötigen aber Unterstützung bei der konkreten Übungsauswahl.
+  - Die Kombination aus Muskelgruppen-Filter und Kategorien-Filter bietet genügend Steuerung, um relevante Übungen schnell einzugrenzen.
+  - Ein minimalistischer «Klick-zum-Plan»-Workflow wird gegenüber algorithmisch generierten Plänen bevorzugt, da er den Nutzer:innen mehr Kontrolle überlässt.
+- **Abgrenzung [Optional]:**
+  - Kein automatisch generierter Trainingsplan (kein AI-Coach, keine Periodisierung)
+  - Kein Tracking von Gewichten, Sätzen oder Wiederholungen – der Fokus liegt auf der Planerstellung, nicht auf dem Logging
+  - Kein Nutzer-Account-System, keine Social Features
+  - Keine eigene Video-/Animations-Produktion – es wird auf bestehende Quellen (z. B. YouTube, MuscleWiki) verlinkt
 ## 3. Vorgehen & Artefakte
-Die Durchführung erfolgt phasenbasiert; dokumentieren Sie die wichtigsten Ergebnisse je Phase.
-
+ 
+Die Durchführung erfolgt phasenbasiert; nachfolgend sind die wichtigsten Ergebnisse je Phase dokumentiert.
+ 
 ### 3.1 Understand & Define
-- **Zielgruppenverständnis:** _[Problemraumanalyse, Recherche, (Proto-)Personas]_
-- **Wesentliche Erkenntnisse:** _[Stichpunkte]_
+ 
+- **Zielgruppenverständnis:**
+  **Problemräume:**
+  - Viele Sportler:innen und Studierende investieren unverhältnismässig viel Zeit in die Recherche passender Übungen und das Zusammenstellen eines sinnvollen Trainingsplans.
+  - Die Menge an Trainingsmethoden und -philosophien (Kraft, Mobility, Plyometrics, Isometrics, Kettlebell, Rotation, Explosiveness) führt zu Entscheidungsmüdigkeit – besonders wenn mehrere Stile kombiniert werden sollen.
+  - Social Media präsentiert ständig neue Übungen, die zwar gespeichert, aber selten strukturiert in den Trainingsalltag integriert werden.
+  - Bestehende Tools sind entweder überladene Coaching-Apps mit Abo-Modell, starre vorgefertigte Pläne oder reine Nachschlagewerke ohne Planungsfunktion.
+  - Athlet:innen, die mehrere Disziplinen kombinieren (z. B. Kraft + Plyometrics + Mobility), finden in klassischen Bodybuilding-Apps kaum passende Inhalte.
+  **Personas:**
+  | Nutzer | Bedürfnisse | Kontext / Herausforderungen | HMW (How Might We) |
+  |---|---|---|---|
+  | **Ambitionierte Athlet:innen** (Hobby- und Wettkampfsport, kombinieren mehrere Trainingsstile) | Schnelle, flexible Plan-Erstellung über mehrere Kategorien hinweg (z. B. Kraft + Plyometrics + Mobility); klare Übersicht über die geplante Session | Wechselnde Trainingsziele je nach Saison/Phase, begrenzte Zeit, sehr viele in Frage kommende Übungen, hoher Anspruch an Variation | Wie könnten wir Athlet:innen ermöglichen, mit wenigen Klicks einen individuellen Plan über mehrere Trainingskategorien hinweg zusammenzustellen? |
+  | **Studierende mit Fitness-Interesse** | Zeitersparnis, einfache Bedienung, geringe Einstiegshürde, kein Abo | Stress durch Studium, knappe Zeitfenster zwischen Vorlesungen, wenig Erfahrung mit strukturierter Trainingsplanung, begrenztes Budget | Wie könnten wir die Trainingsplan-Erstellung so unkompliziert gestalten, dass auch Studierende ohne Vorwissen sie in unter 2 Minuten nutzen können? |
+  | **Fitness-Einsteiger:innen** | Übersichtliche, gefilterte Auswahl; Sicherheit bei der Übungswahl; visuelle Orientierung | Unsicherheit bei der Auswahl, Angst vor Fehlern oder Verletzungen, Überforderung durch zu viele Optionen, fehlendes Vokabular | Wie könnten wir Einsteiger:innen helfen, passende Übungen je Muskelgruppe zu finden und so motiviert dranzubleiben? |
+  | **Trainer:innen / Coaches** (sekundäre Zielgruppe) | Schnelles Erstellen von Vorlagen, die sie an Klient:innen weitergeben können | Wenig Zeit zwischen Sessions, Bedarf an strukturierten, wiederverwendbaren Plänen | Wie könnten wir Coaches ermöglichen, Trainingspläne effizient als Vorlage zu erstellen und zu teilen? |
+- **Wesentliche Erkenntnisse:**
+  - Bestehende Fitness-Apps (Freeletics, Fitbod, Jefit) sind entweder stark algorithmisch/abo-basiert oder fokussieren sich fast ausschliesslich auf klassisches Krafttraining. Die Kombination verschiedener Trainingsstile wird kaum in einem Tool abgedeckt.
+  - Reine Nachschlagewerke wie Lift Manual, ExRx.net oder MuscleWiki bieten umfassende Übungsdatenbanken, jedoch keine interaktive Planerstellung.
+  - Nutzer:innen wünschen sich vor allem Geschwindigkeit, Übersichtlichkeit und Filtermöglichkeiten nach Muskelgruppe und Trainingsart – nicht zwingend mehr Inhalte.
+  - Eine visuelle Übersicht des zusammengestellten Plans wirkt motivierend und verringert die Wahrscheinlichkeit, eine Session abzubrechen.
+  - Studierende und Berufstätige bewerten Zeitersparnis und reibungslose UX höher als Premium-Features (Statistiken, Social Sharing, Gamification).
+  - Der USP liegt in der Kombination aus breiter Kategorienabdeckung (Athletic, Plyometrics, Mobility etc.) und einem minimalistischen Klick-zum-Plan-Workflow – dort wo bestehende Lösungen entweder zu schwer oder zu eingeschränkt sind.
 
 ### 3.2 Sketch
 - **Variantenüberblick:** _[kurz]_
