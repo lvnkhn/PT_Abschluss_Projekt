@@ -76,11 +76,35 @@ Die Durchführung erfolgt phasenbasiert; nachfolgend sind die wichtigsten Ergebn
   - Der USP liegt in der Kombination aus breiter Kategorienabdeckung (Athletic, Plyometrics, Mobility etc.) und einem minimalistischen Klick-zum-Plan-Workflow – dort wo bestehende Lösungen entweder zu schwer oder zu eingeschränkt sind.
 
 ### 3.2 Sketch
-- **Variantenüberblick:** _[kurz]_
-- **Skizzen:** _[Mehrere Varianten; Unterschiede kurz dokumentieren.]_
-
+ 
+Im Rahmen einer Crazy-8s-Session wurden zwei Varianten für die App-Struktur skizziert.
+ 
+- **Variantenüberblick:**
+  | | Variante A – Karussell-Homepage | Variante B – Dashboard-Homepage |
+  |---|---|---|
+  | **Homepage** | Grosses Karussell mit Übungsvorschlägen, weiterklicken nötig um an Kernfunktionen zu gelangen | Dashboard-Layout mit mehreren Containern: aktueller Plan, My Plans, Kategorien, Explore – alles auf einen Blick |
+  | **Navigation** | Home, Your Plan, Exercises, Categories + separate Help-Seite | Home, Your Plan, Exercises, Categories + Add Exercises (ersetzt Help) |
+  | **Help / Add** | Eigene Help-Seite mit externen Links (Lift Manual, Workout Wiki) | Help-Seite wird zu einer **Add Exercise**-Seite umfunktioniert: Nutzende können eigene Übungen anlegen (Name, Bodypart, Category, References) |
+  | **Exercises** | Kategorie-Filter via Checkboxen, Übungskarten mit Bild, Beschreibung und «Add to Plan» | Gleiche Grundstruktur, zusätzlich Checkbox pro Übung für schnelleres Hinzufügen |
+  | **Your Plan** | Übungen gruppiert nach Kategorie als Liste | Gleich, ergänzt um «Add to Plan»-Button und Checkboxen |
+  | **My Plans** | Chronologische Liste mit Datum und Titel | Gleich, ergänzt um Status-Spalte (complete / done) |
+  | **Categories** | Kategorie-Liste mit Klick auf Detailseite | Gleich, zusätzlich farbkodierte Icons pro Kategorie |
+  | **Explore** | 3×3-Grid mit Übungsbildern | Gleich |
+  | **Detail Page** | Übungsillustration, Beschreibung, nummerierte Schritte | Gleich, ergänzt um Referenz-Link |
+- **Skizzen:**
+  - **Variante A** (Crazy-8s, Seite 1): Karussell-basierte Homepage mit separater Help-Seite. Alle Kernfunktionen (Plan, Exercises, Categories) nur über Navigation erreichbar.
+  - **Variante B** (überarbeitete Skizze, Seite 3): Dashboard-Homepage mit «Hi \<User\>»-Begrüssung, Suchleiste, Container für Recent Workout, My Plans, Categories und Explore. Help-Seite durch Add Exercise ersetzt. Floating «+»-Button für schnellen Zugriff.
 ### 3.3 Decide
-- **Gewählte Variante & Begründung:** _[Entscheidkriterien nennen]_  
+ 
+- **Gewählte Variante & Begründung:** Variante B – Dashboard-Homepage. Die Homepage ist der Einstiegspunkt und prägt den ersten Eindruck am stärksten. Das ursprüngliche Karussell (Variante A) nutzte den verfügbaren Platz nicht aus und zwang Nutzende, aktiv weiterzuklicken, um an die Kernfunktionen zu gelangen. Das Dashboard-Layout zeigt alle wichtigen Bereiche (aktueller Plan, My Plans, Kategorien, Explore) direkt auf der Startseite als Container an.
+  **Entscheidkriterien:**
+  - *Sofortiger Überblick:* Dashboard zeigt alle Kernfunktionen ohne zusätzliche Navigation.
+  - *Feedback-getrieben:* Drei Rückmeldungen aus der Sketch-Session flossen direkt ein (siehe unten).
+  - *Mehrwert statt Leerseite:* Die überflüssige Help-Seite wurde zur Add Exercise-Seite umgewandelt – Nutzende können eigene Übungen anlegen, was die App über die vordefinierte Datenbank hinaus flexibel macht.
+  **Erhaltenes Feedback und Einfluss auf die Entscheidung:**
+  1. Die Help-Seite wirkte als eigene Hauptseite überflüssig → Umfunktionierung zu einer **Add Exercise**-Seite mit Formular (Name, Bodypart, Category, References) und Liste eigener Übungen.
+  2. Die Homepage sollte nutzerfreundlicher gestaltet werden, indem die wichtigsten Features als Container auf derselben Seite dargestellt werden → **Dashboard-Layout** mit Containern für Recent Workout, My Plans, Categories und Explore.
+  3. Kategorien sollen visuell und funktional klar unterscheidbar sein → **Farbkodierung und Icons** pro Kategorie; Überschneidungen werden später über Tags abgebildet.
 - **End-to-End-Ablauf:** _[Beschreibung inkl. User Journey Map]_  
 - **Mockup:** _[URL, z. B. Figma; Screenshots mit kurzen Beschreibungen]_  
 
