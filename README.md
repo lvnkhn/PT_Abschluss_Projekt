@@ -111,11 +111,56 @@ Im Rahmen einer Crazy-8s-Session wurden zwei Varianten für die App-Struktur ski
 ### 3.4 Prototype
 
 #### 3.4.1. Entwurf (Design)
+**TODO** Anpassen und Screenshots einfügen (Final version)**TODO**
 Beschreibt die Gestaltung und Interaktion.
 > **Hinweis:** Hier wird der **Prototyp** beschrieben, nicht das **Mockup**.
 - **Informationsarchitektur:** _[z. B. Seiten/Navigation: Konzept, nicht die technische Umsetzung]_
 - **User Interface Design:** _[wichtige Screens: Screenshots mit kurzen Erläuterungen]_  
 - **Designentscheidungen:** _[zentrale Entscheidungen und Begründungen]_
+## 3.4 Prototype
+
+### 3.4.1 Entwurf (Design)
+
+#### Informationsarchitektur
+
+Der Prototyp ist um fünf Hauptbereiche organisiert, die über eine persistente Bottom-Navigation jederzeit erreichbar sind:
+
+- **Home:** Einstiegspunkt mit aktuellem Workout, eigenen Plänen und Kategorien
+- **Exercises:** Übungsliste mit Filterfunktion
+- **Your Plan:** Aktiver Trainingsplan
+- **Categories:** Übungen nach Trainingsart gruppiert
+- **Add:** Formular zum Erfassen eigener Übungen
+
+Die Navigationsstruktur ist flach gehalten – alle zentralen Funktionen sind mit maximal zwei Taps erreichbar. Detailansichten öffnen sich kontextuell aus den Listenansichten.
+
+#### User Interface Design
+
+Die wichtigsten Screens des Prototyps und ihre Interaktionen:
+
+- **Home:** Tap auf "Current Workout" startet das aktive Training. Pläne und Kategorien sind direkt anwählbar.
+- **Exercises:** Filter-Chips schalten zwischen Trainingsarten um. Der "+"-Button fügt eine Übung dem Plan hinzu und kehrt zur Liste zurück.
+- **Your Plan:** Zeigt die hinzugefügten Übungen gruppiert nach Kategorie.
+- **Categories:** Tap auf eine Kategorie öffnet die zugehörige Übungsliste.
+- **Add Exercise:** Formular mit Dropdown für Kategorien; "Save Exercise" speichert und kehrt zur Übersicht zurück.
+- **Übungsdetail:** Zeigt Bild, Tags und Schritt-für-Schritt-Anweisungen zur Übung.
+
+#### Designentscheidungen
+
+- **Dark Mode:** Reduziert Blendwirkung beim Training, schont den Akku auf OLED-Displays und entspricht den Konventionen gängiger Fitness-Apps.
+- **Bottom-Navigation:** Permanente Erreichbarkeit der fünf Hauptbereiche reduziert den Navigationsaufwand und folgt etablierten Mobile-Patterns.
+- **Card-basiertes Layout:** Bietet gute Lesbarkeit, Platz für Bildmaterial und ausreichend grosse Touch-Flächen.
+- **"+"-Button für Schnellaktionen:** Übungen lassen sich direkt aus der Liste zum Plan hinzufügen, ohne Kontextwechsel.
+- **Farbliche Akzente pro Kategorie:** Verbessern die Wiedererkennbarkeit und unterstützen die visuelle Orientierung.
+- **Flache Navigationshierarchie:** Hält den Klickpfad kurz und vermeidet unnötige Zwischenebenen.
+
+#### Workflows
+
+- **Training starten:** Home → Tap "Current Workout" → Training läuft
+- **Übung zum Plan hinzufügen:** Exercises → Filter setzen → "+"-Button → Your Plan
+- **Kategoriebasiert suchen:** Categories → Übungsliste → Übungsdetail
+- **Eigene Übung erfassen:** Add → Formular ausfüllen → "Save Exercise"
+- **Pläne verwalten:** Home oder My Plans → Plan auswählen → Your Plan
+
 
 #### 3.4.2. Umsetzung (Technik)
 Fasst die technische Realisierung zusammen.
