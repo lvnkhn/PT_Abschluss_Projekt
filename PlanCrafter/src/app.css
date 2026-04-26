@@ -1,0 +1,24 @@
+:root {
+  --color-mobility: #14B8A6;
+  --color-isometrics: #A855F7;
+  --color-kraft: #F97316;
+  --color-athletic: #EF4444;
+  --color-plyometrics: #3B82F6;
+  --color-kettlebell: #EAB308;
+  --color-rotation: #22C55E;
+  --color-explosiveness: #EC4899;
+  --bg-primary: #1A1A1A;
+  --bg-card: #2A2A2A;
+  --bg-navbar: #111111;
+  --text-primary: #FFFFFF;
+  --text-secondary: #888888;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
