@@ -212,15 +212,30 @@ Beispiele:
 Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im Projekt.
 
 ### 6.1 KI-Tools
-- **Eingesetzte Tools**: _[z. B. Copilot, ChatGPT, Claude, lokale Modelle; Version/Variante wenn bekannt]_
-- **Zweck & Umfang**: _[wie, wofür und in welchem Ausmass wurde KI eingesetzt (z. B. Textentwürfe, Codevorschläge, Tests, Refactoring); welche Teile stammen (ganz/teilweise) aus KI-Unterstützung?]_
-- **Eigene Leistung (Abgrenzung):** _[was ist eigenständig erarbeitet/überarbeitet worden?]_
+
+- **Eingesetzte Tools**: Claude Code (Modell: claude-sonnet-4-6) von Anthropic, eingebunden als VS Code Extension
+- **Zweck & Umfang**: KI wurde in folgenden Bereichen eingesetzt:
+  - **Datenbankarchitektur:** Beratung zur Datenbankstruktur (Collections, Schema-Design, Entscheid zwischen eingebetteten Daten vs. Referenzen)
+  - **Beispieldaten:** Erstellung von JSON-Beispieldaten für alle Collections (categories, exercises, plans, users)
+  - **Code:** Umsetzung der SvelteKit-Serverlogik (`+page.server.js`) sowie der Svelte-Komponenten (`+page.svelte`) für die Homepage
+  - **Debugging:** Behebung von Svelte-5-spezifischen Warnungen (reaktive Props-Destrukturierung)
+  - Teile des Codes stammen aus KI-Unterstützung, wurden jedoch vom Entwickler geprüft, angepasst und in das Projekt integriert.
+- **Eigene Leistung (Abgrenzung):**
+  - Eigenständige Konzeption und Definition aller Projektanforderungen (Ausgangslage, Ziele, Zielgruppen)
+  - Eigenständige Gestaltung aller Mockups und Prototypen in Figma
+  - Entscheide zur Technologiewahl (SvelteKit, MongoDB, Bootstrap)
+  - Aufbau der MongoDB-Datenbank (Atlas) und Import der Beispieldaten via Compass
+  - Überprüfung, Anpassung und Validierung aller KI-generierten Code-Vorschläge
+  - Projektstruktur und Navigation wurden eigenständig konzipiert
 
 ### 6.2 Prompt-Vorgehen
-_[Überlegungen zu Prompt-Vorgehen, Qualität und Urheberrecht/Quellen. Wie wurde beim Prompting vorgegangen? Zu beschreiben ist die grundlegende Vorgehensweise. Einzelne, konkrete Prompts sollten höchstens als Beispiele aufgeführt werden. ]_
+Die Prompts wurden stets mit konkretem Kontext versehen: Screenshots des Mockups, Ausschnitte aus der Projektdokumentation und spezifische technische Rahmenbedingungen (SvelteKit 5, MongoDB, Bootstrap) wurden jeweils mitgegeben. Statt pauschale Fragen zu stellen («Erstelle mir eine App»), wurden gezielte Teilaufgaben formuliert (z. B. «Erstelle die Homepage-Grundstruktur mit Bootstrap-Elementen gemäss dem angehängten Prototyp, inklusive Interaktivität laut Workflow-Definition in Abschnitt 3.4»). Generierte Vorschläge wurden immer kritisch geprüft, bevor sie übernommen wurden — unpassende Lösungen (z. B. zu komplexe Seed-Skripte statt manuellem Dateneintrag) wurden abgelehnt und das Vorgehen angepasst.
 
 ### 6.3 Reflexion
-_[Nutzen, Grenzen, Risiken/Qualitätssicherung, ...]_
+
+- **Nutzen:** Claude Code war hilfreich für repetitive Boilerplate-Aufgaben (Server-Routen, Serialisierung, JSON-Schemas) und als Sparringspartner bei Architekturentscheiden (z. B. String-IDs vs. ObjectIds, separate Categories-Collection vs. eingebettetes Feld).
+- **Grenzen:** Die KI kennt den spezifischen Projektkontext nicht aus sich heraus — ohne präzise Prompts mit Screenshots und Dokumentationsauszügen wären die Vorschläge zu generisch gewesen. Zudem mussten DB-Namen, Collection-Strukturen und UX-Entscheide stets manuell vorgegeben werden.
+- **Risiken & Qualitätssicherung:** KI-generierter Code wurde nicht blind übernommen. Jeder Vorschlag wurde im IDE auf Korrektheit geprüft, nicht passende Vorschläge (z. B. automatische Seed-Skripte statt manuellem Import) wurden explizit abgelehnt. Die finale Verantwortung für Codequalität und Projektergebnis liegt beim Entwickler.
 
 ## 7. Anhang [Optional]
 Beispiele:
