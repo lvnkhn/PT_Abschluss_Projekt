@@ -25,7 +25,7 @@
 - **Problem:** Viele Sportler:innen und Studierende verbringen unverhältnismässig viel Zeit damit, passende Übungen zu recherchieren und einen sinnvollen Trainingsplan zusammenzustellen. Die schiere Menge an Trainingsmethoden – von klassischem Krafttraining über Mobility und Plyometrics bis hin zu Kettlebell und Agility – führt zu Entscheidungsmüdigkeit und Unsicherheit. Bestehende Lösungen sind entweder zu komplex und abo-basiert (z. B. Freeletics, Fitbod), zu starr mit vorgefertigten Plänen, oder reine Nachschlagewerke ohne interaktive Planungsfunktion (z. B. MuscleWiki, ExRx.net). Es fehlt ein schlankes Tool, das Übungen nach Muskelgruppe *und* Trainingskategorie filterbar macht und mit wenigen Klicks einen individuellen Trainingsplan generiert.
 - **Ziele:**
   - Eine Web-App entwickeln, mit der Nutzer:innen in unter 2 Minuten einen individuellen Trainingsplan zusammenstellen können
-  - Übungen sind filterbar nach Muskelgruppe und Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation, Explosiveness)
+  - Übungen sind filterbar nach Muskelgruppe und Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation)
   - Per Klick werden Übungen in eine visuelle Trainingsplan-Übersicht übernommen
   - Jede Trainingskategorie verfügt über eine eigene Detailseite mit allen zugehörigen Übungen
   - Minimalistisches, intuitives UI – keine Registrierung, kein Abo, keine Überfrachtung
@@ -37,7 +37,7 @@
   1. **Filtern** – Nutzer:innen wählen eine oder mehrere Muskelgruppen und/oder Trainingskategorien aus.
   2. **Auswählen** – Alle passenden Übungen werden angezeigt. Per Klick auf eine Übung wird diese direkt in die Trainingsplan-Übersicht aufgenommen.
   3. **Übersicht** – Der zusammengestellte Trainingsplan wird als kompakte visuelle Übersicht dargestellt, die alle gewählten Übungen für die aktuelle Session enthält.
-  Ergänzend verfügt jede Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation, Explosiveness) über eine eigene Detailseite, auf der alle Übungen dieser Kategorie aufgelistet und beschrieben sind.
+  Ergänzend verfügt jede Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation) über eine eigene Detailseite, auf der alle Übungen dieser Kategorie aufgelistet und beschrieben sind.
 - **Annahmen [Optional]:**
   - Nutzer:innen wissen grundsätzlich, welche Muskelgruppe(n) sie trainieren möchten, benötigen aber Unterstützung bei der konkreten Übungsauswahl.
   - Die Kombination aus Muskelgruppen-Filter und Kategorien-Filter bietet genügend Steuerung, um relevante Übungen schnell einzugrenzen.
@@ -56,7 +56,7 @@ Die Durchführung erfolgt phasenbasiert; nachfolgend sind die wichtigsten Ergebn
 - **Zielgruppenverständnis:**
   **Problemräume:**
   - Viele Sportler:innen und Studierende investieren unverhältnismässig viel Zeit in die Recherche passender Übungen und das Zusammenstellen eines sinnvollen Trainingsplans.
-  - Die Menge an Trainingsmethoden und -philosophien (Kraft, Mobility, Plyometrics, Isometrics, Kettlebell, Rotation, Explosiveness) führt zu Entscheidungsmüdigkeit – besonders wenn mehrere Stile kombiniert werden sollen.
+  - Die Menge an Trainingsmethoden und -philosophien (Kraft, Mobility, Plyometrics, Isometrics, Kettlebell, Rotation) führt zu Entscheidungsmüdigkeit – besonders wenn mehrere Stile kombiniert werden sollen.
   - Social Media präsentiert ständig neue Übungen, die zwar gespeichert, aber selten strukturiert in den Trainingsalltag integriert werden.
   - Bestehende Tools sind entweder überladene Coaching-Apps mit Abo-Modell, starre vorgefertigte Pläne oder reine Nachschlagewerke ohne Planungsfunktion.
   - Athlet:innen, die mehrere Disziplinen kombinieren (z. B. Kraft + Plyometrics + Mobility), finden in klassischen Bodybuilding-Apps kaum passende Inhalte.
