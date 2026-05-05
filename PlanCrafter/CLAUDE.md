@@ -162,7 +162,7 @@ Die App ist minimalistisch gehalten – kein Abo, kein Login, keine Überfrachtu
 | `src/lib/server/db.js` | MongoDB-Verbindung, `serialize()`, `USER_ID` |
 | `src/routes/+layout.svelte` | Bootstrap CDN, globales Layout, Bottom-Navigation |
 | `src/app.css` | Dark Theme, CSS-Variablen |
-| `data/exercises.json` | Alle 148 Übungen (für Compass-Import) |
+| `data/exercises.json` | Alle 65 Übungen (für Compass-Import) |
 | `data/categories.json` | Alle 7 Kategorien (für Compass-Import) |
 | `scripts/add_descriptions.py` | Hilfsskript zum Befüllen von description/instructions |
 | `README.md` | Projektdokumentation (Kapitelstruktur darf nicht verändert werden) |

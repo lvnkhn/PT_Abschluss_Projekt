@@ -20,25 +20,6 @@
     "categoryId": "plyometrics"
   },
   {
-    "name": "Bounce Jumps",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Moderate-height jumps focusing on elastic energy and landing mechanics.",
-    "instructions": [
-      "Stand with feet shoulder-width apart",
-      "Load the hips slightly and jump upward",
-      "Land softly with bent knees to absorb impact",
-      "Immediately use the elastic rebound to jump again",
-      "Perform 10–15 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
     "name": "Box Jumps",
     "bodyParts": [
       "Legs",
@@ -51,102 +32,6 @@
       "Explode upward and forward to land on the box with both feet",
       "Land softly with bent knees in an athletic position",
       "Step back down and repeat — 5–8 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Seated Jumps",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Jump from a seated position to eliminate the stretch reflex and test raw power.",
-    "instructions": [
-      "Sit on a box with hips at 90°, feet flat on floor",
-      "Without rocking forward, drive through feet and jump upward",
-      "Extend hips, knees, and ankles fully at takeoff",
-      "Land softly with bent knees",
-      "Reset and repeat — 5–8 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Explosive Squats",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Squat variation with a powerful upward drive to build lower body power.",
-    "instructions": [
-      "Stand with feet shoulder-width apart",
-      "Lower into a squat until thighs are parallel",
-      "Explode upward with maximum force through legs and hips",
-      "Land softly or stop at the top with full intent",
-      "Perform 6–10 reps with full effort"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Split Jumps",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Plyometric lunge jump that switches legs in the air for power and coordination.",
-    "instructions": [
-      "Start in a lunge position with one foot forward",
-      "Jump upward explosively, switching leg positions in the air",
-      "Land in the opposite lunge position, absorbing impact softly",
-      "Immediately jump again to switch back",
-      "Perform 8–12 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Explosive Leg Switching",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Rapid alternating leg switches that develop speed and lower body power.",
-    "instructions": [
-      "Stand on one leg with the other raised, hip at 90°",
-      "Explosively switch legs, driving the raised knee down and the other knee up",
-      "Minimize ground contact time between switches",
-      "Stay light on your feet and keep core tight",
-      "Perform for 20–30 seconds"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Depth Drops",
-    "bodyParts": [
-      "Legs",
-      "Calves"
-    ],
-    "description": "Step off a box and land softly to train impact absorption and stiffness.",
-    "instructions": [
-      "Stand on a box (30–50 cm), toes at the edge",
-      "Step off (do not jump) and drop to the floor",
-      "Land with both feet simultaneously, absorbing with bent knees",
-      "Focus on a quiet, controlled landing",
-      "Perform 5–8 reps"
     ],
     "imageUrl": "",
     "referenceUrl": "",
@@ -214,18 +99,37 @@
     "categoryId": "plyometrics"
   },
   {
-    "name": "Side Jumps",
+    "name": "Clap Pushups",
     "bodyParts": [
-      "Legs",
-      "Lateral"
+      "Chest",
+      "Arms"
     ],
-    "description": "Lateral jumps over a line to build lateral power and landing stability.",
+    "description": "Push-up with a mid-air clap to develop upper body power and coordination.",
     "instructions": [
-      "Stand on one side of a line or low obstacle",
-      "Jump laterally to the other side with both feet",
-      "Land softly with bent knees and immediately jump back",
-      "Keep a short, reactive ground contact time",
-      "Perform 10 reps per side"
+      "Start in standard push-up position",
+      "Lower chest to the floor with control",
+      "Explode upward with enough power to clap hands mid-air",
+      "Catch yourself with soft elbows and lower for the next rep",
+      "Perform 5–8 reps"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "plyometrics"
+  },
+  {
+    "name": "Split Jumps",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Plyometric lunge jump that switches legs in the air for power and coordination.",
+    "instructions": [
+      "Start in a lunge position with one foot forward",
+      "Jump upward explosively, switching leg positions in the air",
+      "Land in the opposite lunge position, absorbing impact softly",
+      "Immediately jump again to switch back",
+      "Perform 8–12 reps per side"
     ],
     "imageUrl": "",
     "referenceUrl": "",
@@ -254,176 +158,18 @@
     "categoryId": "plyometrics"
   },
   {
-    "name": "Single Leg Jumps",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Unilateral jump to develop single-leg power and landing stability.",
-    "instructions": [
-      "Stand on one leg with a slight knee bend",
-      "Load the hip and jump upward as high as possible",
-      "Land on the same leg with a soft knee bend",
-      "Stabilize before the next rep",
-      "Perform 5–8 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Lunge Jumps Alternating",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Alternating plyometric lunges with an explosive jump between each rep.",
-    "instructions": [
-      "Start in a lunge position with one foot forward",
-      "Jump upward and switch legs in the air",
-      "Land in the opposite lunge position, absorbing softly",
-      "Immediately explode up to switch again",
-      "Perform 10–12 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Bounding",
+    "name": "Depth Drops",
     "bodyParts": [
       "Legs",
-      "Glutes"
-    ],
-    "description": "Exaggerated running strides covering maximum distance per step to build elastic power.",
-    "instructions": [
-      "Begin with a short jog to build momentum",
-      "Push off one leg with maximum force, reaching forward with the opposite leg",
-      "Aim for as much distance as possible per stride",
-      "Land on the opposite foot and continue in a bounding pattern",
-      "Perform for 20–30 meters per set"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Heel Walks",
-    "bodyParts": [
-      "Feet",
       "Calves"
     ],
-    "description": "Walking on heels to strengthen the tibialis anterior and improve dorsiflexion.",
+    "description": "Step off a box and land softly to train impact absorption and stiffness.",
     "instructions": [
-      "Stand tall and lift toes off the ground",
-      "Walk forward on your heels for 20–30 meters",
-      "Take small, controlled steps keeping balance",
-      "Keep core engaged and torso upright",
-      "Rest and repeat 2–3 times"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Toe Walks",
-    "bodyParts": [
-      "Feet",
-      "Calves"
-    ],
-    "description": "Walking on tiptoes to strengthen the calves and improve ankle plantar flexion.",
-    "instructions": [
-      "Rise onto the balls of your feet",
-      "Walk forward on your tiptoes for 20–30 meters",
-      "Take small, controlled steps",
-      "Keep core engaged and torso upright",
-      "Rest and repeat 2–3 times"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Ankle Hops",
-    "bodyParts": [
-      "Feet",
-      "Calves"
-    ],
-    "description": "Small rapid hops using only ankles to strengthen the calves and Achilles tendon.",
-    "instructions": [
-      "Stand with feet hip-width apart",
-      "Hop in place using only your ankles — keep knees mostly straight",
-      "Land on the balls of your feet and immediately hop again",
-      "Keep ground contact time as short as possible",
-      "Perform 20–30 rapid hops"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Explosive Pushups",
-    "bodyParts": [
-      "Chest",
-      "Arms"
-    ],
-    "description": "Push-up with explosive power, pushing up fast enough to briefly leave the floor.",
-    "instructions": [
-      "Start in standard push-up position",
-      "Lower chest to the floor under control",
-      "Explode upward with maximum force, pushing hands off the floor",
-      "Land softly and immediately lower into the next rep",
-      "Perform 5–10 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Clap Pushups",
-    "bodyParts": [
-      "Chest",
-      "Arms"
-    ],
-    "description": "Push-up with a mid-air clap to develop upper body power and coordination.",
-    "instructions": [
-      "Start in standard push-up position",
-      "Lower chest to the floor with control",
-      "Explode upward with enough power to clap hands mid-air",
-      "Catch yourself with soft elbows and lower for the next rep",
+      "Stand on a box (30–50 cm), toes at the edge",
+      "Step off (do not jump) and drop to the floor",
+      "Land with both feet simultaneously, absorbing with bent knees",
+      "Focus on a quiet, controlled landing",
       "Perform 5–8 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "plyometrics"
-  },
-  {
-    "name": "Med Ball Chest Pass",
-    "bodyParts": [
-      "Chest",
-      "Shoulders"
-    ],
-    "description": "Standing chest throw against a wall to develop upper body explosive power.",
-    "instructions": [
-      "Stand 1–2 meters from a wall holding med ball at chest",
-      "Step forward and explosively push the ball into the wall",
-      "Fully extend both arms at the point of release",
-      "Catch the rebound and immediately reset",
-      "Perform 8–12 reps"
     ],
     "imageUrl": "",
     "referenceUrl": "",

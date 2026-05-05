@@ -58,25 +58,6 @@
     "categoryId": "athletic"
   },
   {
-    "name": "Boden Walks",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Walking lunges performed across the floor for leg and glute endurance.",
-    "instructions": [
-      "Stand upright with feet together",
-      "Step forward with one foot and lower back knee toward the floor",
-      "Keep front knee above ankle and torso upright",
-      "Push off back foot and step into the next lunge",
-      "Continue alternating legs across the floor"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "athletic"
-  },
-  {
     "name": "Sprints",
     "bodyParts": [
       "Full Body"
@@ -183,6 +164,25 @@
       "Drive forward with powerful leg steps while the sled follows",
       "Keep upright posture and engage core",
       "Pull 20–40 meters, rest, then repeat"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Boden Walks",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Walking lunges performed across the floor for leg and glute endurance.",
+    "instructions": [
+      "Stand upright with feet together",
+      "Step forward with one foot and lower back knee toward the floor",
+      "Keep front knee above ankle and torso upright",
+      "Push off back foot and step into the next lunge",
+      "Continue alternating legs across the floor"
     ],
     "imageUrl": "",
     "referenceUrl": "",

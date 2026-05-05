@@ -198,7 +198,7 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
 - **Daten & Schnittstellen:**
   - MongoDB Atlas mit 4 Collections: `categories`, `exercises`, `plans`, `users`
   - `exercises.categoryId` verweist als Slug-String (z. B. `"kraft"`) auf `categories.slug` — bewusst ohne ObjectId-Referenzen, um den manuellen Import zu vereinfachen
-  - Alle 148 Übungen sind in `data/exercises.json` als flaches Array gespeichert und wurden via Compass importiert
+  - Alle 65 Übungen sind in `data/exercises.json` als flaches Array gespeichert und wurden via Compass importiert
   - `serialize()` in `db.js` wandelt MongoDB-Dokumente (ObjectId, Date) in JSON-sichere Werte um, bevor sie an SvelteKit-Load-Funktionen zurückgegeben werden
   - `USER_ID = 'demo'` dient als Platzhalter, da kein Authentifizierungssystem implementiert ist
 
@@ -254,8 +254,8 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
 - **Eingesetzte Tools**: Claude Code (Modell: claude-sonnet-4-6) von Anthropic, eingebunden als VS Code Extension
 - **Zweck & Umfang**: KI wurde in folgenden Bereichen eingesetzt:
   - **Datenbankarchitektur:** Beratung zur Datenbankstruktur (Collections, Schema-Design, Entscheid zwischen eingebetteten Daten vs. Referenzen, `categoryId` als Slug-String statt ObjectId)
-  - **Übungsdaten:** Erstellung von JSON-Importdateien für alle 148 Übungen in 7 Kategorien (Athletic, Isometrics, Kettlebell, Kraft, Mobility, Plyometrics, Rotation) inkl. `bodyParts`-Zuordnung
-  - **Descriptions & Instructions:** Generierung von anfängergerechten Beschreibungen und nummerierten Schritt-für-Schritt-Anleitungen für alle 148 Übungen via Python-Hilfsskript (`scripts/add_descriptions.py`)
+  - **Übungsdaten:** Erstellung von JSON-Importdateien für alle 65 Übungen in 7 Kategorien (Athletic, Isometrics, Kettlebell, Kraft, Mobility, Plyometrics, Rotation) inkl. `bodyParts`-Zuordnung
+  - **Descriptions & Instructions:** Generierung von anfängergerechten Beschreibungen und nummerierten Schritt-für-Schritt-Anleitungen für alle 65 Übungen via Python-Hilfsskript (`scripts/add_descriptions.py`)
   - **Kategoriedaten:** Erstellung der `categories.json` mit Farben, Icons und Slugs für alle 7 Kategorien
   - **Code:** Umsetzung der SvelteKit-Serverlogik (`+page.server.js`, `db.js`) sowie der Svelte-Komponenten (`+page.svelte`) für die Homepage
   - **Debugging:** Behebung des MongoDB-Verbindungsfehlers (`MONGODB_URI` nicht gefunden) sowie Svelte-5-spezifischer Warnungen (reaktive Props-Destrukturierung)
@@ -265,7 +265,7 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
   - Eigenständige Konzeption und Definition aller Projektanforderungen (Ausgangslage, Ziele, Zielgruppen)
   - Eigenständige Gestaltung aller Mockups und Prototypen in Figma
   - Entscheide zur Technologiewahl (SvelteKit, MongoDB, Bootstrap)
-  - Zusammenstellung aller 148 Übungen inkl. Kategorie- und Muskelgruppen-Zuordnung (als `.md`-Datei vorbereitet, von KI in JSON konvertiert)
+  - Zusammenstellung aller 65 Übungen inkl. Kategorie- und Muskelgruppen-Zuordnung (als `.md`-Datei vorbereitet, von KI in JSON konvertiert)
   - Aufbau der MongoDB-Datenbank (Atlas) und manueller Import aller Daten via Compass
   - Überprüfung, Anpassung und Validierung aller KI-generierten Vorschläge
   - Projektstruktur und Navigation wurden eigenständig konzipiert

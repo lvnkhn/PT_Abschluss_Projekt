@@ -20,37 +20,18 @@
     "categoryId": "kettlebell"
   },
   {
-    "name": "Alternating Swings",
+    "name": "Goblet Squat",
     "bodyParts": [
-      "Full Body",
-      "Glutes"
+      "Legs",
+      "Core"
     ],
-    "description": "Single-arm swing variation that adds rotational challenge and grip training.",
+    "description": "Front-loaded squat holding the kettlebell at chest height for depth and posture.",
     "instructions": [
-      "Perform a standard two-handed swing to chest height",
-      "At the top, release with one hand and catch with the other",
-      "Let the bell swing back between your legs",
-      "Drive hips forward and repeat the hand switch each rep",
-      "Perform 10–15 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Side Swings",
-    "bodyParts": [
-      "Full Body"
-    ],
-    "description": "Lateral kettlebell swing that targets the hips and adds rotational power.",
-    "instructions": [
-      "Stand with feet wider than hip-width apart",
-      "Swing the kettlebell to one side at hip height",
-      "Let it pendulum across to the other side",
-      "Rotate hips slightly in the direction of each swing",
-      "Perform 10–12 reps per side"
+      "Hold kettlebell by the horns at chest height",
+      "Stand with feet slightly wider than hip-width, toes out",
+      "Lower into a deep squat keeping elbows inside your knees",
+      "Keep chest up and heels flat on the floor",
+      "Drive through heels to stand — 10–15 reps"
     ],
     "imageUrl": "",
     "referenceUrl": "",
@@ -79,103 +60,6 @@
     "categoryId": "kettlebell"
   },
   {
-    "name": "Bob and Wave",
-    "bodyParts": [
-      "Full Body"
-    ],
-    "description": "Dynamic full-body kettlebell movement combining a hinge with a shoulder motion.",
-    "instructions": [
-      "Stand with feet shoulder-width apart, kettlebell in both hands",
-      "Hinge forward into a partial hip hinge (the bob)",
-      "Add a wave motion with the arms while staying in the hinge position",
-      "Keep core tight and back flat throughout",
-      "Perform for 10–15 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Lunge + Alternating Presses",
-    "bodyParts": [
-      "Legs",
-      "Shoulders"
-    ],
-    "description": "Combines a lunge with an overhead press to train full-body coordination and strength.",
-    "instructions": [
-      "Hold a kettlebell in one hand at shoulder height",
-      "Step into a lunge with the opposite leg forward",
-      "As you lower into the lunge, press the kettlebell overhead",
-      "Return to standing as you lower the bell",
-      "Alternate sides for 8–10 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Racked Squat",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Squat with kettlebell in rack position that challenges core stability and leg strength.",
-    "instructions": [
-      "Hold the kettlebell in rack position (resting on forearm, elbow tucked)",
-      "Stand with feet shoulder-width apart, toes slightly out",
-      "Lower into a squat keeping the bell stable and torso upright",
-      "Drive through heels to return to standing",
-      "Perform 8–12 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Goblet Squat",
-    "bodyParts": [
-      "Legs",
-      "Core"
-    ],
-    "description": "Front-loaded squat holding the kettlebell at chest height for depth and posture.",
-    "instructions": [
-      "Hold kettlebell by the horns at chest height",
-      "Stand with feet slightly wider than hip-width, toes out",
-      "Lower into a deep squat keeping elbows inside your knees",
-      "Keep chest up and heels flat on the floor",
-      "Drive through heels to stand — 10–15 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Dual Front Squat",
-    "bodyParts": [
-      "Legs"
-    ],
-    "description": "Double kettlebell front squat for increased load and upper back engagement.",
-    "instructions": [
-      "Clean two kettlebells into rack position at shoulder height",
-      "Stand with feet shoulder-width apart",
-      "Lower into a deep squat keeping bells stable in rack",
-      "Drive through heels to return to standing",
-      "Perform 6–10 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
     "name": "Lunge",
     "bodyParts": [
       "Legs"
@@ -195,97 +79,17 @@
     "categoryId": "kettlebell"
   },
   {
-    "name": "Alternating Lunges",
+    "name": "Racked Squat",
     "bodyParts": [
       "Legs"
     ],
-    "description": "Alternating forward lunges with kettlebell for leg endurance and balance.",
+    "description": "Squat with kettlebell in rack position that challenges core stability and leg strength.",
     "instructions": [
-      "Hold a kettlebell in each hand hanging at sides",
-      "Step forward with one leg into a lunge",
-      "Lower until back knee nearly touches the floor",
-      "Push back to standing and immediately lunge with the other leg",
-      "Continue alternating for 10–12 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Side Lunges",
-    "bodyParts": [
-      "Legs",
-      "Adductors"
-    ],
-    "description": "Lateral lunge with kettlebell that targets inner thighs and glutes.",
-    "instructions": [
-      "Hold kettlebell at chest height or hanging in front",
-      "Step wide to one side, bending the stepping knee",
-      "Lower hips toward the floor while keeping the other leg straight",
-      "Push off the bent leg to return to center",
-      "Perform 8–10 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Reverse Lunge Swings",
-    "bodyParts": [
-      "Legs",
-      "Glutes"
-    ],
-    "description": "Combines a reverse lunge with a kettlebell swing for power and coordination.",
-    "instructions": [
-      "Start standing with kettlebell in both hands",
-      "Step back into a reverse lunge as you hike the bell between your legs",
-      "Drive the front foot into the floor and extend the hip to come out of the lunge",
-      "Use the hip drive to swing the bell to chest height",
-      "Alternate legs for 8–10 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Lunges Around the World",
-    "bodyParts": [
-      "Legs",
-      "Full Body"
-    ],
-    "description": "Full lunge circuit covering forward, lateral, and reverse directions.",
-    "instructions": [
-      "Hold kettlebells at sides",
-      "Lunge forward with one leg and return to center",
-      "Lunge to the side with the same leg and return to center",
-      "Lunge backward with the same leg and return to center",
-      "Complete all directions on one side, then switch — 3 rounds per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Wood Chopper Lunges",
-    "bodyParts": [
-      "Legs",
-      "Core"
-    ],
-    "description": "Lunge combined with a rotational wood chop for full-body movement.",
-    "instructions": [
-      "Hold a kettlebell with both hands above one shoulder",
-      "Step into a lunge as you bring the bell diagonally to the opposite hip",
-      "Keep core engaged and rotate through the torso",
-      "Return to standing as you raise the bell back overhead",
-      "Perform 8–10 reps per side"
+      "Hold the kettlebell in rack position (resting on forearm, elbow tucked)",
+      "Stand with feet shoulder-width apart, toes slightly out",
+      "Lower into a squat keeping the bell stable and torso upright",
+      "Drive through heels to return to standing",
+      "Perform 8–12 reps per side"
     ],
     "imageUrl": "",
     "referenceUrl": "",
@@ -314,26 +118,6 @@
     "categoryId": "kettlebell"
   },
   {
-    "name": "Horizontal Presses",
-    "bodyParts": [
-      "Chest",
-      "Arms"
-    ],
-    "description": "Horizontal pushing exercise with kettlebells to develop chest and triceps.",
-    "instructions": [
-      "Lie on a bench or floor holding a kettlebell in each hand at chest level",
-      "Start with elbows at about 45° from the body",
-      "Press both bells straight up until arms are extended",
-      "Lower with control back to chest level",
-      "Perform 8–12 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
     "name": "Shoulder Presses",
     "bodyParts": [
       "Shoulders"
@@ -353,26 +137,6 @@
     "categoryId": "kettlebell"
   },
   {
-    "name": "Pullovers",
-    "bodyParts": [
-      "Back",
-      "Chest"
-    ],
-    "description": "Lying pullover with kettlebell that stretches the chest and strengthens the lats.",
-    "instructions": [
-      "Lie on a bench with head near the edge, holding kettlebell above chest",
-      "Keeping arms slightly bent, lower the bell behind your head",
-      "Feel the stretch across chest and lats",
-      "Pull the bell back over chest to starting position",
-      "Perform 10–12 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
     "name": "Rows",
     "bodyParts": [
       "Back"
@@ -384,64 +148,6 @@
       "Pull the bell toward your hip, driving elbow back",
       "Keep back flat and avoid rotating the torso",
       "Lower with control — 8–12 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Upright Rows",
-    "bodyParts": [
-      "Shoulders",
-      "Back"
-    ],
-    "description": "Vertical pull targeting the upper traps and side deltoids.",
-    "instructions": [
-      "Stand holding dumbbells or barbell in front of thighs",
-      "Pull weight straight up along your body toward the chin",
-      "Lead with your elbows, keeping them above the wrists",
-      "Do not pull higher than the chin",
-      "Lower with control — 10–12 reps"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Side Front Raises",
-    "bodyParts": [
-      "Shoulders"
-    ],
-    "description": "Combination of lateral and front raises to develop shoulder endurance.",
-    "instructions": [
-      "Stand holding a kettlebell in each hand at sides",
-      "Raise one arm to the side and the other to the front simultaneously",
-      "Lift to shoulder height with a slight elbow bend",
-      "Lower with control and alternate arms",
-      "Perform 10–12 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Rotation",
-    "bodyParts": [
-      "Core"
-    ],
-    "description": "Kettlebell rotation exercise that develops core rotational strength.",
-    "instructions": [
-      "Stand with feet shoulder-width apart, holding kettlebell at chest",
-      "Rotate the torso to one side, bringing the bell along",
-      "Keep hips square and feet flat on the floor",
-      "Return to center and rotate to the other side",
-      "Perform 10–12 reps per side"
     ],
     "imageUrl": "",
     "referenceUrl": "",
@@ -470,58 +176,18 @@
     "categoryId": "kettlebell"
   },
   {
-    "name": "Uppercuts",
+    "name": "Alternating Swings",
     "bodyParts": [
-      "Shoulders",
-      "Core"
+      "Full Body",
+      "Glutes"
     ],
-    "description": "Boxing-inspired kettlebell movement that trains rotational power and shoulder strength.",
+    "description": "Single-arm swing variation that adds rotational challenge and grip training.",
     "instructions": [
-      "Stand in a slight squat stance, holding a kettlebell in one hand",
-      "Drive the bell upward in an uppercut arc, rotating through the hips",
-      "Let hips and core generate the power, not just the arm",
-      "Control the bell back to starting position",
-      "Perform 10–12 reps per side"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Helos",
-    "bodyParts": [
-      "Shoulders",
-      "Core"
-    ],
-    "description": "Circular overhead kettlebell movement that challenges shoulder stability and core control.",
-    "instructions": [
-      "Press the kettlebell overhead with one arm",
-      "Move the bell in a controlled circle overhead (halo motion)",
-      "Keep the shoulder packed and core braced",
-      "Complete 5 circles in one direction, then reverse",
-      "Perform per side with fully controlled movement"
-    ],
-    "imageUrl": "",
-    "referenceUrl": "",
-    "isCustom": false,
-    "userId": null,
-    "categoryId": "kettlebell"
-  },
-  {
-    "name": "Kniend Pushout Rotate",
-    "bodyParts": [
-      "Core",
-      "Shoulders"
-    ],
-    "description": "Kneeling kettlebell push-and-rotate exercise for core anti-rotation strength.",
-    "instructions": [
-      "Kneel on one knee, holding kettlebell at chest with both hands",
-      "Push the bell straight out in front with arms extended",
-      "Rotate the bell to the left then to the right while arms stay extended",
-      "Return to chest and repeat",
-      "Perform 8–10 reps per side"
+      "Perform a standard two-handed swing to chest height",
+      "At the top, release with one hand and catch with the other",
+      "Let the bell swing back between your legs",
+      "Drive hips forward and repeat the hand switch each rep",
+      "Perform 10–15 reps per side"
     ],
     "imageUrl": "",
     "referenceUrl": "",
