@@ -30,7 +30,7 @@
 
 <header>
   <div class="topbar">
-    <span class="app-name">PlanCrafter</span>
+    <a href="/" class="app-name">PlanCrafter</a>
     <div class="topbar-icons">
       <span>🔍</span>
       <span>👤</span>
@@ -65,6 +65,8 @@
   .app-name {
     font-size: 1.2rem;
     font-weight: 700;
+    color: #fff;
+    text-decoration: none;
   }
 
   .topbar-icons {
