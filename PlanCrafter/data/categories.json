@@ -1,1 +1,9 @@
-[]
+[
+  { "name": "Mobility",    "slug": "mobility",    "color": "#14B8A6", "icon": "🧘" },
+  { "name": "Isometrics",  "slug": "isometrics",  "color": "#A855F7", "icon": "💪" },
+  { "name": "Kraft",       "slug": "kraft",       "color": "#F97316", "icon": "🏋️" },
+  { "name": "Athletic",    "slug": "athletic",    "color": "#EF4444", "icon": "🏃" },
+  { "name": "Plyometrics", "slug": "plyometrics", "color": "#3B82F6", "icon": "🦘" },
+  { "name": "Kettlebell",  "slug": "kettlebell",  "color": "#EAB308", "icon": "⚙️" },
+  { "name": "Rotation",    "slug": "rotation",    "color": "#22C55E", "icon": "🔄" }
+]

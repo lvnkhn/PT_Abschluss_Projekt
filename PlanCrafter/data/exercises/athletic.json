@@ -1,0 +1,193 @@
+[
+  {
+    "name": "Jump Squat",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Explosive squat variation that builds lower body power and speed.",
+    "instructions": [
+      "Stand with feet shoulder-width apart",
+      "Lower into a squat until thighs are parallel to the floor",
+      "Explode upward and jump as high as possible",
+      "Land softly with bent knees",
+      "Immediately lower into the next rep"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Bulgarian Pin Squat",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Single-leg squat with rear foot elevated, targeting quads and glutes.",
+    "instructions": [
+      "Place rear foot on a bench behind you, front foot forward",
+      "Stand upright with core engaged",
+      "Lower until front thigh is parallel to the floor",
+      "Push through front heel to return to start",
+      "Complete all reps on one side, then switch"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Split Squat Calf Raises",
+    "bodyParts": [
+      "Legs",
+      "Calves"
+    ],
+    "description": "Combines a split squat position with calf raises for lower leg strength.",
+    "instructions": [
+      "Stand in a split squat stance, front foot forward",
+      "Lower into a split squat position and hold",
+      "Rise up onto the front toes in a calf raise",
+      "Lower the heel back down with control",
+      "Repeat for target reps, then switch sides"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Boden Walks",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Walking lunges performed across the floor for leg and glute endurance.",
+    "instructions": [
+      "Stand upright with feet together",
+      "Step forward with one foot and lower back knee toward the floor",
+      "Keep front knee above ankle and torso upright",
+      "Push off back foot and step into the next lunge",
+      "Continue alternating legs across the floor"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Sprints",
+    "bodyParts": [
+      "Full Body"
+    ],
+    "description": "Short, all-out running efforts to build speed and cardiovascular power.",
+    "instructions": [
+      "Warm up with 5 minutes of light jogging",
+      "Drive knees high and pump arms aggressively",
+      "Sprint at 80–100% effort for 20–40 meters",
+      "Walk back to start for recovery",
+      "Repeat 6–10 times"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Battle Ropes",
+    "bodyParts": [
+      "Full Body"
+    ],
+    "description": "Conditioning exercise using heavy ropes to build power and endurance.",
+    "instructions": [
+      "Stand with feet shoulder-width apart, slight bend in knees",
+      "Hold one rope end in each hand",
+      "Alternately slam each rope up and down in a wave motion",
+      "Keep core tight and maintain a steady rhythm",
+      "Perform for 20–40 seconds per set"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Med Ball Slams",
+    "bodyParts": [
+      "Full Body"
+    ],
+    "description": "Explosive full-body movement that develops power and conditions the whole body.",
+    "instructions": [
+      "Stand with feet shoulder-width apart, hold med ball overhead",
+      "Rise onto toes and brace core",
+      "Slam the ball into the ground as hard as possible",
+      "Catch on the bounce or pick it up",
+      "Repeat for 8–12 reps"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Med Ball Pushes",
+    "bodyParts": [
+      "Full Body"
+    ],
+    "description": "Power throw that trains explosive upper body and core strength.",
+    "instructions": [
+      "Stand facing a wall, hold med ball at chest height",
+      "Step forward and explosively push the ball into the wall",
+      "Fully extend both arms at the point of release",
+      "Catch the rebound and immediately reset",
+      "Perform 8–12 explosive reps"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Sled Pushes",
+    "bodyParts": [
+      "Full Body"
+    ],
+    "description": "Full-body conditioning movement that builds leg drive and work capacity.",
+    "instructions": [
+      "Load the sled with your desired weight",
+      "Place hands on the handles and lean forward at about 45°",
+      "Drive through your legs in short, powerful steps",
+      "Keep core tight and back flat throughout",
+      "Push 20–40 meters, rest, then repeat"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  },
+  {
+    "name": "Sled Pulls",
+    "bodyParts": [
+      "Full Body"
+    ],
+    "description": "Pulling movement that builds posterior chain strength and conditioning.",
+    "instructions": [
+      "Attach a harness or rope to the sled",
+      "Face away from the sled and lean forward slightly",
+      "Drive forward with powerful leg steps while the sled follows",
+      "Keep upright posture and engage core",
+      "Pull 20–40 meters, rest, then repeat"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "athletic"
+  }
+]

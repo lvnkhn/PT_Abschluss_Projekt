@@ -1,0 +1,180 @@
+[
+  {
+    "name": "Butterfly",
+    "bodyParts": [
+      "Hips",
+      "Adductors"
+    ],
+    "description": "Hip-opening stretch targeting the inner thighs and hip flexors.",
+    "instructions": [
+      "Sit on the floor and bring the soles of your feet together",
+      "Let knees drop out to the sides",
+      "Hold your feet and sit tall with a straight back",
+      "Gently press knees toward the floor",
+      "Hold for 30–60 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "Butterfly Holds",
+    "bodyParts": [
+      "Hips",
+      "Adductors"
+    ],
+    "description": "Isometric hold at the butterfly position to deepen the hip-opening stretch.",
+    "instructions": [
+      "Sit in butterfly position with soles of feet together",
+      "Place hands on knees and gently press them toward the floor",
+      "Hold at the point of mild resistance",
+      "Breathe steadily and relax into the position",
+      "Hold for 30–60 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "Couch Stretch",
+    "bodyParts": [
+      "Hips",
+      "Quads"
+    ],
+    "description": "Hip flexor and quad stretch performed against a wall or couch.",
+    "instructions": [
+      "Kneel with one shin against a wall or couch behind you",
+      "Step the other foot forward into a lunge position",
+      "Drive hips forward and upright until you feel the hip flexor stretch",
+      "Keep torso tall and core lightly engaged",
+      "Hold for 60–90 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "Wrist Circles",
+    "bodyParts": [
+      "Arms"
+    ],
+    "description": "Mobility drill for the wrists to improve range of motion and joint health.",
+    "instructions": [
+      "Extend arms in front at shoulder height",
+      "Make a loose fist with both hands",
+      "Rotate wrists in large circles — 10 rotations clockwise",
+      "Reverse direction for 10 rotations counter-clockwise",
+      "Repeat 2–3 times"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "Cobra",
+    "bodyParts": [
+      "Back",
+      "Core"
+    ],
+    "description": "Spinal extension stretch that opens the chest and stretches the abs.",
+    "instructions": [
+      "Lie face down with hands under shoulders, elbows bent",
+      "Press palms into the floor and lift your chest up",
+      "Keep hips on the floor and elbows slightly bent",
+      "Look straight ahead and relax the lower back",
+      "Hold for 20–30 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "Cat Cow",
+    "bodyParts": [
+      "Back",
+      "Core"
+    ],
+    "description": "Spinal mobility drill alternating between flexion and extension.",
+    "instructions": [
+      "Start on hands and knees, wrists below shoulders, knees below hips",
+      "Inhale and drop belly toward floor, lifting head and tailbone (Cow)",
+      "Exhale and round spine toward the ceiling, tucking chin and pelvis (Cat)",
+      "Move fluidly between the two positions",
+      "Repeat for 10–15 slow reps"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "Child Pose",
+    "bodyParts": [
+      "Back",
+      "Hips"
+    ],
+    "description": "Resting stretch that opens the hips and releases lower back tension.",
+    "instructions": [
+      "Kneel on the floor and sit back toward your heels",
+      "Reach arms forward and lower your forehead to the floor",
+      "Let the chest sink toward the floor",
+      "Breathe deeply into the back",
+      "Hold for 30–60 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "90-90 Stretch",
+    "bodyParts": [
+      "Hips"
+    ],
+    "description": "Hip mobility drill targeting internal and external rotation in both hips.",
+    "instructions": [
+      "Sit with both knees bent at 90° — one leg in front, one to the side",
+      "Keep torso upright and both sit bones on the floor",
+      "Lean gently forward over the front shin to feel the stretch",
+      "Hold for 30–45 seconds, then switch sides",
+      "Repeat 2–3 times per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  },
+  {
+    "name": "Seated Good Mornings",
+    "bodyParts": [
+      "Back",
+      "Legs"
+    ],
+    "description": "Seated forward fold targeting hamstring flexibility and lower back mobility.",
+    "instructions": [
+      "Sit on the floor with legs extended straight in front",
+      "Sit tall and brace core lightly",
+      "Hinge forward at the hips, reaching hands toward your feet",
+      "Keep back as flat as possible",
+      "Hold for 30–60 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "mobility"
+  }
+]

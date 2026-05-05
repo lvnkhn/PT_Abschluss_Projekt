@@ -163,13 +163,51 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
 
 
 #### 3.4.2. Umsetzung (Technik)
-Fasst die technische Realisierung zusammen.
-- **Technologie-Stack:** _[SvelteKit, Bibliotheken falls genutzt]_
-- **Tooling:** _[IDE/Erweiterungen, lokale/Cloud-Tools; den Einsatz von KI beschreiben Sie im Kapitel **KI-Deklaration**]_  
-- **Struktur & Komponenten:** _[Seiten, Routen, State/Stores, wichtige Komponenten]_
-- **Daten & Schnittstellen:** _[Wie werden Daten gespeichert, verwaltet, abgerufen?]_
-- **Deployment:** _[URL]_  
-- **Besondere Entscheidungen:** _[z. B. Trade-offs, Vereinfachungen]_  
+
+- **Technologie-Stack:**
+  - **Frontend:** SvelteKit 5 (Svelte 5 Syntax, File-based Routing, SSR via `+page.server.js`)
+  - **Styling:** Bootstrap 5.3.3 (CSS only, eingebunden via CDN in `+layout.svelte`), eigenes Dark-Theme via `app.css` mit CSS-Variablen
+  - **Backend:** SvelteKit Server-Routes (Node.js), MongoDB Node.js Driver v7
+  - **Datenbank:** MongoDB Atlas (Cloud, Cluster `Cluster1DM`), Datenbankname `PT_Project_PlanCrafter`
+  - **Datenverwaltung lokal:** JSON-Dateien unter `data/` für den manuellen Import via MongoDB Compass
+
+- **Tooling:**
+  - Visual Studio Code mit SvelteKit- und MongoDB-Erweiterungen
+  - MongoDB Compass für visuellen Datenbankzugriff und manuellen Import der JSON-Dateien
+  - Node.js / npm für lokale Entwicklung (`npm run dev`)
+  - Python 3 für das Hilfsskript `scripts/add_descriptions.py` zur Datenvorbereitung
+  - Vite als Build-Tool (via SvelteKit)
+
+- **Struktur & Komponenten:**
+
+  ```text
+  src/
+  ├── lib/
+  │   └── server/
+  │       └── db.js          # MongoDB-Verbindung, serialize(), USER_ID
+  ├── routes/
+  │   ├── +layout.svelte     # Bootstrap CDN, globales Layout
+  │   ├── +page.svelte       # Homepage
+  │   ├── +page.server.js    # SSR Load-Funktion Homepage
+  │   └── [weitere Routen]
+  └── app.css                # Dark Theme, CSS-Variablen
+  ```
+
+  Jede Seite besteht aus einem `+page.svelte` (UI) und einem `+page.server.js` (Datenbankzugriff). Die DB-Verbindung wird einmalig in `db.js` aufgebaut und als Singleton gehalten.
+
+- **Daten & Schnittstellen:**
+  - MongoDB Atlas mit 4 Collections: `categories`, `exercises`, `plans`, `users`
+  - `exercises.categoryId` verweist als Slug-String (z. B. `"kraft"`) auf `categories.slug` — bewusst ohne ObjectId-Referenzen, um den manuellen Import zu vereinfachen
+  - Alle 148 Übungen sind in `data/exercises.json` als flaches Array gespeichert und wurden via Compass importiert
+  - `serialize()` in `db.js` wandelt MongoDB-Dokumente (ObjectId, Date) in JSON-sichere Werte um, bevor sie an SvelteKit-Load-Funktionen zurückgegeben werden
+  - `USER_ID = 'demo'` dient als Platzhalter, da kein Authentifizierungssystem implementiert ist
+
+- **Deployment:** Lokale Entwicklungsumgebung (`http://localhost:5173`), kein produktives Deployment
+
+- **Besondere Entscheidungen:**
+  - `categoryId` als Slug-String statt ObjectId: Vereinfacht den manuellen Datenimport erheblich, da keine Cross-Collection-Referenzen beim Import in Compass notwendig sind
+  - Kein Seed-Skript: Testdaten wurden bewusst manuell via MongoDB Compass importiert, um die Datenkontrolle beim Entwickler zu behalten
+  - Bootstrap nur als CSS: Auf die Bootstrap-JS-Komponenten wurde verzichtet, da SvelteKit die Reaktivität selbst übernimmt und kein jQuery-Overhead gewünscht war
 
 ### 3.5 Validate
 - **URL der getesteten Version** (separat deployt)
@@ -215,17 +253,21 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
 
 - **Eingesetzte Tools**: Claude Code (Modell: claude-sonnet-4-6) von Anthropic, eingebunden als VS Code Extension
 - **Zweck & Umfang**: KI wurde in folgenden Bereichen eingesetzt:
-  - **Datenbankarchitektur:** Beratung zur Datenbankstruktur (Collections, Schema-Design, Entscheid zwischen eingebetteten Daten vs. Referenzen)
-  - **Beispieldaten:** Erstellung von JSON-Beispieldaten für alle Collections (categories, exercises, plans, users)
-  - **Code:** Umsetzung der SvelteKit-Serverlogik (`+page.server.js`) sowie der Svelte-Komponenten (`+page.svelte`) für die Homepage
-  - **Debugging:** Behebung von Svelte-5-spezifischen Warnungen (reaktive Props-Destrukturierung)
-  - Teile des Codes stammen aus KI-Unterstützung, wurden jedoch vom Entwickler geprüft, angepasst und in das Projekt integriert.
+  - **Datenbankarchitektur:** Beratung zur Datenbankstruktur (Collections, Schema-Design, Entscheid zwischen eingebetteten Daten vs. Referenzen, `categoryId` als Slug-String statt ObjectId)
+  - **Übungsdaten:** Erstellung von JSON-Importdateien für alle 148 Übungen in 7 Kategorien (Athletic, Isometrics, Kettlebell, Kraft, Mobility, Plyometrics, Rotation) inkl. `bodyParts`-Zuordnung
+  - **Descriptions & Instructions:** Generierung von anfängergerechten Beschreibungen und nummerierten Schritt-für-Schritt-Anleitungen für alle 148 Übungen via Python-Hilfsskript (`scripts/add_descriptions.py`)
+  - **Kategoriedaten:** Erstellung der `categories.json` mit Farben, Icons und Slugs für alle 7 Kategorien
+  - **Code:** Umsetzung der SvelteKit-Serverlogik (`+page.server.js`, `db.js`) sowie der Svelte-Komponenten (`+page.svelte`) für die Homepage
+  - **Debugging:** Behebung des MongoDB-Verbindungsfehlers (`MONGODB_URI` nicht gefunden) sowie Svelte-5-spezifischer Warnungen (reaktive Props-Destrukturierung)
+  - **Dokumentation:** Verfassen der technischen Abschnitte der Projektdokumentation (3.4.2, 6.x)
+  - Teile des Codes und der Inhalte stammen aus KI-Unterstützung, wurden jedoch vom Entwickler geprüft, angepasst und in das Projekt integriert.
 - **Eigene Leistung (Abgrenzung):**
   - Eigenständige Konzeption und Definition aller Projektanforderungen (Ausgangslage, Ziele, Zielgruppen)
   - Eigenständige Gestaltung aller Mockups und Prototypen in Figma
   - Entscheide zur Technologiewahl (SvelteKit, MongoDB, Bootstrap)
-  - Aufbau der MongoDB-Datenbank (Atlas) und Import der Beispieldaten via Compass
-  - Überprüfung, Anpassung und Validierung aller KI-generierten Code-Vorschläge
+  - Zusammenstellung aller 148 Übungen inkl. Kategorie- und Muskelgruppen-Zuordnung (als `.md`-Datei vorbereitet, von KI in JSON konvertiert)
+  - Aufbau der MongoDB-Datenbank (Atlas) und manueller Import aller Daten via Compass
+  - Überprüfung, Anpassung und Validierung aller KI-generierten Vorschläge
   - Projektstruktur und Navigation wurden eigenständig konzipiert
 
 ### 6.2 Prompt-Vorgehen
