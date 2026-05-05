@@ -1,0 +1,505 @@
+[
+  {
+    "name": "Wall Sit Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Static lower body hold that builds quad endurance and knee strength.",
+    "instructions": [
+      "Stand with back flat against a wall",
+      "Slide down until thighs are parallel to the floor",
+      "Keep knees directly above ankles and feet flat",
+      "Hold the position without sliding",
+      "Aim for 30–60 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Wall Sit Holds on Toes",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Wall sit variation with heels raised to increase calf and ankle engagement.",
+    "instructions": [
+      "Set up in a standard wall sit position",
+      "Rise onto your toes while maintaining the squat angle",
+      "Keep knees above ankles and back flat against the wall",
+      "Hold with weight on the balls of your feet",
+      "Aim for 20–45 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Wall Sit Holds on Heels",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Wall sit variation with toes raised to target the tibialis and anterior shin.",
+    "instructions": [
+      "Set up in a standard wall sit position",
+      "Lift your toes off the floor, balancing on your heels",
+      "Keep knees above ankles and back flat against the wall",
+      "Maintain heel contact throughout the hold",
+      "Aim for 20–45 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Squat Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Static hold at the bottom of a squat to build quad and hip strength.",
+    "instructions": [
+      "Stand with feet shoulder-width apart, toes slightly out",
+      "Lower into a deep squat until thighs are parallel or below",
+      "Keep chest up, heels flat, and knees over toes",
+      "Hold the bottom position without bouncing",
+      "Aim for 20–60 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "ATG Split Squat Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Deep split squat hold that stretches and strengthens hip flexors and quads.",
+    "instructions": [
+      "Step one foot forward and lower back knee to the floor",
+      "Sink as deep as possible into the front knee bend",
+      "Keep front shin vertical and torso upright",
+      "Hold the deep position with control",
+      "Aim for 15–30 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Lunge Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Static lunge position that challenges quad, glute, and hip flexor strength.",
+    "instructions": [
+      "Step one foot forward into a lunge stance",
+      "Lower back knee toward the floor without touching it",
+      "Keep front knee above ankle and torso upright",
+      "Hold with both legs engaged",
+      "Aim for 20–40 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Single Leg Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Single-leg balance hold to strengthen stabilizers and improve balance.",
+    "instructions": [
+      "Stand on one leg with a slight bend in the knee",
+      "Lift the opposite foot a few inches off the ground",
+      "Keep hips level and core engaged",
+      "Focus on a fixed point ahead to help balance",
+      "Hold for 30–60 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Single Leg Holds (Knee Up)",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Single-leg hold with the free knee raised to hip height for hip flexor engagement.",
+    "instructions": [
+      "Stand on one leg with a slight bend in the standing knee",
+      "Raise the opposite knee to hip height at 90°",
+      "Keep hips square and core tight",
+      "Hold without letting the raised hip drop",
+      "Aim for 20–40 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Knee Extension Holds (Band)",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Isometric quad strengthening using a resistance band at a fixed knee angle.",
+    "instructions": [
+      "Sit on a bench with a resistance band looped around your ankle",
+      "Extend your leg against the band resistance",
+      "Stop at your chosen angle (e.g., 60° or fully extended)",
+      "Hold with the quad fully contracted",
+      "Aim for 20–40 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Knee External Rotation Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Isometric hold that strengthens the hip external rotators.",
+    "instructions": [
+      "Sit or stand with knees bent at 90°",
+      "Press the knee outward against a fixed resistance (hand or band)",
+      "Keep hips level and spine neutral",
+      "Hold the outward pressure without the knee moving",
+      "Aim for 20–30 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Knee Internal Rotation Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Isometric hold that strengthens the hip internal rotators.",
+    "instructions": [
+      "Sit or stand with knees bent at 90°",
+      "Press the knee inward against a fixed resistance (hand or band)",
+      "Keep hips level and spine neutral",
+      "Hold the inward pressure without the knee moving",
+      "Aim for 20–30 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Spanish Squat (Band)",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Band-assisted squat hold that targets the quads with reduced shear force.",
+    "instructions": [
+      "Loop a resistance band around a fixed post at shin height",
+      "Step back so the band rests against your shins",
+      "Sit back into a squat while the band supports the shins",
+      "Lower until thighs are parallel, keeping torso upright",
+      "Hold for 20–40 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Glute Bridge Holds",
+    "bodyParts": [
+      "Legs",
+      "Glutes"
+    ],
+    "description": "Isometric glute hold at the top of a bridge position.",
+    "instructions": [
+      "Lie on your back with knees bent and feet flat on the floor",
+      "Drive hips upward by squeezing glutes until body forms a straight line",
+      "Keep core tight and avoid hyperextending the lower back",
+      "Hold the top position with glutes fully contracted",
+      "Aim for 20–40 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "RDL Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Isometric hinge hold at the bottom of an RDL to strengthen hamstrings.",
+    "instructions": [
+      "Stand with feet hip-width apart, holding weights",
+      "Hinge at hips, pushing them back while lowering the weights",
+      "Stop when you feel a strong hamstring stretch (around shin level)",
+      "Keep back flat and a slight bend in the knees",
+      "Hold for 15–30 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Single Leg RDL Holds",
+    "bodyParts": [
+      "Legs"
+    ],
+    "description": "Single-leg hinge hold that challenges hamstrings and hip stabilizers.",
+    "instructions": [
+      "Stand on one leg with a slight bend in the knee",
+      "Hinge forward at the hip, extending the free leg behind you",
+      "Lower torso until roughly parallel to the floor, keep back flat",
+      "Hold with core tight and hips square",
+      "Aim for 15–30 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Seated Good Morning Holds",
+    "bodyParts": [
+      "Legs",
+      "Back"
+    ],
+    "description": "Seated isometric hold that strengthens the lower back and hamstrings.",
+    "instructions": [
+      "Sit on a bench with feet flat on floor",
+      "Hinge forward at the hips, lowering chest toward thighs",
+      "Keep back flat and core braced throughout",
+      "Hold the forward lean position",
+      "Aim for 20–30 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Kettlebell Hip Holds",
+    "bodyParts": [
+      "Hips"
+    ],
+    "description": "Isometric hip hold with a kettlebell to build hip and glute strength.",
+    "instructions": [
+      "Stand with feet hip-width apart, kettlebell hanging in front",
+      "Hinge slightly at the hips and squeeze glutes to hold the position",
+      "Keep shoulders back and core engaged",
+      "Maintain the partial hinge angle",
+      "Hold for 20–40 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Hip Abduction Holds",
+    "bodyParts": [
+      "Hips",
+      "Abductors"
+    ],
+    "description": "Isometric hold that strengthens the hip abductors and outer glutes.",
+    "instructions": [
+      "Lie on your side or stand near a wall with a band around your ankles",
+      "Lift or press the top leg outward against the resistance",
+      "Keep hips stacked and core engaged",
+      "Hold the abducted position without rotating the hip",
+      "Aim for 20–30 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Adductor Holds",
+    "bodyParts": [
+      "Hips",
+      "Adductors"
+    ],
+    "description": "Isometric inner thigh hold to strengthen the adductors.",
+    "instructions": [
+      "Lie on your back with knees bent and a ball between your knees",
+      "Squeeze the ball between your knees with maximal force",
+      "Keep lower back flat on the floor",
+      "Hold the squeeze without holding your breath",
+      "Aim for 20–40 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Copenhagen Plank",
+    "bodyParts": [
+      "Hips",
+      "Adductors",
+      "Core"
+    ],
+    "description": "Side plank variation with the top leg on a bench, targeting the adductors and core.",
+    "instructions": [
+      "Place your top foot on a bench and let the bottom leg hang",
+      "Press into a side plank position with your elbow on the floor",
+      "Lift your hips until your body forms a straight line",
+      "Keep core tight and hips elevated",
+      "Hold for 15–30 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Plank",
+    "bodyParts": [
+      "Core"
+    ],
+    "description": "Fundamental core exercise that builds full-body stability and endurance.",
+    "instructions": [
+      "Start on forearms and toes, elbows directly below shoulders",
+      "Keep body in a straight line from head to heels",
+      "Brace core, squeeze glutes, and breathe steadily",
+      "Avoid letting hips sag or rise",
+      "Hold for 30–60 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Side Plank",
+    "bodyParts": [
+      "Core"
+    ],
+    "description": "Lateral core exercise that strengthens the obliques and hip stabilizers.",
+    "instructions": [
+      "Lie on your side with elbow below shoulder",
+      "Stack feet or stagger them for balance",
+      "Lift hips off the floor until body forms a straight line",
+      "Keep core tight and hips elevated throughout",
+      "Hold for 20–40 seconds per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Leg Holds",
+    "bodyParts": [
+      "Core",
+      "Abs"
+    ],
+    "description": "Isometric lower ab exercise performed lying on your back.",
+    "instructions": [
+      "Lie flat on your back with hands under your lower back",
+      "Raise both legs to about 15 cm above the floor",
+      "Keep lower back pressed into the floor",
+      "Hold the position without letting legs drop",
+      "Aim for 20–40 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Scissors",
+    "bodyParts": [
+      "Core",
+      "Abs"
+    ],
+    "description": "Alternating leg movement that targets the lower abs and hip flexors.",
+    "instructions": [
+      "Lie flat on your back with legs extended",
+      "Raise both legs about 15 cm off the floor",
+      "Alternately cross one leg over the other in a scissors motion",
+      "Keep lower back pressed into the floor throughout",
+      "Perform for 20–40 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Biceps Curl Holds",
+    "bodyParts": [
+      "Arms"
+    ],
+    "description": "Isometric biceps hold at a fixed elbow angle to build static arm strength.",
+    "instructions": [
+      "Hold a dumbbell with underhand grip, curl to 90°",
+      "Keep elbows close to your sides and upper arms still",
+      "Hold the position while maintaining tension in the biceps",
+      "Breathe steadily, do not hold your breath",
+      "Aim for 20–30 seconds per arm"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  },
+  {
+    "name": "Gewichtsscheibe Halten",
+    "bodyParts": [
+      "Arms",
+      "Shoulders"
+    ],
+    "description": "Weight plate hold that builds grip, shoulder, and forearm endurance.",
+    "instructions": [
+      "Hold a weight plate at chest height with both hands on the edges",
+      "Keep arms extended or slightly bent",
+      "Engage shoulders and core to maintain the position",
+      "Do not let the plate sag below chest level",
+      "Hold for 20–40 seconds"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "isometrics"
+  }
+]

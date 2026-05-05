@@ -1,0 +1,120 @@
+[
+  {
+    "name": "Russian Twists",
+    "bodyParts": [
+      "Core",
+      "Abs"
+    ],
+    "description": "Seated rotational core exercise targeting the obliques and deep core muscles.",
+    "instructions": [
+      "Sit with knees bent and lean back to about 45°",
+      "Hold a weight at chest level with both hands",
+      "Rotate torso to one side, touching the weight toward the floor",
+      "Rotate to the other side to complete one rep",
+      "Perform 20 total reps (10 per side)"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "rotation"
+  },
+  {
+    "name": "Trunk Rotation",
+    "bodyParts": [
+      "Core"
+    ],
+    "description": "Standing core rotation drill for spinal mobility and rotational strength.",
+    "instructions": [
+      "Stand with feet shoulder-width apart, arms crossed or holding a stick",
+      "Rotate upper body to one side while keeping hips facing forward",
+      "Return to center and rotate to the other side",
+      "Control the movement, do not bounce at end range",
+      "Perform 15–20 reps per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "rotation"
+  },
+  {
+    "name": "Alternating Plate Turns",
+    "bodyParts": [
+      "Core",
+      "Full Body"
+    ],
+    "description": "Standing plate rotation that develops core anti-rotation and rotational power.",
+    "instructions": [
+      "Stand with feet shoulder-width apart, holding a weight plate at chest",
+      "Rotate to one side, extending arms straight out",
+      "Return to center and rotate to the other side",
+      "Keep hips facing forward and rotate only the torso",
+      "Perform 12–15 reps per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "rotation"
+  },
+  {
+    "name": "Cable Woodchop",
+    "bodyParts": [
+      "Core",
+      "Shoulders"
+    ],
+    "description": "Diagonal cable pull from high to low that builds rotational core power.",
+    "instructions": [
+      "Set cable at high position and stand sideways to the machine",
+      "Grip the handle with both hands above the shoulder",
+      "Pull the cable diagonally across the body to the opposite hip",
+      "Keep arms relatively straight and rotate through the core",
+      "Perform 10–12 reps per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "rotation"
+  },
+  {
+    "name": "Med Ball Throws Alternating",
+    "bodyParts": [
+      "Core",
+      "Full Body"
+    ],
+    "description": "Alternating rotational throws against a wall to build explosive core power.",
+    "instructions": [
+      "Stand sideways to a wall, holding a med ball at hip level",
+      "Rotate away from the wall to load up",
+      "Rotate back explosively and throw the ball into the wall",
+      "Catch the rebound and immediately set up the next throw",
+      "Perform 10 reps per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "rotation"
+  },
+  {
+    "name": "Shoulder Back Rotation",
+    "bodyParts": [
+      "Shoulders"
+    ],
+    "description": "Rotational shoulder mobility drill to improve thoracic rotation and posture.",
+    "instructions": [
+      "Stand or sit upright with arms extended to the sides at shoulder height",
+      "Rotate one arm forward and the other backward simultaneously",
+      "Keep core stable and movement controlled",
+      "Alternate directions fluidly",
+      "Perform 10–15 reps per side"
+    ],
+    "imageUrl": "",
+    "referenceUrl": "",
+    "isCustom": false,
+    "userId": null,
+    "categoryId": "rotation"
+  }
+]

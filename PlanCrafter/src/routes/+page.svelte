@@ -202,29 +202,35 @@
   /* Categories grid */
   .categories-scroll {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
   }
   .cat-tile {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
     background: #2A2A2A;
     border: 1.5px solid;
-    border-radius: 14px;
-    padding: 14px 8px;
+    border-radius: 12px;
+    padding: 10px 4px;
     text-decoration: none;
+    min-width: 0;
   }
   .cat-icon {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 1;
   }
   .cat-name {
-    font-size: 0.65rem;
+    font-size: 0.58rem;
     font-weight: 600;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    padding: 0 2px;
   }
 
   /* Explore grid */
