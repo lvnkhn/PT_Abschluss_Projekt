@@ -7,8 +7,8 @@ export async function load() {
     getCollection('exercises'),
   ]);
 
-  const [activePlan, myPlans, categories, explore] = await Promise.all([
-    plansCol.findOne({ userId: USER_ID, status: { $in: ['draft', 'active'] } }),
+  const [draftPlan, myPlans, categories, explore] = await Promise.all([
+    plansCol.findOne({ userId: USER_ID, status: 'draft' }),
     plansCol
       .find({ userId: USER_ID, status: { $in: ['active', 'completed'] } })
       .sort({ createdAt: -1 })
@@ -18,5 +18,6 @@ export async function load() {
     exercisesCol.find().limit(6).toArray(),
   ]);
 
+  const activePlan = draftPlan ?? await plansCol.findOne({ userId: USER_ID, status: 'active' }, { sort: { createdAt: -1 } });
   return serialize({ activePlan, plans: myPlans, categories, explore });
 }

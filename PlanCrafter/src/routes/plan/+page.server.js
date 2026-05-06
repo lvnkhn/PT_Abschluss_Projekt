@@ -3,13 +3,14 @@ import { ObjectId } from 'mongodb';
 
 export async function load() {
   const col = await getCollection('plans');
-  const [plan, savedPlans] = await Promise.all([
-    col.findOne({ userId: USER_ID, status: { $in: ['draft', 'active'] } }),
+  const [draft, savedPlans] = await Promise.all([
+    col.findOne({ userId: USER_ID, status: 'draft' }),
     col
       .find({ userId: USER_ID, status: { $in: ['active', 'completed'] } })
       .sort({ createdAt: -1 })
       .toArray(),
   ]);
+  const plan = draft ?? await col.findOne({ userId: USER_ID, status: 'active' }, { sort: { createdAt: -1 } });
   return serialize({ plan, savedPlans });
 }
 
