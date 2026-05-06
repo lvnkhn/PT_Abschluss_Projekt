@@ -175,11 +175,11 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 
 1. Auf einer Übungsliste (Exercises oder Categories) den **+**-Button antippen → Übung wird einem Draft-Plan hinzugefügt (Button wird grün mit ✓) und ein Toast-Popup erscheint oben rechts mit dem Übungsnamen und einem «Zum Plan →»-Link
 2. Mehrere Übungen hinzufügen
-3. Navigation → *Your Plan* (oder Toast-Link antippen) → Draft-Plan sichtbar mit allen hinzugefügten Übungen
+3. Navigation → *Your Plan* (oder Toast-Link antippen) → Draft-Plan sichtbar in der Sektion «Plan in Bearbeitung»
 4. Unerwünschte Übungen mit **✕** entfernen (live, kein Reload)
-5. Plan benennen (Textfeld) → **Speichern** → Plan wird gespeichert, Status wechselt zu «Aktiv»
-6. Übungen während des Workouts einzeln abhaken (live, Fortschrittsbalken aktualisiert sich)
-7. Sobald alle Übungen erledigt: Plan wird automatisch als «Abgeschlossen» markiert, Datum wird auf heute gesetzt
+5. Plan benennen (Textfeld) → **Speichern** → Plan erscheint in «Meine Pläne»
+6. Plan antippen → Detailseite (`/plans/[id]`) → Fortschrittsbalken + Übungen mit Checkboxen
+7. Übungen einzeln abhaken (live, kein Reload); sobald alle erledigt: Plan wird automatisch als «Abgeschlossen» markiert, Datum wird auf heute gesetzt
 
 ##### Workflow 4: Gespeicherte Pläne verwalten
 

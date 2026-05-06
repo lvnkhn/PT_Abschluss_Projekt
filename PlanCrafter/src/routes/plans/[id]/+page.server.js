@@ -19,13 +19,29 @@ export const actions = {
     const col = await getCollection('plans');
     await col.updateOne(
       { _id: new ObjectId(params.id) },
-      {
-        $set: {
-          status: 'active',
-          'exercises.$[].done': false,
-        }
-      }
+      { $set: { status: 'active', lastActivatedAt: new Date(), 'exercises.$[].done': false } }
     );
-    redirect(303, '/plan');
-  }
+    redirect(303, `/plans/${params.id}`);
+  },
+
+  toggleDone: async ({ request, params }) => {
+    const data = await request.formData();
+    const exerciseId = data.get('exerciseId');
+    const currentDone = data.get('done') === 'true';
+    const col = await getCollection('plans');
+    const id = new ObjectId(params.id);
+
+    await col.updateOne(
+      { _id: id, 'exercises.exerciseId': exerciseId },
+      { $set: { 'exercises.$.done': !currentDone } }
+    );
+
+    const plan = await col.findOne({ _id: id });
+    if (plan.exercises.length > 0 && plan.exercises.every(e => e.done)) {
+      await col.updateOne(
+        { _id: id },
+        { $set: { status: 'completed', lastCompletedAt: new Date() } }
+      );
+    }
+  },
 };

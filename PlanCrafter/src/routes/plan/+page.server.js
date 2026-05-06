@@ -3,15 +3,18 @@ import { ObjectId } from 'mongodb';
 
 export async function load() {
   const col = await getCollection('plans');
-  const [draft, savedPlans] = await Promise.all([
+  const [draft, activePlan, savedPlans] = await Promise.all([
     col.findOne({ userId: USER_ID, status: 'draft' }),
+    col.findOne(
+      { userId: USER_ID, status: 'active' },
+      { sort: { lastActivatedAt: -1, createdAt: -1 } }
+    ),
     col
       .find({ userId: USER_ID, status: { $in: ['active', 'completed'] } })
-      .sort({ createdAt: -1 })
+      .sort({ lastActivatedAt: -1, createdAt: -1 })
       .toArray(),
   ]);
-  const plan = draft ?? await col.findOne({ userId: USER_ID, status: 'active' }, { sort: { createdAt: -1 } });
-  return serialize({ plan, savedPlans });
+  return serialize({ draft, activePlan, savedPlans });
 }
 
 export const actions = {
@@ -23,7 +26,7 @@ export const actions = {
     const col = await getCollection('plans');
     await col.updateOne(
       { _id: new ObjectId(planId) },
-      { $set: { name, status: 'active' } }
+      { $set: { name, status: 'active', lastActivatedAt: new Date() } }
     );
     return { success: true };
   },
@@ -58,5 +61,16 @@ export const actions = {
       { _id: new ObjectId(planId) },
       { $pull: { exercises: { exerciseId } } }
     );
-  }
+  },
+
+  activatePlan: async ({ request }) => {
+    const data = await request.formData();
+    const planId = data.get('planId');
+    const col = await getCollection('plans');
+    const plan = await col.findOne({ _id: new ObjectId(planId) });
+    const update = plan?.status === 'completed'
+      ? { $set: { status: 'active', lastActivatedAt: new Date(), 'exercises.$[].done': false } }
+      : { $set: { lastActivatedAt: new Date() } };
+    await col.updateOne({ _id: new ObjectId(planId) }, update);
+  },
 };
