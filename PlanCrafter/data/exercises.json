@@ -13,13 +13,13 @@
       "Immediately lower into the next rep"
     ],
     "imageUrl": "/img/exercises/jump-squat.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://liftmanual.com/jump-squat/",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
   },
   {
-    "name": "Bulgarian Pin Squat",
+    "name": "Bulgarian Split Squat",
     "bodyParts": [
       "Legs"
     ],
@@ -32,7 +32,7 @@
       "Complete all reps on one side, then switch"
     ],
     "imageUrl": "/img/exercises/bulgarian-split-squat.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://liftmanual.com/how-to-do-a-bulgarian-split-squat/",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
@@ -52,7 +52,7 @@
       "Repeat for target reps, then switch sides"
     ],
     "imageUrl": "/img/exercises/Split-Squat-Calf-Raises.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.rehabhero.ca/exercise/split-squat-calf-raise",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
@@ -71,7 +71,7 @@
       "Repeat 6–10 times"
     ],
     "imageUrl": "/img/exercises/sprints.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=6m_fjNhRhkY",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
@@ -90,7 +90,7 @@
       "Perform for 20–40 seconds per set"
     ],
     "imageUrl": "/img/exercises/battle-ropes.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=_Nokk04kTdI&t=28s",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
@@ -109,7 +109,7 @@
       "Repeat for 8–12 reps"
     ],
     "imageUrl": "/img/exercises/med-ball-slams.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.menshealth.de/uebungen/medicine-ball-slams-richtig-machen-explosivitaet-kraft-und-ausdauer/",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
@@ -147,7 +147,7 @@
       "Push 20–40 meters, rest, then repeat"
     ],
     "imageUrl": "/img/exercises/sled-pushes.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://liftmanual.com/power-sled-push/",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
@@ -166,13 +166,13 @@
       "Pull 20–40 meters, rest, then repeat"
     ],
     "imageUrl": "/img/exercises/sled-pulls.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=10EV71O4oBo",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
   },
   {
-    "name": "Boden Walks",
+    "name": "Stalking Lunges",
     "bodyParts": [
       "Legs"
     ],
@@ -185,7 +185,7 @@
       "Continue alternating legs across the floor"
     ],
     "imageUrl": "/img/exercises/boden-walks.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/SSIGkrnNceA",
     "isCustom": false,
     "userId": null,
     "categoryId": "athletic"
@@ -204,7 +204,7 @@
       "Aim for 30–60 seconds"
     ],
     "imageUrl": "/img/exercises/walls-sits-holds.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=RG7z0P9qrLk",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -223,7 +223,7 @@
       "Aim for 20–60 seconds"
     ],
     "imageUrl": "/img/exercises/squat-holds.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=_izLJ0giePc",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -242,7 +242,7 @@
       "Aim for 20–40 seconds per side"
     ],
     "imageUrl": "/img/exercises/lunge-holds.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/60DPipXKqhE",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -261,7 +261,7 @@
       "Hold for 30–60 seconds per side"
     ],
     "imageUrl": "/img/exercises/single-leg-holds.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=W4QBixosmxs",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -282,7 +282,7 @@
       "Hold for 15–30 seconds per side"
     ],
     "imageUrl": "/img/exercises/copenhagen-plank.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=aDsaGBnvDQo",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -301,7 +301,7 @@
       "Hold for 30–60 seconds"
     ],
     "imageUrl": "/img/exercises/plank.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.menshealth.de/krafttraining/plank-so-perfektionierst-du-den-unterarmstuetz/",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -320,7 +320,7 @@
       "Hold for 20–40 seconds per side"
     ],
     "imageUrl": "/img/exercises/side-plank.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=NXr4Fw8q60o",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -340,7 +340,7 @@
       "Aim for 20–40 seconds"
     ],
     "imageUrl": "/img/exercises/glute-bridge-holds.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=vtnpY_fYJ4M",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -359,7 +359,7 @@
       "Aim for 15–30 seconds per side"
     ],
     "imageUrl": "/img/exercises/single-leg-rdls-holds.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=GoKjrvJi-Iw",
     "isCustom": false,
     "userId": null,
     "categoryId": "isometrics"
@@ -399,7 +399,7 @@
       "Let it swing back and repeat for 15–20 reps"
     ],
     "imageUrl": "/img/exercises/swings.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=YSxHifyI6s8",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -419,7 +419,7 @@
       "Drive through heels to stand — 10–15 reps"
     ],
     "imageUrl": "/img/exercises/goblet-squat.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=QilYZ20kVfM",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -439,7 +439,7 @@
       "Perform 8–10 reps per side"
     ],
     "imageUrl": "/img/exercises/single-leg-deadlift.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/s32cCgmRV3I",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -458,7 +458,7 @@
       "Perform 8–12 reps per side"
     ],
     "imageUrl": "/img/exercises/lunge.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=mEKnw3Kmu7o",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -477,7 +477,7 @@
       "Perform 8–12 reps per side"
     ],
     "imageUrl": "/img/exercises/racked-squat.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=U-8AxRHCr3M",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -497,7 +497,7 @@
       "Perform 6–8 reps per side"
     ],
     "imageUrl": "/img/exercises/clean-arm-press.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=sAtZ4yAsQnI",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -516,7 +516,7 @@
       "Perform 8–10 reps per side"
     ],
     "imageUrl": "/img/exercises/shoulder-presses.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=X-uFqWtjpGI",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -535,7 +535,7 @@
       "Lower with control — 8–12 reps per side"
     ],
     "imageUrl": "/img/exercises/rows.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=UsxcaALqr2c",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -555,7 +555,7 @@
       "Return to standing — 5–8 reps per side"
     ],
     "imageUrl": "/img/exercises/windmills.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=cNiWFzr7p7s",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -575,7 +575,7 @@
       "Perform 10–15 reps per side"
     ],
     "imageUrl": "/img/exercises/alternating-swings.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/gw2T-Ww2r4U",
     "isCustom": false,
     "userId": null,
     "categoryId": "kettlebell"
@@ -594,7 +594,7 @@
       "Drive through heels to return to standing — 8–12 reps"
     ],
     "imageUrl": "/img/exercises/squats.avif",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=xqvCmoLULNY",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -613,7 +613,7 @@
       "Alternate legs for 10–12 reps per side"
     ],
     "imageUrl": "/img/exercises/lunges.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=lf4gJgKyLpI",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -632,7 +632,7 @@
       "Drive hips forward to return — 8–12 reps"
     ],
     "imageUrl": "/img/exercises/rdls.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=xAL7lHwj30E",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -651,13 +651,13 @@
       "Perform 10–12 reps"
     ],
     "imageUrl": "/img/exercises/lat-pull-downs.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/bNmvKpJSWKM",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
   },
   {
-    "name": "Bankdrücken",
+    "name": "Chest Press",
     "bodyParts": [
       "Chest"
     ],
@@ -670,7 +670,7 @@
       "Perform 5–8 reps — use a spotter with heavy weight"
     ],
     "imageUrl": "/img/exercises/bankdruecken.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/mTaiQemkEpU",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -689,7 +689,7 @@
       "Perform 8–12 reps"
     ],
     "imageUrl": "/img/exercises/shoulder-press.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/k6tzKisR3NY",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -708,7 +708,7 @@
       "Perform 12–15 reps"
     ],
     "imageUrl": "/img/exercises/lateral-raises.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/Kl3LEzQ5Zqs",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -727,7 +727,7 @@
       "Perform 10–12 reps"
     ],
     "imageUrl": "/img/exercises/curls.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/_aoad2yuP5w",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -746,7 +746,7 @@
       "Perform 12–15 reps"
     ],
     "imageUrl": "/img/exercises/tricep-pushdowns.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/1FjkhpZsaxc",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -765,7 +765,7 @@
       "Perform 15–20 reps"
     ],
     "imageUrl": "/img/exercises/crunches.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/eeJ_CYqSoT4",
     "isCustom": false,
     "userId": null,
     "categoryId": "kraft"
@@ -785,7 +785,7 @@
       "Hold for 30–60 seconds"
     ],
     "imageUrl": "/img/exercises/butterfly.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=JJSFFJLYETE",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -805,7 +805,7 @@
       "Hold for 30–60 seconds"
     ],
     "imageUrl": "/img/exercises/butterfly-holds.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=4J7kbCmPScQ",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -825,7 +825,7 @@
       "Hold for 60–90 seconds per side"
     ],
     "imageUrl": "/img/exercises/couch-stretch.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=Fg-lwNBzVV8",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -844,7 +844,7 @@
       "Repeat 2–3 times"
     ],
     "imageUrl": "/img/exercises/wrist-circles.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=wRSk1_C6yOM",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -864,7 +864,7 @@
       "Hold for 20–30 seconds"
     ],
     "imageUrl": "/img/exercises/cobra.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=Nd3j6Avtv6Q",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -884,7 +884,7 @@
       "Repeat for 10–15 slow reps"
     ],
     "imageUrl": "/img/exercises/cat-cow.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=TK6tM059e8o",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -904,7 +904,7 @@
       "Hold for 30–60 seconds"
     ],
     "imageUrl": "/img/exercises/child-pose.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=_ZX_zTOBgp8",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -923,7 +923,7 @@
       "Repeat 2–3 times per side"
     ],
     "imageUrl": "/img/exercises/90-90-stretch.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=m51AZSXMvEA",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -943,7 +943,7 @@
       "Hold for 30–60 seconds"
     ],
     "imageUrl": "/img/exercises/seated-good-mornings.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=S7WGAvaGxOw",
     "isCustom": false,
     "userId": null,
     "categoryId": "mobility"
@@ -963,7 +963,7 @@
       "Perform 20–30 reps"
     ],
     "imageUrl": "/img/exercises/pogo-jumps.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=iU-TKr4YesM",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -983,7 +983,7 @@
       "Step back down and repeat — 5–8 reps"
     ],
     "imageUrl": "/img/exercises/box-jumps.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=NBY9-kTuHEk",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1003,7 +1003,7 @@
       "Perform 5–8 reps"
     ],
     "imageUrl": "/img/exercises/broad-jump.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=c6Etg7bpFfI",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1023,7 +1023,7 @@
       "Perform 8–10 reps"
     ],
     "imageUrl": "/img/exercises/tuck-jumps.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=qGk0MTjwLPo",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1042,7 +1042,7 @@
       "Jump with arms overhead to complete one rep — 10–15 reps"
     ],
     "imageUrl": "/img/exercises/burpees.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=auBLPXO8Fww",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1062,7 +1062,7 @@
       "Perform 5–8 reps"
     ],
     "imageUrl": "/img/exercises/clap-push-up.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=EYwWCgM198U",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1081,7 +1081,7 @@
       "Perform 8–12 reps per side"
     ],
     "imageUrl": "/img/exercises/split-jumps.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=j7ODZHSEGQA",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1101,7 +1101,7 @@
       "Perform 10–12 reps per side"
     ],
     "imageUrl": "/img/exercises/skater-jumps.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=Xz27DudBfSs",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1121,7 +1121,7 @@
       "Perform 5–8 reps"
     ],
     "imageUrl": "/img/exercises/depth-drops.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=uoDrpDu4HVY",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1141,7 +1141,7 @@
       "Repeat for 8–12 reps"
     ],
     "imageUrl": "/img/exercises/med-ball-slam.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=QxYhFwMd1Ks",
     "isCustom": false,
     "userId": null,
     "categoryId": "plyometrics"
@@ -1161,7 +1161,7 @@
       "Perform 20 total reps (10 per side)"
     ],
     "imageUrl": "/img/exercises/russian-twists.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=PkGPokybYaU",
     "isCustom": false,
     "userId": null,
     "categoryId": "rotation"
@@ -1180,7 +1180,7 @@
       "Perform 15–20 reps per side"
     ],
     "imageUrl": "/img/exercises/trunk-rotation.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/EBMrPbWJIKA",
     "isCustom": false,
     "userId": null,
     "categoryId": "rotation"
@@ -1200,7 +1200,7 @@
       "Perform 12–15 reps per side"
     ],
     "imageUrl": "/img/exercises/alternating-plate-turns.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=TnQX6pMAWMI",
     "isCustom": false,
     "userId": null,
     "categoryId": "rotation"
@@ -1220,7 +1220,7 @@
       "Perform 10–12 reps per side"
     ],
     "imageUrl": "/img/exercises/cable-woodchop.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/watch?v=gcGNypjIQDo",
     "isCustom": false,
     "userId": null,
     "categoryId": "rotation"
@@ -1240,13 +1240,13 @@
       "Perform 10 reps per side"
     ],
     "imageUrl": "/img/exercises/medball-throws-alternating.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/HF414S_AXeU",
     "isCustom": false,
     "userId": null,
     "categoryId": "rotation"
   },
   {
-    "name": "Shoulder Back Rotation",
+    "name": "Shoulder External Rotation",
     "bodyParts": [
       "Shoulders"
     ],
@@ -1259,7 +1259,7 @@
       "Perform 10–15 reps per side"
     ],
     "imageUrl": "/img/exercises/shoulder-back-rotation.jpg",
-    "referenceUrl": "",
+    "referenceUrl": "https://www.youtube.com/shorts/feGRl3XB8MI",
     "isCustom": false,
     "userId": null,
     "categoryId": "rotation"
