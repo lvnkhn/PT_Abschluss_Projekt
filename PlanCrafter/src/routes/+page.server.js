@@ -7,13 +7,16 @@ export async function load() {
     getCollection('exercises'),
   ]);
 
-  const [plans, categories, explore] = await Promise.all([
-    plansCol.find({ userId: USER_ID }).sort({ createdAt: -1 }).limit(3).toArray(),
+  const [activePlan, myPlans, categories, explore] = await Promise.all([
+    plansCol.findOne({ userId: USER_ID, status: { $in: ['draft', 'active'] } }),
+    plansCol
+      .find({ userId: USER_ID, status: { $in: ['active', 'completed'] } })
+      .sort({ createdAt: -1 })
+      .limit(2)
+      .toArray(),
     categoriesCol.find().toArray(),
     exercisesCol.find().limit(6).toArray(),
   ]);
 
-  const activePlan = plans[0] ?? null;
-
-  return serialize({ activePlan, plans, categories, explore });
+  return serialize({ activePlan, plans: myPlans, categories, explore });
 }

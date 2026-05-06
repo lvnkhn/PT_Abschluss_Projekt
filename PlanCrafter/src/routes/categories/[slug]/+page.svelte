@@ -1,6 +1,8 @@
 <script>
+  import { enhance } from '$app/forms';
   let { data } = $props();
   const cat = data.category;
+  let added = $state({});
 </script>
 
 <div class="page">
@@ -37,7 +39,15 @@
             <p class="ex-desc">{ex.description}</p>
           </div>
         </a>
-        <button class="add-btn" aria-label="Add to plan">+</button>
+        <form method="POST" action="?/addToPlan" use:enhance={() => {
+          added[ex._id] = true;
+          return async ({ update }) => { await update(); };
+        }}>
+          <input type="hidden" name="exerciseId" value={ex._id} />
+          <button type="submit" class="add-btn" class:added={added[ex._id]}>
+            {added[ex._id] ? '✓' : '+'}
+          </button>
+        </form>
       </div>
     {/each}
   </div>
@@ -173,5 +183,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.2s;
+  }
+  .add-btn.added {
+    background: #14B8A6;
+    color: #fff;
   }
 </style>
