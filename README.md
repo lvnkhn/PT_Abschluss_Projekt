@@ -173,9 +173,9 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 
 ##### Workflow 3: Plan erstellen und Workout durchführen
 
-1. Auf einer Übungsliste (Exercises oder Categories) den **+**-Button antippen → Übung wird einem Draft-Plan hinzugefügt (Button wird grün mit ✓)
+1. Auf einer Übungsliste (Exercises oder Categories) den **+**-Button antippen → Übung wird einem Draft-Plan hinzugefügt (Button wird grün mit ✓) und ein Toast-Popup erscheint oben rechts mit dem Übungsnamen und einem «Zum Plan →»-Link
 2. Mehrere Übungen hinzufügen
-3. Navigation → *Your Plan* → Draft-Plan sichtbar mit allen hinzugefügten Übungen
+3. Navigation → *Your Plan* (oder Toast-Link antippen) → Draft-Plan sichtbar mit allen hinzugefügten Übungen
 4. Unerwünschte Übungen mit **✕** entfernen (live, kein Reload)
 5. Plan benennen (Textfeld) → **Speichern** → Plan wird gespeichert, Status wechselt zu «Aktiv»
 6. Übungen während des Workouts einzeln abhaken (live, Fortschrittsbalken aktualisiert sich)
@@ -224,9 +224,10 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   ```text
   src/
   ├── lib/
-  │   └── server/
-  │       ├── db.js              # MongoDB-Verbindung, serialize(), USER_ID
-  │       └── planHelper.js      # Shared-Helfer: Draft-Plan holen/erstellen, Übung hinzufügen
+  │   ├── server/
+  │   │   ├── db.js              # MongoDB-Verbindung, serialize(), USER_ID
+  │   │   └── planHelper.js      # Shared-Helfer: Draft-Plan holen/erstellen, Übung hinzufügen
+  │   └── toast.svelte.js        # Reaktiver Toast-State (Svelte-5-Klasse, seitenübergreifend)
   ├── routes/
   │   ├── +layout.svelte         # Bootstrap CDN, globales Layout, Bottom-Navigation
   │   ├── +page.svelte           # Homepage

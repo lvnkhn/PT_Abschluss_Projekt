@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { toast } from '$lib/toast.svelte.js';
   let { data } = $props();
 
   let added = $state({});
@@ -51,7 +52,7 @@
         </a>
         <form method="POST" action="?/addToPlan" use:enhance={() => {
           added[ex._id] = true;
-          return async ({ update }) => { await update(); };
+          return async ({ update }) => { await update(); toast.show(ex.name); };
         }}>
           <input type="hidden" name="exerciseId" value={ex._id} />
           <button type="submit" class="add-btn" class:added={added[ex._id]}>
