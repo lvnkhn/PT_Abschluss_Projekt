@@ -153,13 +153,54 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
 - **Farbliche Akzente pro Kategorie:** Verbessern die Wiedererkennbarkeit und unterstützen die visuelle Orientierung.
 - **Flache Navigationshierarchie:** Hält den Klickpfad kurz und vermeidet unnötige Zwischenebenen.
 
-#### Workflows
+#### Workflows & Testanleitung
 
-- **Training starten:** Home → Tap "Current Workout" → Training läuft
-- **Übung zum Plan hinzufügen:** Exercises → Filter setzen → "+"-Button → Your Plan
-- **Kategoriebasiert suchen:** Categories → Übungsliste → Übungsdetail
-- **Eigene Übung erfassen:** Add → Formular ausfüllen → "Save Exercise"
-- **Pläne verwalten:** Home oder My Plans → Plan auswählen → Your Plan
+Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werden (`npm run dev` im Ordner `PlanCrafter`). Die App verwendet `userId: "demo"` für alle Daten — kein Login erforderlich.
+
+---
+
+##### Workflow 1: Übungen durchsuchen
+
+1. Navigation → *Exercises* → alle 65 Übungen werden geladen
+2. Kategorie-Chip (z. B. «Kraft») antippen → Liste filtert auf diese Kategorie
+3. Übung antippen → Detailseite mit Bild, Kategorie-Badge, bodyParts-Badges, Schritt-für-Schritt-Anleitung und Referenz-Link
+
+##### Workflow 2: Kategoriebasiert suchen
+
+1. Navigation → *Categories* → alle 7 Kategorien mit Übungsanzahl
+2. Kategorie antippen → Übungsliste dieser Kategorie
+3. Übung antippen → Detailseite (Zurück-Button navigiert zur Kategorie zurück)
+
+##### Workflow 3: Plan erstellen und Workout durchführen
+
+1. Auf einer Übungsliste (Exercises oder Categories) den **+**-Button antippen → Übung wird einem Draft-Plan hinzugefügt (Button wird grün mit ✓) und ein Toast-Popup erscheint oben rechts mit dem Übungsnamen und einem «Zum Plan →»-Link
+2. Mehrere Übungen hinzufügen
+3. Navigation → *Your Plan* (oder Toast-Link antippen) → Draft-Plan sichtbar mit allen hinzugefügten Übungen
+4. Unerwünschte Übungen mit **✕** entfernen (live, kein Reload)
+5. Plan benennen (Textfeld) → **Speichern** → Plan wird gespeichert, Status wechselt zu «Aktiv»
+6. Übungen während des Workouts einzeln abhaken (live, Fortschrittsbalken aktualisiert sich)
+7. Sobald alle Übungen erledigt: Plan wird automatisch als «Abgeschlossen» markiert, Datum wird auf heute gesetzt
+
+##### Workflow 4: Gespeicherte Pläne verwalten
+
+1. Navigation → *Your Plan* → Scrolldown zeigt alle gespeicherten Pläne
+2. Plan antippen → Detailseite mit Übungsliste und Abschlussdatum
+3. **Jetzt starten** → Plan wird zurückgesetzt (alle Haken entfernt) und als aktiver Workout geöffnet
+4. Home → *My Plans* zeigt die 2 neuesten Pläne; **View all** → vollständige Planliste
+
+##### Workflow 5: Eigene Übung erfassen
+
+1. Navigation → *Add* → Formular mit Name, Kategorie (Dropdown), Referenz-URL
+2. **Speichern** → eigene Übung wird in MongoDB gespeichert (`isCustom: true`)
+3. Übung erscheint in der Exercises-Liste der gewählten Kategorie
+
+##### Workflow 6: Home-Navigation
+
+1. *Current Workout*-Card zeigt den aktiven/nicht abgeschlossenen Plan → Antippen öffnet *Your Plan*
+2. *My Plans* zeigt die 2 neuesten Pläne → direkt anwählbar
+3. *Categories*-Kacheln → direkt zur Kategorie-Detailseite
+4. *Explore*-Grid → direkt zur Übungsdetailseite
+5. «PlanCrafter»-Schriftzug oben → navigiert immer zur Homepage
 
 
 #### 3.4.2. Umsetzung (Technik)
@@ -183,17 +224,40 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
   ```text
   src/
   ├── lib/
-  │   └── server/
-  │       └── db.js          # MongoDB-Verbindung, serialize(), USER_ID
+  │   ├── server/
+  │   │   ├── db.js              # MongoDB-Verbindung, serialize(), USER_ID
+  │   │   └── planHelper.js      # Shared-Helfer: Draft-Plan holen/erstellen, Übung hinzufügen
+  │   └── toast.svelte.js        # Reaktiver Toast-State (Svelte-5-Klasse, seitenübergreifend)
   ├── routes/
-  │   ├── +layout.svelte     # Bootstrap CDN, globales Layout
-  │   ├── +page.svelte       # Homepage
-  │   ├── +page.server.js    # SSR Load-Funktion Homepage
-  │   └── [weitere Routen]
-  └── app.css                # Dark Theme, CSS-Variablen
+  │   ├── +layout.svelte         # Bootstrap CDN, globales Layout, Bottom-Navigation
+  │   ├── +page.svelte           # Homepage
+  │   ├── +page.server.js        # Load: activePlan, myPlans, categories, explore
+  │   ├── categories/
+  │   │   ├── +page.svelte       # Alle 7 Kategorien als Grid
+  │   │   ├── +page.server.js
+  │   │   └── [slug]/
+  │   │       ├── +page.svelte   # Übungen einer Kategorie mit "+"-Button
+  │   │       └── +page.server.js # Load + addToPlan Action
+  │   ├── exercises/
+  │   │   └── [id]/
+  │   │       ├── +page.svelte   # Übungsdetailseite (Bild, Badges, Schritte, Ref-Link)
+  │   │       └── +page.server.js # Load + addToPlan Action
+  │   ├── plan/
+  │   │   ├── +page.svelte       # Draft/Aktiver Plan (Übungen entfernen, benennen, abhaken)
+  │   │   └── +page.server.js    # Load + saveName / toggleDone / removeExercise Actions
+  │   ├── plans/
+  │   │   ├── +page.svelte       # Alle gespeicherten Pläne
+  │   │   ├── +page.server.js
+  │   │   └── [id]/
+  │   │       ├── +page.svelte   # Plandetailseite mit "Jetzt starten"-Button
+  │   │       └── +page.server.js # Load + restart Action
+  │   └── add-exercise/
+  │       ├── +page.svelte       # Formular eigene Übung erfassen
+  │       └── +page.server.js    # addExercise Action (isCustom: true)
+  └── app.css                    # Dark Theme, CSS-Variablen
   ```
 
-  Jede Seite besteht aus einem `+page.svelte` (UI) und einem `+page.server.js` (Datenbankzugriff). Die DB-Verbindung wird einmalig in `db.js` aufgebaut und als Singleton gehalten.
+  Jede Seite besteht aus einem `+page.svelte` (UI) und einem `+page.server.js` (Datenbankzugriff). Die DB-Verbindung wird einmalig in `db.js` aufgebaut und als Singleton gehalten. `planHelper.js` kapselt die geteilte Logik zum Erstellen und Befüllen von Draft-Plänen, damit `exercises/[id]` und `categories/[slug]` keinen duplizierten Code enthalten.
 
 - **Daten & Schnittstellen:**
   - MongoDB Atlas mit 4 Collections: `categories`, `exercises`, `plans`, `users`
@@ -201,6 +265,9 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
   - Alle 65 Übungen sind in `data/exercises.json` als flaches Array gespeichert und wurden via Compass importiert
   - `serialize()` in `db.js` wandelt MongoDB-Dokumente (ObjectId, Date) in JSON-sichere Werte um, bevor sie an SvelteKit-Load-Funktionen zurückgegeben werden
   - `USER_ID = 'demo'` dient als Platzhalter, da kein Authentifizierungssystem implementiert ist
+  - **Plan-Datenmodell:** Pläne durchlaufen drei Status: `draft` (noch nicht benannt) → `active` (Workout läuft) → `completed` (alle Übungen abgehakt). Übungsdetails (Name, imageUrl) werden denormalisiert direkt im Plan-Dokument eingebettet, um Joins zu vermeiden
+  - **Reaktivität:** `use:enhance` (SvelteKit) sendet Form-Actions per Fetch ohne Reload; `update({ reset: false })` löst die Load-Funktion erneut aus, sodass UI-Updates sofort sichtbar sind. Berechnete Werte (`doneCount`, `isDraft`) werden mit Svelte-5-`$derived()` reaktiv gehalten
+  - **Form Actions** decken alle schreibenden Operationen ab: `addToPlan`, `saveName`, `toggleDone`, `removeExercise`, `restart` — jede in der `+page.server.js` der zugehörigen Route
 
 - **Deployment:** Lokale Entwicklungsumgebung (`http://localhost:5173`), kein produktives Deployment
 
@@ -208,6 +275,8 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
   - `categoryId` als Slug-String statt ObjectId: Vereinfacht den manuellen Datenimport erheblich, da keine Cross-Collection-Referenzen beim Import in Compass notwendig sind
   - Kein Seed-Skript: Testdaten wurden bewusst manuell via MongoDB Compass importiert, um die Datenkontrolle beim Entwickler zu behalten
   - Bootstrap nur als CSS: Auf die Bootstrap-JS-Komponenten wurde verzichtet, da SvelteKit die Reaktivität selbst übernimmt und kein jQuery-Overhead gewünscht war
+  - Denormalisierte Übungsdaten im Plan: Name und Bild-URL einer Übung werden beim Hinzufügen direkt ins Plan-Dokument kopiert. Dadurch können Pläne korrekt angezeigt werden, auch wenn die ursprüngliche Übung später umbenannt oder gelöscht wird
+  - `history.back()` für Zurück-Navigation: Detail-Seiten von Übungen nutzen `history.back()` statt eines fixen Links, damit der Zurück-Button kontextabhängig funktioniert (von Exercises-Liste, Categories-Seite oder Homepage)
 
 ### 3.5 Validate
 - **URL der getesteten Version** (separat deployt)
@@ -257,9 +326,10 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
   - **Übungsdaten:** Erstellung von JSON-Importdateien für alle 65 Übungen in 7 Kategorien (Athletic, Isometrics, Kettlebell, Kraft, Mobility, Plyometrics, Rotation) inkl. `bodyParts`-Zuordnung
   - **Descriptions & Instructions:** Generierung von anfängergerechten Beschreibungen und nummerierten Schritt-für-Schritt-Anleitungen für alle 65 Übungen via Python-Hilfsskript (`scripts/add_descriptions.py`)
   - **Kategoriedaten:** Erstellung der `categories.json` mit Farben, Icons und Slugs für alle 7 Kategorien
-  - **Code:** Umsetzung der SvelteKit-Serverlogik (`+page.server.js`, `db.js`) sowie der Svelte-Komponenten (`+page.svelte`) für die Homepage
-  - **Debugging:** Behebung des MongoDB-Verbindungsfehlers (`MONGODB_URI` nicht gefunden) sowie Svelte-5-spezifischer Warnungen (reaktive Props-Destrukturierung)
-  - **Dokumentation:** Verfassen der technischen Abschnitte der Projektdokumentation (3.4.2, 6.x)
+  - **Code:** Umsetzung aller SvelteKit-Routen und Serverlogik (`+page.server.js`, `db.js`, `planHelper.js`) sowie aller Svelte-Komponenten (`+page.svelte`) für sämtliche Seiten der App: Homepage, Exercises-Liste, Übungsdetailseite, Categories-Übersicht, Kategorie-Detailseite, Your Plan (Draft + Active + Completed), Plan-Detailseite, Add-Exercise-Formular
+  - **Plan-Feature:** Vollständige Implementierung des Plan-Workflows (Draft → Active → Completed) inkl. `use:enhance`-Pattern für Live-Updates ohne Seitenreload, `$derived()`-Reaktivität in Svelte 5, MongoDB-Positionaloperator für Array-Updates (`exercises.$`) und `$pull` für Array-Elemente entfernen
+  - **Debugging:** Behebung des MongoDB-Verbindungsfehlers (`MONGODB_URI` nicht gefunden), Svelte-5-spezifischer Warnungen (reaktive Props-Destrukturierung) sowie Fix fehlender Live-Updates bei Form-Actions (fehlende `use:enhance`-Callbacks)
+  - **Dokumentation:** Verfassen der technischen Abschnitte der Projektdokumentation (3.4.1 Workflows/Testanleitung, 3.4.2 Technik, 6.x) sowie der `CLAUDE.md` Projektregeln
   - Teile des Codes und der Inhalte stammen aus KI-Unterstützung, wurden jedoch vom Entwickler geprüft, angepasst und in das Projekt integriert.
 - **Eigene Leistung (Abgrenzung):**
   - Eigenständige Konzeption und Definition aller Projektanforderungen (Ausgangslage, Ziele, Zielgruppen)

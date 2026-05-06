@@ -10,6 +10,7 @@
 <script>
   import '../app.css';
   import { page } from '$app/stores';
+  import { toast } from '$lib/toast.svelte.js';
 
   let { children } = $props();
 
@@ -42,6 +43,17 @@
 <main>
   {@render children()}
 </main>
+
+{#if toast.message}
+  <div class="toast-notification">
+    <span class="toast-check">✓</span>
+    <div class="toast-body">
+      <p class="toast-name">{toast.message}</p>
+      <a href="/plan" class="toast-link" onclick={() => toast.dismiss()}>Zum Plan →</a>
+    </div>
+    <button class="toast-close" onclick={() => toast.dismiss()}>✕</button>
+  </div>
+{/if}
 
 <nav class="bottom-nav">
   {#each tabs as tab}
@@ -130,5 +142,69 @@
 
   .tab-label {
     font-size: 0.65rem;
+  }
+
+  .toast-notification {
+    position: fixed;
+    top: 70px;
+    right: 16px;
+    z-index: 2000;
+    background: #2A2A2A;
+    border: 1px solid #14B8A6;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 210px;
+    max-width: 280px;
+    animation: toast-in 0.25s ease;
+  }
+
+  @keyframes toast-in {
+    from { transform: translateX(110%); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+  }
+
+  .toast-check {
+    color: #14B8A6;
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .toast-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .toast-name {
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toast-link {
+    color: #14B8A6;
+    font-size: 0.78rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .toast-close {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
   }
 </style>
