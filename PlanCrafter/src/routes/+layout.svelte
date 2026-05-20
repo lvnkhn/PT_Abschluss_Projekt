@@ -10,9 +10,10 @@
 <script>
   import '../app.css';
   import { page } from '$app/stores';
+  import { goto } from '$app/navigation';
   import { toast } from '$lib/toast.svelte.js';
 
-  let { children } = $props();
+  let { children, data } = $props();
 
   const tabs = [
     { label: 'Home',       href: '/',             icon: '🏠' },
@@ -27,15 +28,60 @@
     if (href === '/') return path === '/';
     return path.startsWith(href);
   }
+
+  let showSearch = $state(false);
+  let searchValue = $state('');
+
+  function handleSearch(e) {
+    e.preventDefault();
+    if (searchValue.trim()) {
+      goto(`/exercises?q=${encodeURIComponent(searchValue.trim())}`);
+    }
+    showSearch = false;
+    searchValue = '';
+  }
+
+  function openSearch() {
+    showSearch = true;
+  }
+
+  function closeSearch() {
+    showSearch = false;
+    searchValue = '';
+  }
 </script>
 
 <header>
   <div class="topbar">
-    <a href="/" class="app-name">PlanCrafter</a>
-    <div class="topbar-icons">
-      <span>🔍</span>
-      <span>👤</span>
-    </div>
+    {#if showSearch}
+      <form class="search-topbar" onsubmit={handleSearch}>
+        <span class="search-topbar-icon">🔍</span>
+        <!-- svelte-ignore a11y_autofocus -->
+        <input
+          type="text"
+          bind:value={searchValue}
+          placeholder="Übungen suchen…"
+          class="search-topbar-input"
+          autofocus
+        />
+        <button type="button" class="close-btn" onclick={closeSearch}>✕</button>
+      </form>
+    {:else}
+      <a href="/" class="app-name">PlanCrafter</a>
+      <div class="topbar-icons">
+        <button class="icon-btn" onclick={openSearch} title="Suchen">🔍</button>
+        {#if data.username}
+          <div class="user-menu">
+            <span class="username-chip">{data.username}</span>
+            <form method="POST" action="/logout">
+              <button type="submit" class="icon-btn logout-btn" title="Abmelden">👤</button>
+            </form>
+          </div>
+        {:else}
+          <a href="/login" class="icon-btn" title="Anmelden">👤</a>
+        {/if}
+      </div>
+    {/if}
   </div>
   <div class="category-gradient"></div>
 </header>
@@ -72,6 +118,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 16px;
+    min-height: 52px;
   }
 
   .app-name {
@@ -83,9 +130,77 @@
 
   .topbar-icons {
     display: flex;
-    gap: 16px;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
     font-size: 1.2rem;
     cursor: pointer;
+    color: #fff;
+    padding: 0;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .user-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .username-chip {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #14B8A6;
+    background: #14B8A615;
+    border: 1px solid #14B8A6;
+    border-radius: 20px;
+    padding: 3px 10px;
+  }
+
+  .logout-btn {
+    opacity: 0.6;
+  }
+
+  /* Search in topbar */
+  .search-topbar {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .search-topbar-icon {
+    font-size: 1rem;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .search-topbar-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .search-topbar-input::placeholder {
+    color: #666;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 0.9rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
   }
 
   .category-gradient {

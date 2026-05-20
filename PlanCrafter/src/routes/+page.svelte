@@ -1,16 +1,31 @@
 <script>
+  import { goto } from '$app/navigation';
   let { data } = $props();
+
+  let homeSearch = $state('');
+
+  function handleSearch(e) {
+    e.preventDefault();
+    if (homeSearch.trim()) {
+      goto(`/exercises?q=${encodeURIComponent(homeSearch.trim())}`);
+    }
+  }
 </script>
 
 <div class="page">
 
   <!-- Greeting + Search -->
   <section class="section">
-    <h2 class="greeting">Hi User</h2>
-    <div class="search-bar">
+    <h2 class="greeting">Hi {data.username ?? 'User'} 👋</h2>
+    <form class="search-bar" onsubmit={handleSearch}>
       <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Search exercises..." class="search-input" />
-    </div>
+      <input
+        type="text"
+        bind:value={homeSearch}
+        placeholder="Übungen suchen…"
+        class="search-input"
+      />
+    </form>
   </section>
 
   <!-- Current Workout -->
@@ -71,6 +86,25 @@
     </div>
   </section>
 
+  <!-- Recommendations -->
+  {#if data.recommended.length > 0}
+    <section class="section">
+      <h3 class="section-title">Für dich empfohlen</h3>
+      <div class="explore-grid">
+        {#each data.recommended as ex}
+          <a href="/exercises/{ex._id}" class="explore-card">
+            {#if ex.imageUrl}
+              <img src={ex.imageUrl} alt={ex.name} class="explore-img" loading="lazy" />
+            {:else}
+              <div class="explore-placeholder"></div>
+            {/if}
+            <span class="explore-name">{ex.name}</span>
+          </a>
+        {/each}
+      </div>
+    </section>
+  {/if}
+
   <!-- Explore -->
   <section class="section">
     <h3 class="section-title">Explore</h3>
@@ -78,7 +112,7 @@
       {#each data.explore as ex}
         <a href="/exercises/{ex._id}" class="explore-card">
           {#if ex.imageUrl}
-            <img src={ex.imageUrl} alt={ex.name} class="explore-img" />
+            <img src={ex.imageUrl} alt={ex.name} class="explore-img" loading="lazy" />
           {:else}
             <div class="explore-placeholder"></div>
           {/if}
@@ -91,13 +125,9 @@
 </div>
 
 <style>
-  .page {
-    padding: 16px;
-  }
+  .page { padding: 16px; }
 
-  .section {
-    margin-bottom: 20px;
-  }
+  .section { margin-bottom: 20px; }
 
   /* Greeting */
   .greeting {
@@ -116,10 +146,7 @@
     padding: 10px 14px;
     gap: 10px;
   }
-  .search-icon {
-    font-size: 1rem;
-    opacity: 0.5;
-  }
+  .search-icon { font-size: 1rem; opacity: 0.5; }
   .search-input {
     background: transparent;
     border: none;
@@ -128,32 +155,16 @@
     width: 100%;
     font-size: 0.95rem;
   }
-  .search-input::placeholder {
-    color: #666;
-  }
+  .search-input::placeholder { color: #666; }
 
   /* Card */
-  .card {
-    background: #2A2A2A;
-    border: none;
-    border-radius: 14px;
-  }
-  .card-body {
-    padding: 16px;
-  }
+  .card { background: #2A2A2A; border: none; border-radius: 14px; }
+  .card-body { padding: 16px; }
   .card-label {
-    font-size: 0.75rem;
-    color: #888;
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.75rem; color: #888; margin-bottom: 2px;
+    text-transform: uppercase; letter-spacing: 0.5px;
   }
-  .card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    margin: 0;
-  }
+  .card-title { font-size: 1rem; font-weight: 600; color: #fff; margin: 0; }
 
   /* Plans list */
   .plan-row {
@@ -165,38 +176,18 @@
     text-decoration: none;
     color: inherit;
   }
-  .plan-row:last-of-type {
-    border-bottom: none;
-  }
-  .plan-date {
-    display: block;
-    font-size: 0.72rem;
-    color: #888;
-  }
-  .plan-name {
-    font-size: 0.95rem;
-    color: #fff;
-    font-weight: 500;
-  }
-  .arrow {
-    color: #555;
-    font-size: 1.2rem;
-  }
+  .plan-row:last-of-type { border-bottom: none; }
+  .plan-date { display: block; font-size: 0.72rem; color: #888; }
+  .plan-name { font-size: 0.95rem; color: #fff; font-weight: 500; }
+  .arrow { color: #555; font-size: 1.2rem; }
   .view-all {
-    display: block;
-    text-align: center;
-    color: #888;
-    font-size: 0.85rem;
-    margin-top: 10px;
-    text-decoration: none;
+    display: block; text-align: center; color: #888;
+    font-size: 0.85rem; margin-top: 10px; text-decoration: none;
   }
 
   /* Section title */
   .section-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 12px;
+    font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 12px;
   }
 
   /* Categories grid */
@@ -218,10 +209,7 @@
     text-decoration: none;
     min-width: 0;
   }
-  .cat-icon {
-    font-size: 1.4rem;
-    line-height: 1;
-  }
+  .cat-icon { font-size: 1.4rem; line-height: 1; }
   .cat-name {
     font-size: 0.58rem;
     font-weight: 600;
@@ -233,10 +221,10 @@
     padding: 0 2px;
   }
 
-  /* Explore grid */
+  /* Explore / Recommendations grid */
   .explore-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
   }
   .explore-card {
@@ -249,24 +237,19 @@
     display: block;
   }
   .explore-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; height: 100%; object-fit: cover;
   }
   .explore-placeholder {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     background: linear-gradient(135deg, #2A2A2A, #3A3A3A);
   }
   .explore-name {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0; left: 0; right: 0;
     padding: 4px 6px;
     background: linear-gradient(transparent, rgba(0,0,0,0.75));
     color: #fff;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
   }
 </style>
