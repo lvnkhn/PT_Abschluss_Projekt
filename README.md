@@ -45,7 +45,7 @@
 - **Abgrenzung [Optional]:**
   - Kein automatisch generierter Trainingsplan (kein AI-Coach, keine Periodisierung)
   - Kein Tracking von Gewichten, Sätzen oder Wiederholungen – der Fokus liegt auf der Planerstellung, nicht auf dem Logging
-  - Kein Nutzer-Account-System, keine Social Features
+  - Keine Social Features (kein Sharing, kein öffentliches Profil)
   - Keine eigene Video-/Animations-Produktion – es wird auf bestehende Quellen (z. B. YouTube, MuscleWiki) verlinkt
 ## 3. Vorgehen & Artefakte
  
@@ -155,52 +155,69 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
 
 #### Workflows & Testanleitung
 
-Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werden (`npm run dev` im Ordner `PlanCrafter`). Die App verwendet `userId: "demo"` für alle Daten — kein Login erforderlich.
+Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werden (`npm run dev` im Ordner `PlanCrafter`). Die App unterstützt Login/Registrierung; ohne Account läuft alles unter dem Demo-User (`userId: "demo"`).
 
 ---
 
-##### Workflow 1: Übungen durchsuchen
+##### Workflow 1: Registrierung & Login
 
-1. Navigation → *Exercises* → alle 65 Übungen werden geladen
+1. 👤-Icon in der Topbar antippen → Weiterleitung zu `/login`
+2. «Registrieren»-Link antippen → `/register` → Benutzername (min. 3 Zeichen) und Passwort (min. 6 Zeichen) eingeben → «Konto erstellen»
+3. Weiterleitung zur Homepage; Benutzername wird im Header angezeigt
+4. Abmelden: 👤-Icon antippen → Logout-Formular → Session wird gelöscht, Weiterleitung zu `/login`
+5. **Ohne Account:** «Ohne Konto fortfahren (Demo)» antippen → App funktioniert mit `userId: "demo"`
+
+##### Workflow 2: Übungen durchsuchen und suchen
+
+1. Navigation → *Exercises* → alle Übungen werden geladen
 2. Kategorie-Chip (z. B. «Kraft») antippen → Liste filtert auf diese Kategorie
-3. Übung antippen → Detailseite mit Bild, Kategorie-Badge, bodyParts-Badges, Schritt-für-Schritt-Anleitung und Referenz-Link
+3. Suchfeld tippen (z. B. «Squat») → Liste filtert reaktiv ohne Seitenreload
+4. Alternativ: 🔍-Icon in der Topbar antippen → Sucheingabe erscheint inline → Suche über alle Übungen, navigiert zu `/exercises?q=...`
+5. Übung antippen → Detailseite mit Bild, Kategorie-Badge, bodyParts-Badges, **BodyMap-Anatomieübersicht**, Schritt-für-Schritt-Anleitung und Referenz-Link
 
-##### Workflow 2: Kategoriebasiert suchen
+##### Workflow 3: Kategoriebasiert suchen
 
-1. Navigation → *Categories* → alle 7 Kategorien mit Übungsanzahl
+1. Navigation → *Categories* → alle 7 Kategorien mit Übungsanzahl; **Suchfeld** filtert Kategorien reaktiv
 2. Kategorie antippen → Übungsliste dieser Kategorie
 3. Übung antippen → Detailseite (Zurück-Button navigiert zur Kategorie zurück)
 
-##### Workflow 3: Plan erstellen und Workout durchführen
+##### Workflow 4: Plan erstellen und Workout durchführen
 
-1. Auf einer Übungsliste (Exercises oder Categories) den **+**-Button antippen → Übung wird einem Draft-Plan hinzugefügt (Button wird grün mit ✓) und ein Toast-Popup erscheint oben rechts mit dem Übungsnamen und einem «Zum Plan →»-Link
-2. Mehrere Übungen hinzufügen
-3. Navigation → *Your Plan* (oder Toast-Link antippen) → Draft-Plan sichtbar in der Sektion «Plan in Bearbeitung»
+1. Auf einer Übungsliste (Exercises, Categories oder Detailseite) den **+**-Button antippen
+   - **Kein aktiver Plan vorhanden:** Übung wird direkt einem Draft-Plan hinzugefügt
+   - **Aktive Pläne vorhanden:** Inline-Picker öffnet sich — «+ Neuer Entwurf» oder bestehenden Plan wählen
+2. Toast-Popup erscheint oben rechts mit Übungsname und «Zum Plan →»-Link
+3. Navigation → *Your Plan* → Draft-Plan in der Sektion «Plan in Bearbeitung» sichtbar
 4. Unerwünschte Übungen mit **✕** entfernen (live, kein Reload)
 5. Plan benennen (Textfeld) → **Speichern** → Plan erscheint in «Meine Pläne»
 6. Plan antippen → Detailseite (`/plans/[id]`) → Fortschrittsbalken + Übungen mit Checkboxen
-7. Übungen einzeln abhaken (live, kein Reload); sobald alle erledigt: Plan wird automatisch als «Abgeschlossen» markiert, Datum wird auf heute gesetzt
+7. **Timer starten:** «▶ Timer starten»-Button antippen → Stoppuhr läuft; Pause/Reset möglich
+8. Übungen einzeln abhaken (live, kein Reload); sobald alle erledigt: Plan wird automatisch abgeschlossen
+9. **Partieller Abschluss:** «Training abschliessen (x/y)»-Button antippen → Plan wird abgeschlossen, auch wenn nicht alle Übungen erledigt sind
 
-##### Workflow 4: Gespeicherte Pläne verwalten
+##### Workflow 5: Gespeicherte Pläne verwalten
 
-1. Navigation → *Your Plan* → Scrolldown zeigt alle gespeicherten Pläne
-2. Plan antippen → Detailseite mit Übungsliste und Abschlussdatum
-3. **Jetzt starten** → Plan wird zurückgesetzt (alle Haken entfernt) und als aktiver Workout geöffnet
+1. Navigation → *Plans* → alle gespeicherten Pläne mit direkten Aktions-Buttons:
+   - **✏ (Bearbeiten):** Öffnet die Bearbeitungsseite (`/plans/[id]/edit`) → Umbenennen, Übungen hinzufügen/entfernen
+   - **▶ (Starten):** Plan sofort aktivieren und zu *Your Plan* navigieren — kein Hineinklicken erforderlich
+2. Plan antippen → Detailseite mit Timer, Fortschrittsbalken, Übungsliste und «Training abschliessen»-Button
+3. Abgeschlossener Plan: «Erneut starten» → Haken werden zurückgesetzt, Plan wird wieder aktiv
 4. Home → *My Plans* zeigt die 2 neuesten Pläne; **View all** → vollständige Planliste
 
-##### Workflow 5: Eigene Übung erfassen
+##### Workflow 6: Eigene Übung erfassen
 
 1. Navigation → *Add* → Formular mit Name, Kategorie (Dropdown), Referenz-URL
 2. **Speichern** → eigene Übung wird in MongoDB gespeichert (`isCustom: true`)
 3. Übung erscheint in der Exercises-Liste der gewählten Kategorie
 
-##### Workflow 6: Home-Navigation
+##### Workflow 7: Home-Navigation & Empfehlungen
 
 1. *Current Workout*-Card zeigt den aktiven/nicht abgeschlossenen Plan → Antippen öffnet *Your Plan*
 2. *My Plans* zeigt die 2 neuesten Pläne → direkt anwählbar
 3. *Categories*-Kacheln → direkt zur Kategorie-Detailseite
-4. *Explore*-Grid → direkt zur Übungsdetailseite
-5. «PlanCrafter»-Schriftzug oben → navigiert immer zur Homepage
+4. **«Für dich empfohlen»**-Grid → zeigt Übungen aus der meistgenutzten Trainingskategorie des Users (erscheint sobald Pläne mit Übungen vorhanden)
+5. *Explore*-Grid → 6 zufällige Übungen direkt zur Detailseite
+6. «PlanCrafter»-Schriftzug oben → navigiert immer zur Homepage
 
 
 #### 3.4.2. Umsetzung (Technik)
@@ -223,51 +240,70 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 
   ```text
   src/
+  ├── hooks.server.js            # Session-Middleware: setzt event.locals.userId / .username
   ├── lib/
+  │   ├── components/
+  │   │   └── BodyMap.svelte     # SVG-Körperschema mit Muskelgruppen-Highlighting
   │   ├── server/
-  │   │   ├── db.js              # MongoDB-Verbindung, serialize(), USER_ID
-  │   │   └── planHelper.js      # Shared-Helfer: Draft-Plan holen/erstellen, Übung hinzufügen
+  │   │   ├── auth.js            # Passwort-Hashing (scrypt), Session-Verwaltung
+  │   │   ├── db.js              # MongoDB-Verbindung, serialize(), USER_ID (Fallback)
+  │   │   └── planHelper.js      # Shared-Helfer: Draft holen/erstellen, Übung hinzufügen/Plan zuweisen
   │   └── toast.svelte.js        # Reaktiver Toast-State (Svelte-5-Klasse, seitenübergreifend)
   ├── routes/
-  │   ├── +layout.svelte         # Bootstrap CDN, globales Layout, Bottom-Navigation
-  │   ├── +page.svelte           # Homepage
-  │   ├── +page.server.js        # Load: activePlan, myPlans, categories, explore
+  │   ├── +layout.server.js      # Load: username aus Session → an Layout übergeben
+  │   ├── +layout.svelte         # Bootstrap CDN, globales Layout, Bottom-Navigation, Topbar-Suche
+  │   ├── +page.svelte           # Homepage (Suche, Empfehlungen, Explore)
+  │   ├── +page.server.js        # Load: activePlan, myPlans, categories, explore, recommended
   │   ├── categories/
-  │   │   ├── +page.svelte       # Alle 7 Kategorien als Grid
+  │   │   ├── +page.svelte       # Alle 7 Kategorien mit Suchfilter
   │   │   ├── +page.server.js
   │   │   └── [slug]/
-  │   │       ├── +page.svelte   # Übungen einer Kategorie mit "+"-Button
-  │   │       └── +page.server.js # Load + addToPlan Action
+  │   │       ├── +page.svelte   # Übungen mit "+"-Button / Plan-Picker
+  │   │       └── +page.server.js # Load + addToPlan Action (Draft oder spezifischer Plan)
   │   ├── exercises/
+  │   │   ├── +page.svelte       # Übungsliste mit Suchfeld, Kategorie-Chips, Plan-Picker
+  │   │   ├── +page.server.js    # Load + addToPlan Action
   │   │   └── [id]/
-  │   │       ├── +page.svelte   # Übungsdetailseite (Bild, Badges, Schritte, Ref-Link)
+  │   │       ├── +page.svelte   # Übungsdetailseite mit BodyMap, Plan-Picker
   │   │       └── +page.server.js # Load + addToPlan Action
+  │   ├── login/
+  │   │   ├── +page.svelte       # Login-Formular
+  │   │   └── +page.server.js    # Passwort verifizieren, Session erstellen
+  │   ├── logout/
+  │   │   ├── +page.svelte       # (leer, nur für Form-Action)
+  │   │   └── +page.server.js    # Session löschen, Cookie entfernen
   │   ├── plan/
-  │   │   ├── +page.svelte       # Draft/Aktiver Plan (Übungen entfernen, benennen, abhaken)
-  │   │   └── +page.server.js    # Load + saveName / toggleDone / removeExercise Actions
+  │   │   ├── +page.svelte       # Draft/Aktiver Plan mit Timer, Abschliessen-Button
+  │   │   └── +page.server.js    # Load + saveName / toggleDone / removeExercise / completePlan
   │   ├── plans/
-  │   │   ├── +page.svelte       # Alle gespeicherten Pläne
-  │   │   ├── +page.server.js
+  │   │   ├── +page.svelte       # Alle gespeicherten Pläne mit Bearbeiten/Starten-Buttons
+  │   │   ├── +page.server.js    # Load + activate Action
   │   │   └── [id]/
-  │   │       ├── +page.svelte   # Plandetailseite mit "Jetzt starten"-Button
-  │   │       └── +page.server.js # Load + restart Action
-  │   └── add-exercise/
-  │       ├── +page.svelte       # Formular eigene Übung erfassen
-  │       └── +page.server.js    # addExercise Action (isCustom: true)
+  │   │       ├── +page.svelte   # Plandetailseite mit Timer, "Training abschliessen"-Button
+  │   │       ├── +page.server.js # Load + restart / toggleDone / completePlan Actions
+  │   │       └── edit/
+  │   │           ├── +page.svelte   # Plan bearbeiten (Umbenennen, Übungen verwalten)
+  │   │           └── +page.server.js
+  │   └── register/
+  │       ├── +page.svelte       # Registrierungs-Formular
+  │       └── +page.server.js    # User anlegen, Session erstellen
+  ├── add-exercise/
+  │   ├── +page.svelte           # Formular eigene Übung erfassen
+  │   └── +page.server.js        # addExercise Action (isCustom: true)
   └── app.css                    # Dark Theme, CSS-Variablen
   ```
 
   Jede Seite besteht aus einem `+page.svelte` (UI) und einem `+page.server.js` (Datenbankzugriff). Die DB-Verbindung wird einmalig in `db.js` aufgebaut und als Singleton gehalten. `planHelper.js` kapselt die geteilte Logik zum Erstellen und Befüllen von Draft-Plänen, damit `exercises/[id]` und `categories/[slug]` keinen duplizierten Code enthalten.
 
 - **Daten & Schnittstellen:**
-  - MongoDB Atlas mit 4 Collections: `categories`, `exercises`, `plans`, `users`
+  - MongoDB Atlas mit 5 Collections: `categories`, `exercises`, `plans`, `users`, `sessions`
   - `exercises.categoryId` verweist als Slug-String (z. B. `"kraft"`) auf `categories.slug` — bewusst ohne ObjectId-Referenzen, um den manuellen Import zu vereinfachen
   - Alle 65 Übungen sind in `data/exercises.json` als flaches Array gespeichert und wurden via Compass importiert
   - `serialize()` in `db.js` wandelt MongoDB-Dokumente (ObjectId, Date) in JSON-sichere Werte um, bevor sie an SvelteKit-Load-Funktionen zurückgegeben werden
-  - `USER_ID = 'demo'` dient als Platzhalter, da kein Authentifizierungssystem implementiert ist
-  - **Plan-Datenmodell:** Pläne durchlaufen drei Status: `draft` (noch nicht benannt) → `active` (Workout läuft) → `completed` (alle Übungen abgehakt). Übungsdetails (Name, imageUrl) werden denormalisiert direkt im Plan-Dokument eingebettet, um Joins zu vermeiden
-  - **Reaktivität:** `use:enhance` (SvelteKit) sendet Form-Actions per Fetch ohne Reload; `update({ reset: false })` löst die Load-Funktion erneut aus, sodass UI-Updates sofort sichtbar sind. Berechnete Werte (`doneCount`, `isDraft`) werden mit Svelte-5-`$derived()` reaktiv gehalten
-  - **Form Actions** decken alle schreibenden Operationen ab: `addToPlan`, `saveName`, `toggleDone`, `removeExercise`, `restart` — jede in der `+page.server.js` der zugehörigen Route
+  - **Auth & Sessions:** Passwörter werden mit Node.js-`crypto.scryptSync` + zufälligem Salt gehasht. Sessions werden als zufälliger 32-Byte-Hex-Token in der `sessions`-Collection gespeichert (mit `expiresAt`-Feld, 30 Tage). `hooks.server.js` liest das `session`-Cookie und setzt `event.locals.userId` (Benutzername) und `event.locals.username`; Fallback ist `'demo'` für nicht eingeloggte Nutzer.
+  - **Plan-Datenmodell:** Pläne durchlaufen drei Status: `draft` (noch nicht benannt) → `active` (Workout läuft) → `completed` (Training abgeschlossen, manuell oder automatisch wenn alle Übungen erledigt). Übungsdetails (Name, imageUrl) werden denormalisiert direkt im Plan-Dokument eingebettet, um Joins zu vermeiden.
+  - **Reaktivität:** `use:enhance` (SvelteKit) sendet Form-Actions per Fetch ohne Reload; `update({ reset: false })` löst die Load-Funktion erneut aus, sodass UI-Updates sofort sichtbar sind. Berechnete Werte (`doneCount`, `isActive`) werden mit Svelte-5-`$derived()` reaktiv gehalten
+  - **Form Actions** decken alle schreibenden Operationen ab: `addToPlan`, `saveName`, `toggleDone`, `removeExercise`, `restart`, `completePlan`, `activate` — jede in der `+page.server.js` der zugehörigen Route
 
 - **Deployment:** Lokale Entwicklungsumgebung (`http://localhost:5173`), kein produktives Deployment
 
@@ -277,37 +313,148 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   - Bootstrap nur als CSS: Auf die Bootstrap-JS-Komponenten wurde verzichtet, da SvelteKit die Reaktivität selbst übernimmt und kein jQuery-Overhead gewünscht war
   - Denormalisierte Übungsdaten im Plan: Name und Bild-URL einer Übung werden beim Hinzufügen direkt ins Plan-Dokument kopiert. Dadurch können Pläne korrekt angezeigt werden, auch wenn die ursprüngliche Übung später umbenannt oder gelöscht wird
   - `history.back()` für Zurück-Navigation: Detail-Seiten von Übungen nutzen `history.back()` statt eines fixen Links, damit der Zurück-Button kontextabhängig funktioniert (von Exercises-Liste, Categories-Seite oder Homepage)
+  - Kein Modal-Dialog: Aktionen wie der Plan-Picker (Übung einem spezifischen Plan zuweisen) werden inline als positioniertes Dropdown dargestellt, das direkt unter dem auslösenden Button erscheint — kein Bootstrap-Modal, da das CLAUDE.md-Designprinzip «Keine Modals» eingehalten wird
+  - Session-Authentifizierung ohne externe Libraries: Passwort-Hashing und Token-Generierung nutzen ausschliesslich Node.js Built-in (`crypto`), um keine zusätzliche Abhängigkeit (z. B. `bcrypt`) einführen zu müssen
+  - Benutzername als `userId`: Statt ObjectId wird der Benutzername direkt als `userId` in Plänen gespeichert, was die Lesbarkeit von Datenbankdokumenten erhöht und die Migration des bestehenden Demo-Datasets vereinfacht (`userId: "demo"` bleibt valide)
 
 ### 3.5 Validate
-- **URL der getesteten Version** (separat deployt)
-- **Ziele der Prüfung:** _[welche Fragen sollen beantwortet werden?]_  
-- **Vorgehen:** _[moderiert/unmoderiert; remote/on-site]_  
-- **Stichprobe:** _[Mit wem wurde getestet? Profil; Anzahl]_  
-- **Aufgaben/Szenarien:** _[Ausformulierte Testaufgaben]_  
-- **Kennzahlen & Beobachtungen:** _[z. B. Erfolgsquote, Zeitbedarf, qualitative Findings]_  
-- **Zusammenfassung der Resultate:** _[Wichtigste Erkenntnisse; 2-4 Sätze]_  
-- **Abgeleitete Verbesserungen:** _[Anforderungen, die als nächstes umgesetzt werden sollten, priorisiert, kurz begründet; falls Verbesserungen im Prototyp konkret umgesetzt wurden: In Kap. 4 dokumentieren]_  
+
+- **URL der getesteten Version:** https://ptabschlussprojekt.netlify.app/
+
+- **Ziele der Prüfung:**
+  - Ist der Kern-Workflow (Übung finden → Plan erstellen → Plan starten) ohne Einführung verständlich?
+  - Verstehen Testpersonen den Plan-Status (Draft → Active → Completed)?
+  - Finden Testpersonen Kategorien und Übungsdetails problemlos?
+  - Wird die App als nützlich und zeitsparend wahrgenommen (Proof of Value)?
+
+- **Vorgehen:** Moderiertes, szenario-basiertes Usability Testing; On-Site; Think-Aloud-Methode; Kurzinterview und Kurzfragen nach jedem Szenario
+
+- **Stichprobe:** 2 Testpersonen (Lorenzo, Erion); Profil: Studierende mit Fitness-Interesse, keine Vorkenntnisse der App
+
+- **Aufgaben/Szenarien:**
+
+  **Szenario 1 – Erste Erkundung**
+  > Du hast von einer Fitness-App gehört, die dir helfen soll, schnell einen Trainingsplan zusammenzustellen. Du öffnest die App zum ersten Mal.
+  - Aufgabe 1a: Schau dir die App an und beschreibe laut, was du siehst und was du als Nächstes tun würdest.
+  - Aufgabe 1b: Du interessierst dich für Plyometrics-Übungen. Finde heraus, welche Übungen in dieser Kategorie verfügbar sind.
+
+  **Szenario 2 – Trainingsplan zusammenstellen**
+  > Du planst ein Training für morgen und möchtest Übungen für Beine und Rumpf kombinieren.
+  - Aufgabe 2a: Stelle einen Plan mit mindestens 3 Übungen zusammen.
+  - Aufgabe 2b: Entferne eine Übung, die du doch nicht machen möchtest.
+  - Aufgabe 2c: Führe alles Nötige aus, damit du mit deinem Plan trainieren kannst.
+
+  **Szenario 3 – Übungsdetail & Navigation**
+  > Du hast den Begriff «Bulgarian Split Squat» noch nie gehört und möchtest herausfinden, ob die Übung für dich geeignet ist.
+  - Aufgabe 3a: Finde die Übung und schau dir die Details an.
+  - Aufgabe 3b: Kehre nach der Detailansicht zur vorherigen Seite zurück.
+
+- **Kennzahlen & Beobachtungen:**
+
+  | Issue | Schweregrad | Betroffene Personen |
+  |---|---|---|
+  | Kein Login / keine benutzerspezifischen Pläne | 3 | Lorenzo |
+  | Plan-Bearbeitung umständlich (keine fixen Aktions-Buttons) | 3 | Erion |
+  | Suchfunktion (Icon) sichtbar aber nicht aktiv | 3 | Erion |
+  | Plan nicht teilweise abschliessbar | 3 | Erion |
+  | Übung nicht direkt einem spezifischen Plan zuweisbar | 3 | Lorenzo |
+  | Kein Timer beim Start einer Trainingseinheit | 2 | Lorenzo |
+  | Kein Anatomy-Bild auf Detailseiten | 2 | Erion |
+  | Keine Vorschläge / Empfehlungen | 2 | Lorenzo |
+  | Bilder zu gross | 1 | Lorenzo |
+
+  Beide Testpersonen würden die App nutzen – jedoch nur, wenn sie als Mobile App verfügbar wäre. Als grösste Lücke wurden das fehlende Login-System und die eingeschränkte Plan-Verwaltung genannt.
+
+- **Zusammenfassung der Resultate:** Der Kern-Workflow war für beide Testpersonen grundsätzlich nachvollziehbar, jedoch zeigten sich bei der Plan-Bearbeitung und der Übungs-Zuweisung deutliche Usability-Probleme. Das nicht funktionierende Such-Icon und das fehlende Login-System wurden als kritische Mängel wahrgenommen. Beide Testpersonen bewerteten die App als prinzipiell nützlich, machten ihre tatsächliche Nutzung aber von einer Mobile-App-Version abhängig.
+
+- **Abgeleitete Verbesserungen:**
+
+  | Priorität | Verbesserung | Begründung |
+  |---|---|---|
+  | 1 | Suchfunktion aktivieren (Categories & Exercises können gesucht werden) | Icon ist sichtbar und weckt Erwartung – führt zu Verwirrung bei beiden TP |
+  | 2 | Fixe Aktions-Buttons pro Plan-Item (Bearbeiten, Starten) | Plan-Bearbeitung war für Erion die grösste Hürde im Kern-Workflow |
+  | 3 | Übung direkt einem spezifischen Plan zuweisen | Fehlt sobald mehrere Pläne existieren; von Lorenzo explizit vermisst |
+  | 4 | Partiellen Plan-Abschluss ermöglichen | Realitätsnahe Nutzung: nicht immer werden alle Übungen gemacht |
+  | 5 | Login-System & benutzerspezifische Pläne | Grundvoraussetzung für produktiven Einsatz; von Lorenzo priorisiert |
+  | 6 | Timer beim Start einer Trainingseinheit | Ergänzt den Workflow sinnvoll; geringer Aufwand, hoher wahrgenommener Wert |
+  | 7 | Anatomy-Bild auf Detailseiten | Verbessert Informationsgehalt der Detailseite deutlich |
+  | 8 | Empfehlungs-Sektion auf Homepage | Nice-to-have; erhöht Orientierung beim Einstieg |
+  | 9 | Bildgrössen optimieren | Kosmetisch; einfach umsetzbar |
+
+  _Falls Verbesserungen konkret im Prototyp umgesetzt wurden: In Kap. 4 dokumentieren._
 
 ## 4. Erweiterungen [Optional]
-Dokumentiert Erweiterungen über den Mindestumfang hinaus.
-> **Hinweis:** Jede Erweiterung ist separat nach dem folgenden Schema zu beschreiben.
+Dokumentiert Erweiterungen über den Mindestumfang hinaus. Alle 9 Erweiterungen wurden direkt aus den in Kap. 3.5 identifizierten Usability-Issues abgeleitet und vollständig implementiert.
 
-### _[4.x Kurzbeschreibung / Titel]_  
-- **Beschreibung & Nutzen:** _[Was wurde erweitert? Warum?]_  
-- **Wo umgesetzt:** _[Wie und wo wurde es gemacht? Frontend, Backend, Datenbank?]_  
-- **Referenz:** _[Wo wird die Erweiterung auch noch beschrieben, z.B. Screenshot oder Beschreibung in einem anderen Kapitel]_  
-- **Aus Evaluation abgeleitet?:** _[Wurde diese Erweiterung als Folge eines in der Evaluation identifizierten Issues implementiert?]_  
+### 4.1 Suchfunktion aktivieren
 
-> Das folgende **Beispiel** wurde bewusst kurz gehalten. Erweiterungen dürfen auch ausführlicher beschrieben werden.
+- **Beschreibung & Nutzen:** Das 🔍-Icon in der Topbar und die Suchleisten auf der Exercises- und Categories-Seite sind nun funktional. Nutzer:innen können Übungen und Kategorien reaktiv filtern, ohne die Seite neu zu laden. Die Topbar-Suche navigiert zu `/exercises?q=...`.
+- **Wo umgesetzt:**
+  - **Frontend:** `+layout.svelte` (Topbar-Suche, inline Eingabefeld mit Toggle), `exercises/+page.svelte` (Suchfeld + `$derived`-Filterung), `categories/+page.svelte` (Suchfeld + `$derived`-Filterung), `+page.svelte` (Homepage-Suchformular navigiert zu Exercises)
+  - **Backend:** `exercises/+page.server.js` liest den URL-Parameter `?q=` und gibt ihn als `searchQuery` zurück (Client übernimmt die Filterung reaktiv)
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 1 — «Suchfunktion aktivieren»
 
-### 4.1 Tabelle nach Kategorien filtern
-- **Beschreibung & Nutzen:** Tabelle X kann nach Kategorie gefiltert werden, weil User typischerweise nur an einer bestimmten Kategorie interessiert sind.  
-- **Wo umgesetzt:** 
-  - **Frontend:** Tabelle mit Dropdown in Datei ...
-  - **Backend:** Form Action ... in Datei ...
-  - **Datenbank:** MongoDB-Query in Datei ...
-- **Referenz:** Screenshot in Kap. x.y
-- **Aus Evaluation abgeleitet?:** Ja, Issue x.y
+### 4.2 Fixe Aktions-Buttons pro Plan-Item
+
+- **Beschreibung & Nutzen:** Auf der Plans-Übersicht (`/plans`) hat jeder Plan-Eintrag direkt sichtbare Buttons: **✏ Bearbeiten** (navigiert zu `/plans/[id]/edit`) und **▶ Starten** (aktiviert den Plan und navigiert zu `/plan`). Nutzer:innen müssen nicht mehr in die Plandetailseite hineinklicken, um einen Plan zu starten.
+- **Wo umgesetzt:**
+  - **Frontend:** `plans/+page.svelte` (Karten-Layout mit Aktions-Buttons, `use:enhance`)
+  - **Backend:** `plans/+page.server.js` — neue `activate`-Action setzt Plan auf `active` (oder resettet bei `completed`) und leitet zu `/plan` weiter. Auch auf `plan/+page.svelte` (Meine Pläne-Sektion) sind Start-Buttons ergänzt.
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 2 — «Fixe Aktions-Buttons pro Plan-Item»
+
+### 4.3 Übung direkt einem spezifischen Plan zuweisen
+
+- **Beschreibung & Nutzen:** Der **+**-Button auf Exercises-, Categories- und Detailseiten öffnet nun einen Inline-Plan-Picker, wenn aktive Pläne vorhanden sind. Nutzer:innen können wählen, ob die Übung einem neuen Entwurf oder einem bestehenden Plan zugewiesen wird.
+- **Wo umgesetzt:**
+  - **Frontend:** `exercises/+page.svelte`, `categories/[slug]/+page.svelte`, `exercises/[id]/+page.svelte` — Picker erscheint als positioniertes Dropdown-Overlay unter dem "+" Button (`$state openPicker`)
+  - **Backend:** `exercises/+page.server.js`, `categories/[slug]/+page.server.js`, `exercises/[id]/+page.server.js` — `addToPlan`-Action nimmt optionalen `planId`-Parameter entgegen; `planHelper.js` — neue `addExerciseToPlan(exerciseId, planId, userId)`-Funktion
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 3 — «Übung direkt einem spezifischen Plan zuweisen»
+
+### 4.4 Partiellen Plan-Abschluss ermöglichen
+
+- **Beschreibung & Nutzen:** Ein aktiver Plan kann nun manuell abgeschlossen werden, auch wenn nicht alle Übungen abgehakt wurden. Der Button «Training abschliessen (x/y)» zeigt den aktuellen Fortschritt und setzt den Plan-Status auf `completed`.
+- **Wo umgesetzt:**
+  - **Frontend:** `plans/[id]/+page.svelte` (Button unterhalb der Übungsliste, nur sichtbar wenn Plan aktiv), `plan/+page.svelte` (gleicher Button auf der aktiven Workout-Seite)
+  - **Backend:** `plans/[id]/+page.server.js` — neue `completePlan`-Action; `plan/+page.server.js` — neue `completePlan`-Action mit `planId` aus FormData
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 4 — «Partiellen Plan-Abschluss ermöglichen»
+
+### 4.5 Login-System & benutzerspezifische Pläne
+
+- **Beschreibung & Nutzen:** Nutzer:innen können sich registrieren und anmelden. Alle Pläne sind benutzerspezifisch — jede Person sieht nur ihre eigenen Daten. Ohne Login funktioniert die App weiterhin mit dem Demo-User.
+- **Wo umgesetzt:**
+  - **Frontend:** `login/+page.svelte`, `register/+page.svelte` (Formulare mit Fehleranzeige), `logout/+page.svelte` (leer, nur Form-Action), `+layout.svelte` (👤-Icon zeigt Benutzername wenn eingeloggt, sonst Link zu `/login`)
+  - **Backend:** `src/lib/server/auth.js` (Passwort-Hashing mit `crypto.scryptSync`, Session-CRUD in MongoDB), `src/hooks.server.js` (liest Session-Cookie, setzt `event.locals.userId` und `event.locals.username`), `+layout.server.js` (gibt `username` an Layout weiter), alle `+page.server.js` — `USER_ID` ersetzt durch `locals.userId`
+  - **Datenbank:** Collections `users` (username, passwordHash) und `sessions` (token, username, expiresAt) in MongoDB Atlas
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 5 — «Login-System & benutzerspezifische Pläne»
+
+### 4.6 Timer beim Start einer Trainingseinheit
+
+- **Beschreibung & Nutzen:** Auf der aktiven Workout-Seite (`/plan`) und der Plandetailseite (`/plans/[id]`) steht ein Stoppuhr-Timer zur Verfügung. Start/Pause und Reset ermöglichen eine einfache Zeiterfassung für die gesamte Trainingseinheit.
+- **Wo umgesetzt:**
+  - **Frontend:** `plan/+page.svelte` und `plans/[id]/+page.svelte` — `$state`-basierter Timer mit `setInterval`, `onDestroy`-Cleanup, formatiertes `HH:MM:SS`-Display. Rein clientseitig, keine Datenbankanbindung.
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 6 — «Timer beim Start einer Trainingseinheit»
+
+### 4.7 Anatomy-Bild auf Detailseiten
+
+- **Beschreibung & Nutzen:** Auf der Übungsdetailseite (`/exercises/[id]`) wird eine SVG-basierte Körperschema-Visualisierung angezeigt. Trainierte Muskelgruppen werden in der Akzentfarbe (#14B8A6) hervorgehoben; nicht trainierte Bereiche erscheinen dunkel. Unter dem Schema sind alle `bodyParts` als Chips dargestellt.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/lib/components/BodyMap.svelte` (wiederverwendbare SVG-Komponente mit `bodyParts`-Prop und Keyword-Matching), `exercises/[id]/+page.svelte` (Einbindung in eine Card-Sektion zwischen Kategorie-Badge und Beschreibung)
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 7 — «Anatomy-Bild auf Detailseiten»
+
+### 4.8 Empfehlungs-Sektion auf Homepage
+
+- **Beschreibung & Nutzen:** Sobald Nutzer:innen Pläne mit Übungen haben, erscheint auf der Homepage eine «Für dich empfohlen»-Sektion mit Übungen aus der meistgenutzten Trainingskategorie. Das erhöht die Orientierung beim Wiedereinstieg.
+- **Wo umgesetzt:**
+  - **Frontend:** `+page.svelte` — neues «Für dich empfohlen»-Grid (4 Kacheln), erscheint nur wenn `data.recommended.length > 0`
+  - **Backend:** `+page.server.js` — aggregiert alle Plan-Übungen aller gespeicherten Pläne, ermittelt die häufigste `categoryId`, lädt bis zu 4 Übungen dieser Kategorie als `recommended`
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 8 — «Empfehlungs-Sektion auf Homepage»
+
+### 4.9 Bildgrössen optimieren
+
+- **Beschreibung & Nutzen:** Alle Übungsbilder in der App laden nur noch dann, wenn sie im Sichtbereich sind (`loading="lazy"`). Das reduziert die initiale Ladezeit, besonders auf Listenseiten mit vielen Einträgen.
+- **Wo umgesetzt:**
+  - **Frontend:** `loading="lazy"` ergänzt auf allen `<img>`-Tags in: `exercises/+page.svelte`, `exercises/[id]/+page.svelte`, `categories/[slug]/+page.svelte`, `plan/+page.svelte`, `plans/[id]/+page.svelte`, `+page.svelte`
+- **Aus Evaluation abgeleitet?:** Ja, Issue Prio 9 — «Bildgrössen optimieren»
 
 ## 5. Projektorganisation [Optional]
 Beispiele:

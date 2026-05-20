@@ -1,4 +1,5 @@
 <script>
+  import { enhance } from '$app/forms';
   let { data } = $props();
 </script>
 
@@ -14,9 +15,16 @@
   {:else}
     <div class="plan-list">
       {#each data.plans as plan}
-        <a href="/plans/{plan._id}" class="plan-row">
-          <div class="plan-info">
-            <p class="plan-name">{plan.name}</p>
+        <div class="plan-card">
+          <a href="/plans/{plan._id}" class="plan-info">
+            <div class="plan-header">
+              <p class="plan-name">{plan.name}</p>
+              {#if plan.status === 'active'}
+                <span class="badge-active">Aktiv</span>
+              {:else}
+                <span class="badge-done">✓</span>
+              {/if}
+            </div>
             <p class="plan-meta">
               {plan.exercises.length} Übungen ·
               {#if plan.lastCompletedAt}
@@ -25,16 +33,17 @@
                 {new Date(plan.createdAt).toLocaleDateString('de-CH')}
               {/if}
             </p>
+          </a>
+          <div class="plan-actions">
+            <a href="/plans/{plan._id}/edit" class="action-btn edit-btn" title="Bearbeiten">✏</a>
+            <form method="POST" action="?/activate" use:enhance={() => {
+              return async ({ update }) => { await update({ reset: false }); };
+            }}>
+              <input type="hidden" name="planId" value={plan._id} />
+              <button type="submit" class="action-btn start-btn" title="Starten">▶</button>
+            </form>
           </div>
-          <div class="plan-right">
-            {#if plan.status === 'active'}
-              <span class="badge-active">Aktiv</span>
-            {:else}
-              <span class="badge-done">✓</span>
-            {/if}
-            <span class="arrow">›</span>
-          </div>
-        </a>
+        </div>
       {/each}
     </div>
   {/if}
@@ -42,9 +51,7 @@
 </div>
 
 <style>
-  .page {
-    padding: 16px;
-  }
+  .page { padding: 16px; }
 
   .title {
     font-size: 1.6rem;
@@ -53,26 +60,28 @@
     margin-bottom: 16px;
   }
 
-  .plan-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .plan-list { display: flex; flex-direction: column; gap: 10px; }
 
-  .plan-row {
+  .plan-card {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     background: #2A2A2A;
     border-radius: 14px;
-    padding: 16px;
-    text-decoration: none;
+    padding: 14px 12px 14px 16px;
+    gap: 12px;
   }
 
   .plan-info {
+    flex: 1;
+    text-decoration: none;
+    min-width: 0;
+  }
+
+  .plan-header {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
   }
 
   .plan-name {
@@ -80,6 +89,9 @@
     font-weight: 600;
     color: #fff;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .plan-meta {
@@ -88,30 +100,53 @@
     margin: 0;
   }
 
-  .plan-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
   .badge-active {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
-    padding: 3px 10px;
+    padding: 2px 8px;
     border-radius: 20px;
     background: #14B8A620;
     color: #14B8A6;
     border: 1px solid #14B8A6;
+    flex-shrink: 0;
   }
 
   .badge-done {
     font-size: 0.85rem;
     color: #14B8A6;
+    flex-shrink: 0;
   }
 
-  .arrow {
-    color: #555;
-    font-size: 1.4rem;
+  .plan-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .action-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    flex-shrink: 0;
+  }
+
+  .edit-btn {
+    background: #333;
+    color: #aaa;
+  }
+
+  .start-btn {
+    background: #14B8A6;
+    color: #fff;
+    font-size: 0.8rem;
   }
 
   .empty {
@@ -123,8 +158,5 @@
     color: #666;
     font-size: 0.9rem;
   }
-  .empty a {
-    color: #14B8A6;
-    text-decoration: none;
-  }
+  .empty a { color: #14B8A6; text-decoration: none; }
 </style>

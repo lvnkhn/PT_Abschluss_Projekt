@@ -1,8 +1,8 @@
-import { getCollection, serialize, USER_ID } from '$lib/server/db.js';
+import { getCollection, serialize } from '$lib/server/db.js';
 import { ObjectId } from 'mongodb';
 import { error } from '@sveltejs/kit';
 
-export async function load({ params }) {
+export async function load({ params, locals }) {
   const [plansCol, exercisesCol, categoriesCol] = await Promise.all([
     getCollection('plans'),
     getCollection('exercises'),
@@ -11,7 +11,7 @@ export async function load({ params }) {
 
   let plan;
   try {
-    plan = await plansCol.findOne({ _id: new ObjectId(params.id), userId: USER_ID });
+    plan = await plansCol.findOne({ _id: new ObjectId(params.id), userId: locals.userId });
   } catch {
     throw error(404, 'Plan not found');
   }

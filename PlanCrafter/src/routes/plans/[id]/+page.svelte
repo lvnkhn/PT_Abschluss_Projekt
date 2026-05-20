@@ -1,11 +1,42 @@
 <script>
   import { enhance } from '$app/forms';
+  import { onDestroy } from 'svelte';
   let { data } = $props();
 
   const plan      = $derived(data.plan);
   const isActive  = $derived(plan.status === 'active');
   const doneCount = $derived(plan.exercises.filter(e => e.done).length);
   const total     = $derived(plan.exercises.length);
+
+  // Timer
+  let seconds = $state(0);
+  let timerRunning = $state(false);
+  let timerInterval;
+
+  function toggleTimer() {
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+    } else {
+      timerRunning = true;
+      timerInterval = setInterval(() => { seconds++; }, 1000);
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    seconds = 0;
+  }
+
+  function fmt(s) {
+    const h = Math.floor(s / 3600).toString().padStart(2, '0');
+    const m = Math.floor((s % 3600) / 60).toString().padStart(2, '0');
+    const sec = (s % 60).toString().padStart(2, '0');
+    return `${h}:${m}:${sec}`;
+  }
+
+  onDestroy(() => clearInterval(timerInterval));
 </script>
 
 <div class="page">
@@ -30,19 +61,34 @@
     <form method="POST" action="?/restart" use:enhance={() => {
       return async ({ update }) => { await update({ reset: false }); };
     }}>
-      <button type="submit" class="btn-start">Jetzt starten</button>
+      <button type="submit" class="btn-start">Erneut starten</button>
     </form>
   {/if}
 
   {#if isActive}
+    <!-- Progress -->
     <div>
       <p class="progress-label">{doneCount} / {total} erledigt</p>
       <div class="progress-bar">
         <div class="progress-fill" style="width: {total > 0 ? (doneCount / total) * 100 : 0}%"></div>
       </div>
     </div>
+
+    <!-- Timer -->
+    <div class="timer-card">
+      <p class="timer-display">{fmt(seconds)}</p>
+      <div class="timer-btns">
+        <button onclick={toggleTimer} class="timer-btn" class:running={timerRunning}>
+          {timerRunning ? '⏸ Pause' : '▶ Timer starten'}
+        </button>
+        {#if seconds > 0}
+          <button onclick={resetTimer} class="timer-reset">↺</button>
+        {/if}
+      </div>
+    </div>
   {/if}
 
+  <!-- Exercise list -->
   <div class="exercise-list">
     {#each plan.exercises as ex}
       {#if isActive}
@@ -52,7 +98,7 @@
           <input type="hidden" name="exerciseId" value={ex.exerciseId} />
           <input type="hidden" name="done"       value={ex.done} />
           {#if ex.imageUrl}
-            <img src={ex.imageUrl} alt={ex.name} class="ex-img" />
+            <img src={ex.imageUrl} alt={ex.name} class="ex-img" loading="lazy" />
           {:else}
             <div class="ex-img ex-placeholder"></div>
           {/if}
@@ -64,18 +110,27 @@
       {:else}
         <div class="ex-card" class:done={ex.done}>
           {#if ex.imageUrl}
-            <img src={ex.imageUrl} alt={ex.name} class="ex-img" />
+            <img src={ex.imageUrl} alt={ex.name} class="ex-img" loading="lazy" />
           {:else}
             <div class="ex-img ex-placeholder"></div>
           {/if}
           <span class="ex-name">{ex.name}</span>
-          {#if ex.done}
-            <span class="check-icon">✓</span>
-          {/if}
+          {#if ex.done}<span class="check-icon">✓</span>{/if}
         </div>
       {/if}
     {/each}
   </div>
+
+  <!-- Partial completion -->
+  {#if isActive && total > 0}
+    <form method="POST" action="?/completePlan" use:enhance={() => {
+      return async ({ update }) => { await update({ reset: false }); };
+    }}>
+      <button type="submit" class="btn-complete">
+        Training abschliessen ({doneCount}/{total})
+      </button>
+    </form>
+  {/if}
 
 </div>
 
@@ -112,6 +167,53 @@
     border-radius: 4px; transition: width 0.3s;
   }
 
+  /* Timer */
+  .timer-card {
+    background: #2A2A2A;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .timer-display {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .timer-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .timer-btn {
+    padding: 8px 16px;
+    background: #14B8A6;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .timer-btn.running { background: #0e9087; }
+
+  .timer-reset {
+    width: 34px; height: 34px;
+    background: #333; color: #aaa;
+    border: none; border-radius: 8px;
+    font-size: 1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+
   .exercise-list { display: flex; flex-direction: column; gap: 10px; }
 
   .ex-card {
@@ -142,4 +244,16 @@
   .check-btn.checked { background: #14B8A6; border-color: #14B8A6; }
 
   .check-icon { color: #14B8A6; font-size: 1rem; font-weight: 700; }
+
+  .btn-complete {
+    width: 100%;
+    padding: 14px;
+    background: #2A2A2A;
+    color: #14B8A6;
+    border: 1.5px solid #14B8A6;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
 </style>

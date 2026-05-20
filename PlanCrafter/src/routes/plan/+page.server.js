@@ -1,16 +1,17 @@
-import { getCollection, serialize, USER_ID } from '$lib/server/db.js';
+import { getCollection, serialize } from '$lib/server/db.js';
 import { ObjectId } from 'mongodb';
 
-export async function load() {
+export async function load({ locals }) {
+  const userId = locals.userId;
   const col = await getCollection('plans');
   const [draft, activePlan, savedPlans] = await Promise.all([
-    col.findOne({ userId: USER_ID, status: 'draft' }),
+    col.findOne({ userId, status: 'draft' }),
     col.findOne(
-      { userId: USER_ID, status: 'active' },
+      { userId, status: 'active' },
       { sort: { lastActivatedAt: -1, createdAt: -1 } }
     ),
     col
-      .find({ userId: USER_ID, status: { $in: ['active', 'completed'] } })
+      .find({ userId, status: { $in: ['active', 'completed'] } })
       .sort({ lastActivatedAt: -1, createdAt: -1 })
       .toArray(),
   ]);
@@ -18,7 +19,7 @@ export async function load() {
 }
 
 export const actions = {
-  saveName: async ({ request }) => {
+  saveName: async ({ request, locals }) => {
     const data = await request.formData();
     const planId = data.get('planId');
     const name = data.get('name')?.trim();
@@ -72,5 +73,15 @@ export const actions = {
       ? { $set: { status: 'active', lastActivatedAt: new Date(), 'exercises.$[].done': false } }
       : { $set: { lastActivatedAt: new Date() } };
     await col.updateOne({ _id: new ObjectId(planId) }, update);
+  },
+
+  completePlan: async ({ request }) => {
+    const data = await request.formData();
+    const planId = data.get('planId');
+    const col = await getCollection('plans');
+    await col.updateOne(
+      { _id: new ObjectId(planId) },
+      { $set: { status: 'completed', lastCompletedAt: new Date() } }
+    );
   },
 };

@@ -1,12 +1,12 @@
-import { getCollection, serialize, USER_ID } from '$lib/server/db.js';
+import { getCollection, serialize } from '$lib/server/db.js';
 import { ObjectId } from 'mongodb';
 import { error, redirect } from '@sveltejs/kit';
 
-export async function load({ params }) {
+export async function load({ params, locals }) {
   const col = await getCollection('plans');
   let plan;
   try {
-    plan = await col.findOne({ _id: new ObjectId(params.id), userId: USER_ID });
+    plan = await col.findOne({ _id: new ObjectId(params.id), userId: locals.userId });
   } catch {
     throw error(404, 'Plan not found');
   }
@@ -43,5 +43,14 @@ export const actions = {
         { $set: { status: 'completed', lastCompletedAt: new Date() } }
       );
     }
+  },
+
+  completePlan: async ({ params }) => {
+    const col = await getCollection('plans');
+    await col.updateOne(
+      { _id: new ObjectId(params.id) },
+      { $set: { status: 'completed', lastCompletedAt: new Date() } }
+    );
+    redirect(303, `/plans/${params.id}`);
   },
 };

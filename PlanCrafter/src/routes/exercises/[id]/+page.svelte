@@ -1,7 +1,24 @@
 <script>
+  import { enhance } from '$app/forms';
+  import { toast } from '$lib/toast.svelte.js';
+  import BodyMap from '$lib/components/BodyMap.svelte';
   let { data } = $props();
   const ex = data.exercise;
   const cat = data.category;
+
+  let added = $state(false);
+  let openPicker = $state(false);
+
+  function handleAdd(planName) {
+    return () => {
+      openPicker = false;
+      added = true;
+      return async ({ update }) => {
+        await update();
+        toast.show(planName ?? ex.name);
+      };
+    };
+  }
 </script>
 
 <div class="page">
@@ -13,7 +30,7 @@
 
   <!-- Image -->
   {#if ex.imageUrl}
-    <img src={ex.imageUrl} alt={ex.name} class="hero-img" />
+    <img src={ex.imageUrl} alt={ex.name} class="hero-img" loading="lazy" />
   {:else}
     <div class="hero-img hero-placeholder"></div>
   {/if}
@@ -25,12 +42,10 @@
     </span>
   {/if}
 
-  <!-- Body parts -->
+  <!-- Body parts + BodyMap -->
   {#if ex.bodyParts?.length}
-    <div class="bodyparts">
-      {#each ex.bodyParts as part}
-        <span class="part-badge">{part}</span>
-      {/each}
+    <div class="anatomy-section">
+      <BodyMap bodyParts={ex.bodyParts} />
     </div>
   {/if}
 
@@ -59,6 +74,41 @@
     </a>
   {/if}
 
+  <!-- Add to plan -->
+  <div class="add-section">
+    {#if added}
+      <button type="button" class="btn-add added">✓ Hinzugefügt</button>
+    {:else if data.plans.length > 0}
+      <button type="button" class="btn-add" onclick={() => openPicker = !openPicker}>
+        {openPicker ? '× Schliessen' : '+ Zu Plan hinzufügen'}
+      </button>
+      {#if openPicker}
+        <div class="plan-picker">
+          <p class="picker-label">Zu welchem Plan?</p>
+          <form method="POST" action="?/addToPlan" use:enhance={handleAdd(null)}>
+            <input type="hidden" name="exerciseId" value={ex._id} />
+            <button type="submit" class="picker-item">+ Neuer Entwurf</button>
+          </form>
+          {#each data.plans as plan}
+            <form method="POST" action="?/addToPlan" use:enhance={handleAdd(plan.name)}>
+              <input type="hidden" name="exerciseId" value={ex._id} />
+              <input type="hidden" name="planId" value={plan._id} />
+              <button type="submit" class="picker-item">{plan.name}</button>
+            </form>
+          {/each}
+        </div>
+      {/if}
+    {:else}
+      <form method="POST" action="?/addToPlan" use:enhance={() => {
+        added = true;
+        return async ({ update }) => { await update(); toast.show(ex.name); };
+      }}>
+        <input type="hidden" name="exerciseId" value={ex._id} />
+        <button type="submit" class="btn-add">+ Zu Plan hinzufügen</button>
+      </form>
+    {/if}
+  </div>
+
 </div>
 
 <style>
@@ -81,10 +131,7 @@
     cursor: pointer;
     padding: 0;
   }
-  .back-arrow {
-    font-size: 1.4rem;
-    line-height: 1;
-  }
+  .back-arrow { font-size: 1.4rem; line-height: 1; }
 
   .hero-img {
     width: 100%;
@@ -105,18 +152,10 @@
     width: fit-content;
   }
 
-  .bodyparts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .part-badge {
-    padding: 5px 14px;
-    border-radius: 10px;
+  .anatomy-section {
     background: #2A2A2A;
-    color: #ccc;
-    font-size: 0.82rem;
-    font-weight: 500;
+    border-radius: 14px;
+    padding: 16px;
   }
 
   .description {
@@ -142,23 +181,15 @@
     gap: 12px;
   }
 
-  .step {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
+  .step { display: flex; align-items: flex-start; gap: 12px; }
 
   .step-num {
-    width: 28px;
-    height: 28px;
+    width: 28px; height: 28px;
     border-radius: 50%;
     background: #2A2A2A;
     color: #ccc;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 0.85rem; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
 
@@ -175,6 +206,56 @@
     font-size: 0.85rem;
     text-decoration: none;
     font-weight: 500;
-    margin-top: 4px;
   }
+
+  /* Add section */
+  .add-section { position: relative; }
+
+  .btn-add {
+    width: 100%;
+    padding: 14px;
+    background: #fff;
+    color: #111;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-add.added { background: #14B8A6; color: #fff; }
+
+  /* Plan picker */
+  .plan-picker {
+    margin-top: 10px;
+    background: #2A2A2A;
+    border: 1px solid #3A3A3A;
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .picker-label {
+    font-size: 0.75rem;
+    color: #666;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .picker-item {
+    width: 100%;
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .picker-item:hover { background: #3A3A3A; }
 </style>
