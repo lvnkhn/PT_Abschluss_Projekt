@@ -279,14 +279,70 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   - `history.back()` für Zurück-Navigation: Detail-Seiten von Übungen nutzen `history.back()` statt eines fixen Links, damit der Zurück-Button kontextabhängig funktioniert (von Exercises-Liste, Categories-Seite oder Homepage)
 
 ### 3.5 Validate
-- **URL der getesteten Version** (separat deployt)
-- **Ziele der Prüfung:** _[welche Fragen sollen beantwortet werden?]_  
-- **Vorgehen:** _[moderiert/unmoderiert; remote/on-site]_  
-- **Stichprobe:** _[Mit wem wurde getestet? Profil; Anzahl]_  
-- **Aufgaben/Szenarien:** _[Ausformulierte Testaufgaben]_  
-- **Kennzahlen & Beobachtungen:** _[z. B. Erfolgsquote, Zeitbedarf, qualitative Findings]_  
-- **Zusammenfassung der Resultate:** _[Wichtigste Erkenntnisse; 2-4 Sätze]_  
-- **Abgeleitete Verbesserungen:** _[Anforderungen, die als nächstes umgesetzt werden sollten, priorisiert, kurz begründet; falls Verbesserungen im Prototyp konkret umgesetzt wurden: In Kap. 4 dokumentieren]_  
+
+- **URL der getesteten Version:** https://ptabschlussprojekt.netlify.app/
+
+- **Ziele der Prüfung:**
+  - Ist der Kern-Workflow (Übung finden → Plan erstellen → Plan starten) ohne Einführung verständlich?
+  - Verstehen Testpersonen den Plan-Status (Draft → Active → Completed)?
+  - Finden Testpersonen Kategorien und Übungsdetails problemlos?
+  - Wird die App als nützlich und zeitsparend wahrgenommen (Proof of Value)?
+
+- **Vorgehen:** Moderiertes, szenario-basiertes Usability Testing; On-Site; Think-Aloud-Methode; Kurzinterview und Kurzfragen nach jedem Szenario
+
+- **Stichprobe:** 2 Testpersonen (Lorenzo, Erion); Profil: Studierende mit Fitness-Interesse, keine Vorkenntnisse der App
+
+- **Aufgaben/Szenarien:**
+
+  **Szenario 1 – Erste Erkundung**
+  > Du hast von einer Fitness-App gehört, die dir helfen soll, schnell einen Trainingsplan zusammenzustellen. Du öffnest die App zum ersten Mal.
+  - Aufgabe 1a: Schau dir die App an und beschreibe laut, was du siehst und was du als Nächstes tun würdest.
+  - Aufgabe 1b: Du interessierst dich für Plyometrics-Übungen. Finde heraus, welche Übungen in dieser Kategorie verfügbar sind.
+
+  **Szenario 2 – Trainingsplan zusammenstellen**
+  > Du planst ein Training für morgen und möchtest Übungen für Beine und Rumpf kombinieren.
+  - Aufgabe 2a: Stelle einen Plan mit mindestens 3 Übungen zusammen.
+  - Aufgabe 2b: Entferne eine Übung, die du doch nicht machen möchtest.
+  - Aufgabe 2c: Führe alles Nötige aus, damit du mit deinem Plan trainieren kannst.
+
+  **Szenario 3 – Übungsdetail & Navigation**
+  > Du hast den Begriff «Bulgarian Split Squat» noch nie gehört und möchtest herausfinden, ob die Übung für dich geeignet ist.
+  - Aufgabe 3a: Finde die Übung und schau dir die Details an.
+  - Aufgabe 3b: Kehre nach der Detailansicht zur vorherigen Seite zurück.
+
+- **Kennzahlen & Beobachtungen:**
+
+  | Issue | Schweregrad | Betroffene Personen |
+  |---|---|---|
+  | Kein Login / keine benutzerspezifischen Pläne | 3 | Lorenzo |
+  | Plan-Bearbeitung umständlich (keine fixen Aktions-Buttons) | 3 | Erion |
+  | Suchfunktion (Icon) sichtbar aber nicht aktiv | 3 | Erion |
+  | Plan nicht teilweise abschliessbar | 3 | Erion |
+  | Übung nicht direkt einem spezifischen Plan zuweisbar | 3 | Lorenzo |
+  | Kein Timer beim Start einer Trainingseinheit | 2 | Lorenzo |
+  | Kein Anatomy-Bild auf Detailseiten | 2 | Erion |
+  | Keine Vorschläge / Empfehlungen | 2 | Lorenzo |
+  | Bilder zu gross | 1 | Lorenzo |
+
+  Beide Testpersonen würden die App nutzen – jedoch nur, wenn sie als Mobile App verfügbar wäre. Als grösste Lücke wurden das fehlende Login-System und die eingeschränkte Plan-Verwaltung genannt.
+
+- **Zusammenfassung der Resultate:** Der Kern-Workflow war für beide Testpersonen grundsätzlich nachvollziehbar, jedoch zeigten sich bei der Plan-Bearbeitung und der Übungs-Zuweisung deutliche Usability-Probleme. Das nicht funktionierende Such-Icon und das fehlende Login-System wurden als kritische Mängel wahrgenommen. Beide Testpersonen bewerteten die App als prinzipiell nützlich, machten ihre tatsächliche Nutzung aber von einer Mobile-App-Version abhängig.
+
+- **Abgeleitete Verbesserungen:**
+
+  | Priorität | Verbesserung | Begründung |
+  |---|---|---|
+  | 1 | Suchfunktion aktivieren (Categories & Exercises) | Icon ist sichtbar und weckt Erwartung – führt zu Verwirrung bei beiden TP |
+  | 2 | Fixe Aktions-Buttons pro Plan-Item (Bearbeiten, Starten) | Plan-Bearbeitung war für Erion die grösste Hürde im Kern-Workflow |
+  | 3 | Übung direkt einem spezifischen Plan zuweisen | Fehlt sobald mehrere Pläne existieren; von Lorenzo explizit vermisst |
+  | 4 | Partiellen Plan-Abschluss ermöglichen | Realitätsnahe Nutzung: nicht immer werden alle Übungen gemacht |
+  | 5 | Login-System & benutzerspezifische Pläne | Grundvoraussetzung für produktiven Einsatz; von Lorenzo priorisiert |
+  | 6 | Timer beim Start einer Trainingseinheit | Ergänzt den Workflow sinnvoll; geringer Aufwand, hoher wahrgenommener Wert |
+  | 7 | Anatomy-Bild auf Detailseiten | Verbessert Informationsgehalt der Detailseite deutlich |
+  | 8 | Empfehlungs-Sektion auf Homepage | Nice-to-have; erhöht Orientierung beim Einstieg |
+  | 9 | Bildgrössen optimieren | Kosmetisch; einfach umsetzbar |
+
+  _Falls Verbesserungen konkret im Prototyp umgesetzt wurden: In Kap. 4 dokumentieren._
 
 ## 4. Erweiterungen [Optional]
 Dokumentiert Erweiterungen über den Mindestumfang hinaus.
