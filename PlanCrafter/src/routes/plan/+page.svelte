@@ -10,8 +10,8 @@
   const totalCount  = $derived(activePlan?.exercises.length ?? 0);
   const draftCount  = $derived(draft?.exercises.length ?? 0);
 
-  // Timer
-  let seconds = $state(0);
+  // Timer in centiseconds (1/100 second)
+  let cs = $state(0);
   let timerRunning = $state(false);
   let timerInterval;
 
@@ -21,24 +21,37 @@
       timerRunning = false;
     } else {
       timerRunning = true;
-      timerInterval = setInterval(() => { seconds++; }, 1000);
+      timerInterval = setInterval(() => { cs++; }, 10);
     }
   }
 
   function resetTimer() {
     clearInterval(timerInterval);
     timerRunning = false;
-    seconds = 0;
+    cs = 0;
   }
 
-  function fmt(s) {
-    const h = Math.floor(s / 3600).toString().padStart(2, '0');
-    const m = Math.floor((s % 3600) / 60).toString().padStart(2, '0');
-    const sec = (s % 60).toString().padStart(2, '0');
-    return `${h}:${m}:${sec}`;
+  function fmt(c) {
+    const totalMs = c * 10;
+    const h   = Math.floor(totalMs / 3600000).toString().padStart(2, '0');
+    const m   = Math.floor((totalMs % 3600000) / 60000).toString().padStart(2, '0');
+    const s   = Math.floor((totalMs % 60000) / 1000).toString().padStart(2, '0');
+    const ms  = Math.floor(totalMs % 1000 / 10).toString().padStart(2, '0');
+    return `${h}:${m}:${s}.${ms}`;
   }
+
+  // Elapsed ms for saving
+  const elapsedMs = $derived(cs * 10);
 
   onDestroy(() => clearInterval(timerInterval));
+
+  // Toggle exercise done by clicking anywhere on card
+  function submitForm(e) {
+    if (!e.target.closest('button[type=submit]')) {
+      const btn = e.currentTarget.querySelector('button[type=submit]');
+      btn?.click();
+    }
+  }
 </script>
 
 <div class="page">
@@ -54,12 +67,12 @@
 
     <!-- Timer -->
     <div class="timer-card">
-      <p class="timer-display">{fmt(seconds)}</p>
+      <p class="timer-display">{fmt(cs)}</p>
       <div class="timer-btns">
         <button onclick={toggleTimer} class="timer-btn" class:running={timerRunning}>
           {timerRunning ? '⏸ Pause' : '▶ Start'}
         </button>
-        {#if seconds > 0}
+        {#if cs > 0}
           <button onclick={resetTimer} class="timer-reset">↺</button>
         {/if}
       </div>
@@ -67,9 +80,16 @@
 
     <div class="exercise-list">
       {#each activePlan.exercises as ex}
-        <form method="POST" action="?/toggleDone" use:enhance={() => {
-          return async ({ update }) => { await update({ reset: false }); };
-        }} class="ex-workout-card" class:done={ex.done}>
+        <form
+          method="POST"
+          action="?/toggleDone"
+          use:enhance={() => {
+            return async ({ update }) => { await update({ reset: false }); };
+          }}
+          class="ex-workout-card"
+          class:done={ex.done}
+          onclick={submitForm}
+        >
           <input type="hidden" name="planId"     value={activePlan._id} />
           <input type="hidden" name="exerciseId" value={ex.exerciseId} />
           <input type="hidden" name="done"       value={ex.done} />
@@ -86,12 +106,13 @@
       {/each}
     </div>
 
-    <!-- Partial completion -->
+    <!-- Complete -->
     {#if totalCount > 0}
       <form method="POST" action="?/completePlan" use:enhance={() => {
         return async ({ update }) => { await update({ reset: false }); };
       }}>
         <input type="hidden" name="planId" value={activePlan._id} />
+        <input type="hidden" name="elapsedMs" value={elapsedMs} />
         <button type="submit" class="btn-complete">
           Training abschliessen ({doneCount}/{totalCount})
         </button>
@@ -107,10 +128,10 @@
 
   <!-- ── New plan button ───────────────────────────── -->
   {#if !draft}
-    <a href="/exercises" class="btn-new-plan">+ Neuen Plan erstellen</a>
+    <a href="/exercises" class="btn-new-plan">➕ Neuen Plan erstellen</a>
   {/if}
 
-  <!-- ── Draft (plan being built) ─────────────────── -->
+  <!-- ── Draft ─────────────────────────────────────── -->
   {#if draft}
     <div class="draft-section" class:has-active={!!activePlan}>
       <h3 class="draft-title">Plan in Bearbeitung</h3>
@@ -164,10 +185,13 @@
               {:else}
                 {new Date(p.createdAt).toLocaleDateString('de-CH')}
               {/if}
+              {#if p.bestTimeMs}
+                · ⏱ {fmt(p.bestTimeMs / 10)}
+              {/if}
             </p>
           </a>
           <div class="plan-actions">
-            <a href="/plans/{p._id}/edit" class="action-btn edit-btn" title="Bearbeiten">✏</a>
+            <a href="/plans/{p._id}/edit" class="action-btn edit-btn" title="Bearbeiten">✏️</a>
             <form method="POST" action="?/activatePlan" use:enhance={() => {
               return async ({ update }) => { await update({ reset: false }); };
             }}>
@@ -190,10 +214,10 @@
     gap: 14px;
   }
 
-  .title { font-size: 1.6rem; font-weight: 700; color: #fff; margin: 0; }
-  .subtitle { color: #888; font-size: 0.85rem; margin: 0; }
+  .title { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+  .subtitle { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
 
-  .progress-bar { height: 4px; background: #333; border-radius: 4px; overflow: hidden; }
+  .progress-bar { height: 4px; background: var(--border-1); border-radius: 4px; overflow: hidden; }
   .progress-fill {
     height: 100%; background: #14B8A6;
     border-radius: 4px; transition: width 0.3s;
@@ -201,7 +225,7 @@
 
   /* Timer */
   .timer-card {
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 14px 16px;
     display: flex;
@@ -211,12 +235,13 @@
   }
 
   .timer-display {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-primary);
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     margin: 0;
+    font-family: 'Courier New', monospace;
   }
 
   .timer-btns { display: flex; align-items: center; gap: 8px; }
@@ -227,12 +252,13 @@
     border: none; border-radius: 10px;
     font-size: 0.85rem; font-weight: 600; cursor: pointer;
     transition: background 0.2s;
+    white-space: nowrap;
   }
   .timer-btn.running { background: #0e9087; }
 
   .timer-reset {
     width: 32px; height: 32px;
-    background: #333; color: #aaa;
+    background: var(--bg-card-alt); color: var(--text-dim);
     border: none; border-radius: 8px;
     font-size: 1rem; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
@@ -244,7 +270,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 12px;
   }
@@ -253,7 +279,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 12px;
     border: none;
@@ -268,22 +294,22 @@
     width: 56px; height: 56px;
     border-radius: 10px; object-fit: cover; flex-shrink: 0;
   }
-  .ex-placeholder { background: linear-gradient(135deg, #333, #444); }
+  .ex-placeholder { background: var(--placeholder-gradient); }
 
-  .ex-name { flex: 1; font-size: 0.95rem; font-weight: 600; color: #fff; }
-  .done-text { text-decoration: line-through; color: #666; }
+  .ex-name { flex: 1; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .done-text { text-decoration: line-through; color: var(--text-secondary); }
 
   .remove-btn {
     width: 32px; height: 32px;
     border-radius: 8px;
-    background: #3A3A3A; color: #888;
+    background: var(--bg-card-alt); color: var(--text-secondary);
     border: none; font-size: 0.85rem; cursor: pointer; flex-shrink: 0;
   }
 
   .check-btn {
     width: 32px; height: 32px; border-radius: 50%;
-    background: #333; color: #fff;
-    border: 2px solid #444;
+    background: var(--bg-card-alt); color: var(--text-primary);
+    border: 2px solid var(--border-2);
     font-size: 1rem; cursor: pointer; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.2s, border-color 0.2s;
@@ -293,7 +319,7 @@
   .btn-complete {
     width: 100%;
     padding: 14px;
-    background: #2A2A2A;
+    background: var(--bg-card);
     color: #14B8A6;
     border: 1.5px solid #14B8A6;
     border-radius: 14px;
@@ -304,20 +330,20 @@
 
   .draft-section { display: flex; flex-direction: column; gap: 10px; }
   .draft-section.has-active {
-    border-top: 1px solid #2A2A2A;
+    border-top: 1px solid var(--border-1);
     padding-top: 14px;
   }
-  .draft-title { font-size: 1rem; font-weight: 700; color: #fff; margin: 0; }
+  .draft-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin: 0; }
 
   .name-form { display: flex; gap: 10px; margin-top: 4px; }
   .name-input {
     flex: 1;
-    background: #2A2A2A; border: 1px solid #444; border-radius: 12px;
-    padding: 12px 14px; color: #fff; font-size: 0.95rem; outline: none;
+    background: var(--bg-input); border: 1px solid var(--border-2); border-radius: 12px;
+    padding: 12px 14px; color: var(--text-primary); font-size: 0.95rem; outline: none;
   }
-  .name-input::placeholder { color: #555; }
+  .name-input::placeholder { color: var(--text-secondary); }
   .btn-save {
-    padding: 12px 20px; background: #fff; color: #111;
+    padding: 12px 20px; background: var(--btn-primary-bg); color: var(--btn-primary-color);
     border: none; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
   }
 
@@ -325,18 +351,18 @@
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; gap: 10px; margin-top: 80px; text-align: center;
   }
-  .empty-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0; }
-  .empty-sub { color: #666; font-size: 0.85rem; margin: 0; }
+  .empty-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+  .empty-sub { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
 
   .btn-new-plan {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 14px;
-    background: #2A2A2A;
-    border: 1.5px dashed #444;
+    background: var(--bg-card);
+    border: 1.5px dashed var(--border-2);
     border-radius: 14px;
-    color: #aaa;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
@@ -344,31 +370,31 @@
   }
   .btn-new-plan:hover { border-color: #14B8A6; color: #14B8A6; }
 
-  .divider { height: 1px; background: #2A2A2A; margin: 4px 0; }
-  .section-title { font-size: 1rem; font-weight: 700; color: #fff; margin: 0; }
+  .divider { height: 1px; background: var(--border-1); margin: 4px 0; }
+  .section-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin: 0; }
 
   .saved-list { display: flex; flex-direction: column; gap: 10px; }
 
   .plan-row {
     display: flex; align-items: center;
-    background: #2A2A2A; border-radius: 14px;
+    background: var(--bg-card); border-radius: 14px;
     padding: 14px 12px 14px 16px; gap: 10px;
   }
   .plan-info { flex: 1; text-decoration: none; min-width: 0; }
   .plan-name {
-    font-size: 1rem; font-weight: 600; color: #fff; margin: 0;
+    font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .plan-meta { font-size: 0.78rem; color: #888; margin: 0; }
+  .plan-meta { font-size: 0.78rem; color: var(--text-secondary); margin: 0; }
 
   .plan-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
   .action-btn {
     width: 36px; height: 36px; border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; cursor: pointer; text-decoration: none;
+    font-size: 1rem; cursor: pointer; text-decoration: none;
     border: none; flex-shrink: 0;
   }
-  .edit-btn { background: #3A3A3A; color: #aaa; }
+  .edit-btn { background: var(--bg-card-alt); color: var(--text-dim); }
   .start-btn { background: #14B8A6; color: #fff; font-size: 0.78rem; }
 </style>

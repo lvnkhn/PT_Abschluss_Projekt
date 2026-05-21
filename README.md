@@ -159,20 +159,21 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 
 ---
 
-##### Workflow 1: Registrierung & Login
+##### Workflow 1: Registrierung, Login & Profil
 
-1. 👤-Icon in der Topbar antippen → Weiterleitung zu `/login`
+1. «Anmelden»-Link in der Topbar antippen → Weiterleitung zu `/login`
 2. «Registrieren»-Link antippen → `/register` → Benutzername (min. 3 Zeichen) und Passwort (min. 6 Zeichen) eingeben → «Konto erstellen»
-3. Weiterleitung zur Homepage; Benutzername wird im Header angezeigt
-4. Abmelden: 👤-Icon antippen → Logout-Formular → Session wird gelöscht, Weiterleitung zu `/login`
-5. **Ohne Account:** «Ohne Konto fortfahren (Demo)» antippen → App funktioniert mit `userId: "demo"`
+3. Weiterleitung zur Homepage; Benutzername-Chip in der Topbar erscheint
+4. 👤-Icon antippen → Profilseite (`/profile`) mit **Contributions-Heatmap** (52-Wochen-Grid, jeder Login = 1 Contribution) und «Abmelden»-Button
+5. **Abmelden:** auf der Profilseite «Abmelden» antippen → Session wird gelöscht, Weiterleitung zu `/login`
+6. **Ohne Account:** «Ohne Konto fortfahren (Demo)» antippen → App funktioniert mit `userId: "demo"`
 
 ##### Workflow 2: Übungen durchsuchen und suchen
 
 1. Navigation → *Exercises* → alle Übungen werden geladen
 2. Kategorie-Chip (z. B. «Kraft») antippen → Liste filtert auf diese Kategorie
-3. Suchfeld tippen (z. B. «Squat») → Liste filtert reaktiv ohne Seitenreload
-4. Alternativ: 🔍-Icon in der Topbar antippen → Sucheingabe erscheint inline → Suche über alle Übungen, navigiert zu `/exercises?q=...`
+3. Suchfeld tippen (z. B. «Squat») → **Echtzeit-Suchvorschläge** erscheinen (Übungen und Kategorien), reaktive Listenfilterung ohne Reload
+4. Alternativ: 🔍-Icon in der Topbar antippen → Sucheingabe erscheint inline mit **Autocomplete-Dropdown** für Übungen & Kategorien
 5. Übung antippen → Detailseite mit Bild, Kategorie-Badge, bodyParts-Badges, **BodyMap-Anatomieübersicht**, Schritt-für-Schritt-Anleitung und Referenz-Link
 
 ##### Workflow 3: Kategoriebasiert suchen
@@ -191,16 +192,16 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 4. Unerwünschte Übungen mit **✕** entfernen (live, kein Reload)
 5. Plan benennen (Textfeld) → **Speichern** → Plan erscheint in «Meine Pläne»
 6. Plan antippen → Detailseite (`/plans/[id]`) → Fortschrittsbalken + Übungen mit Checkboxen
-7. **Timer starten:** «▶ Timer starten»-Button antippen → Stoppuhr läuft; Pause/Reset möglich
-8. Übungen einzeln abhaken (live, kein Reload); sobald alle erledigt: Plan wird automatisch abgeschlossen
-9. **Partieller Abschluss:** «Training abschliessen (x/y)»-Button antippen → Plan wird abgeschlossen, auch wenn nicht alle Übungen erledigt sind
+7. **Timer starten:** «▶ Start»-Button antippen → Stoppuhr läuft im Format **HH:MM:SS.ms** (Stunden, Minuten, Sekunden, Millisekunden); Pause/Reset möglich
+8. Übungen abhaken: Überall auf das Übungs-Feld tippen (nicht nur auf den Kreis) → Übung wird als erledigt markiert (live, kein Reload); sobald alle erledigt: Plan automatisch abgeschlossen
+9. **Partieller Abschluss:** «Training abschliessen (x/y)»-Button antippen → Plan wird abgeschlossen; **gemessene Zeit wird gespeichert und als Bestzeit angezeigt**
 
 ##### Workflow 5: Gespeicherte Pläne verwalten
 
-1. Navigation → *Plans* → alle gespeicherten Pläne mit direkten Aktions-Buttons:
-   - **✏ (Bearbeiten):** Öffnet die Bearbeitungsseite (`/plans/[id]/edit`) → Umbenennen, Übungen hinzufügen/entfernen
+1. Navigation → *Plans* → **obere Hälfte:** «Neuen Plan erstellen»-Button; **untere Hälfte:** alle gespeicherten Pläne mit direkten Aktions-Buttons:
+   - **✏️ (Bearbeiten):** Öffnet die Bearbeitungsseite (`/plans/[id]/edit`) → Umbenennen, Übungen hinzufügen/entfernen
    - **▶ (Starten):** Plan sofort aktivieren und zu *Your Plan* navigieren — kein Hineinklicken erforderlich
-2. Plan antippen → Detailseite mit Timer, Fortschrittsbalken, Übungsliste und «Training abschliessen»-Button
+2. Plan antippen → Detailseite mit Timer (HH:MM:SS.ms), Fortschrittsbalken, Übungsliste, **Bestzeit** und «Training abschliessen»-Button
 3. Abgeschlossener Plan: «Erneut starten» → Haken werden zurückgesetzt, Plan wird wieder aktiv
 4. Home → *My Plans* zeigt die 2 neuesten Pläne; **View all** → vollständige Planliste
 
@@ -210,21 +211,29 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 2. **Speichern** → eigene Übung wird in MongoDB gespeichert (`isCustom: true`)
 3. Übung erscheint in der Exercises-Liste der gewählten Kategorie
 
-##### Workflow 7: Home-Navigation & Empfehlungen
+##### Workflow 7: Home-Navigation, Empfehlungen & Explore-Karussell
 
 1. *Current Workout*-Card zeigt den aktiven/nicht abgeschlossenen Plan → Antippen öffnet *Your Plan*
 2. *My Plans* zeigt die 2 neuesten Pläne → direkt anwählbar
-3. *Categories*-Kacheln → direkt zur Kategorie-Detailseite
+3. *Categories*-Kacheln → direkt zur Kategorie-Detailseite (auf kleinen Bildschirmen 4-spaltig)
 4. **«Für dich empfohlen»**-Grid → zeigt Übungen aus der meistgenutzten Trainingskategorie des Users (erscheint sobald Pläne mit Übungen vorhanden)
-5. *Explore*-Grid → 6 zufällige Übungen direkt zur Detailseite
-6. «PlanCrafter»-Schriftzug oben → navigiert immer zur Homepage
+5. **Explore-Karussell** → 3 Slides à 8 Übungen (2 Zeilen × 4 Spalten); Übungen wechseln täglich (datum-basierter Seed); Swipe auf Mobile, Pfeile auf Desktop
+6. ☀️/🌙-Toggle in der Topbar → wechselt zwischen Dark Mode und Light Mode (Einstellung wird in localStorage gespeichert)
+7. «PlanCrafter»-Schriftzug oben → navigiert immer zur Homepage
+
+##### Workflow 8: Profil & Aktivitäts-Heatmap
+
+1. 👤-Icon in der Topbar antippen (wenn angemeldet) → Profilseite `/profile`
+2. **Contributions-Heatmap:** 52-Wochen-Grid à 7 Tage (ähnlich GitHub/GitLab); Farbintensität zeigt Anzahl Logins pro Tag
+3. Gesamtzahl aller Logins wird angezeigt
+4. «Abmelden»-Button auf der Profilseite
 
 
 #### 3.4.2. Umsetzung (Technik)
 
 - **Technologie-Stack:**
   - **Frontend:** SvelteKit 5 (Svelte 5 Syntax, File-based Routing, SSR via `+page.server.js`)
-  - **Styling:** Bootstrap 5.3.3 (CSS only, eingebunden via CDN in `+layout.svelte`), eigenes Dark-Theme via `app.css` mit CSS-Variablen
+  - **Styling:** Bootstrap 5.3.3 (CSS only, eingebunden via CDN in `+layout.svelte`), Dark/Light-Theme via `app.css` mit CSS-Custom-Properties (`data-theme="light"`-Attribut auf `<html>`), Theme-Persist via `localStorage`
   - **Backend:** SvelteKit Server-Routes (Node.js), MongoDB Node.js Driver v7
   - **Datenbank:** MongoDB Atlas (Cloud, Cluster `Cluster1DM`), Datenbankname `PT_Project_PlanCrafter`
   - **Datenverwaltung lokal:** JSON-Dateien unter `data/` für den manuellen Import via MongoDB Compass
@@ -272,6 +281,9 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   │   ├── logout/
   │   │   ├── +page.svelte       # (leer, nur für Form-Action)
   │   │   └── +page.server.js    # Session löschen, Cookie entfernen
+  │   ├── profile/
+  │   │   ├── +page.svelte       # Profilseite: Avatar, Contributions-Heatmap, Logout-Button
+  │   │   └── +page.server.js    # Load: logins[]; Action logout: Session löschen
   │   ├── plan/
   │   │   ├── +page.svelte       # Draft/Aktiver Plan mit Timer, Abschliessen-Button
   │   │   └── +page.server.js    # Load + saveName / toggleDone / removeExercise / completePlan
@@ -296,12 +308,13 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   Jede Seite besteht aus einem `+page.svelte` (UI) und einem `+page.server.js` (Datenbankzugriff). Die DB-Verbindung wird einmalig in `db.js` aufgebaut und als Singleton gehalten. `planHelper.js` kapselt die geteilte Logik zum Erstellen und Befüllen von Draft-Plänen, damit `exercises/[id]` und `categories/[slug]` keinen duplizierten Code enthalten.
 
 - **Daten & Schnittstellen:**
-  - MongoDB Atlas mit 5 Collections: `categories`, `exercises`, `plans`, `users`, `sessions`
+  - MongoDB Atlas mit 5 Collections: `categories`, `exercises`, `plans`, `users` (inkl. `logins`-Array für Contributions-Tracking), `sessions`
   - `exercises.categoryId` verweist als Slug-String (z. B. `"kraft"`) auf `categories.slug` — bewusst ohne ObjectId-Referenzen, um den manuellen Import zu vereinfachen
   - Alle 65 Übungen sind in `data/exercises.json` als flaches Array gespeichert und wurden via Compass importiert
   - `serialize()` in `db.js` wandelt MongoDB-Dokumente (ObjectId, Date) in JSON-sichere Werte um, bevor sie an SvelteKit-Load-Funktionen zurückgegeben werden
   - **Auth & Sessions:** Passwörter werden mit Node.js-`crypto.scryptSync` + zufälligem Salt gehasht. Sessions werden als zufälliger 32-Byte-Hex-Token in der `sessions`-Collection gespeichert (mit `expiresAt`-Feld, 30 Tage). `hooks.server.js` liest das `session`-Cookie und setzt `event.locals.userId` (Benutzername) und `event.locals.username`; Fallback ist `'demo'` für nicht eingeloggte Nutzer.
-  - **Plan-Datenmodell:** Pläne durchlaufen drei Status: `draft` (noch nicht benannt) → `active` (Workout läuft) → `completed` (Training abgeschlossen, manuell oder automatisch wenn alle Übungen erledigt). Übungsdetails (Name, imageUrl) werden denormalisiert direkt im Plan-Dokument eingebettet, um Joins zu vermeiden.
+  - **Plan-Datenmodell:** Pläne durchlaufen drei Status: `draft` (noch nicht benannt) → `active` (Workout läuft) → `completed` (Training abgeschlossen, manuell oder automatisch wenn alle Übungen erledigt). Übungsdetails (Name, imageUrl) werden denormalisiert direkt im Plan-Dokument eingebettet, um Joins zu vermeiden. Das Feld `bestTimeMs` (Millisekunden) speichert die bisher schnellste abgeschlossene Zeit des Plans.
+  - **Timer:** Clientseitiger Millisekunden-Timer (Intervall 10 ms, Centiseconds-Tracking) mit Format `HH:MM:SS.ms`. Die gemessene Zeit wird beim Plan-Abschliessen als `elapsedMs` über FormData übermittelt und serverseitig in `bestTimeMs` gespeichert (nur wenn besser als bisherige Bestzeit).
   - **Reaktivität:** `use:enhance` (SvelteKit) sendet Form-Actions per Fetch ohne Reload; `update({ reset: false })` löst die Load-Funktion erneut aus, sodass UI-Updates sofort sichtbar sind. Berechnete Werte (`doneCount`, `isActive`) werden mit Svelte-5-`$derived()` reaktiv gehalten
   - **Form Actions** decken alle schreibenden Operationen ab: `addToPlan`, `saveName`, `toggleDone`, `removeExercise`, `restart`, `completePlan`, `activate` — jede in der `+page.server.js` der zugehörigen Route
 
@@ -456,6 +469,55 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus. Alle 9 Erweiterungen 
   - **Frontend:** `loading="lazy"` ergänzt auf allen `<img>`-Tags in: `exercises/+page.svelte`, `exercises/[id]/+page.svelte`, `categories/[slug]/+page.svelte`, `plan/+page.svelte`, `plans/[id]/+page.svelte`, `+page.svelte`
 - **Aus Evaluation abgeleitet?:** Ja, Issue Prio 9 — «Bildgrössen optimieren»
 
+### 4.10 Profilseite mit Contributions-Heatmap
+
+- **Beschreibung & Nutzen:** Jeder Login wird in der `users`-Collection als Timestamp in einem `logins`-Array gespeichert. Die neue Profilseite (`/profile`) zeigt eine 52-Wochen-Aktivitätsgrafik (ähnlich GitHub/GitLab), bei der Farbintensität die Anzahl Logins pro Tag visualisiert. Ausserdem enthält die Seite den «Abmelden»-Button – der 👤-Topbar-Button navigiert nun zur Profilseite statt direkt auszuloggen.
+- **Wo umgesetzt:**
+  - **Frontend:** `profile/+page.svelte` (Contributions-Grid aus `$derived`-berechneten Wochen-/Tag-Daten, 4 Farbstufen: keine/1/2/3+)
+  - **Backend:** `profile/+page.server.js` (Load: lädt `logins`-Array; Action `logout`: Session löschen), `login/+page.server.js` (`$push: { logins: new Date() }` bei erfolgreichem Login), `+layout.svelte` (👤 → `/profile` statt Logout-Form)
+- **Aus Evaluation abgeleitet?:** Post-Evaluation-Erweiterung basierend auf Nutzerfeedback (fehlende User-Identität/Gamification)
+
+### 4.11 Dark / Light Mode Toggle
+
+- **Beschreibung & Nutzen:** Ein ☀️/🌙-Toggle in der Topbar wechselt zwischen dem bisherigen Dark Mode und einem neuen Light Mode. Die Einstellung wird im `localStorage` gespeichert und bereits beim Laden (`app.html` inline `<script>`) angewendet, sodass kein «Flash of unstyled content» entsteht. Alle Farben sind über CSS Custom Properties (`var(--bg-primary)` etc.) in `app.css` definiert; das `data-theme="light"`-Attribut auf `<html>` schaltet die hellen Werte ein.
+- **Wo umgesetzt:**
+  - **Frontend:** `app.html` (inline Theme-Init-Script), `app.css` (`:root` dark + `[data-theme="light"]` light), `+layout.svelte` (Toggle-Button, localStorage-Sync), alle Pages (CSS-Variablen statt Hardcoded-Farben)
+- **Aus Evaluation abgeleitet?:** Post-Evaluation-Erweiterung (Barrierefreiheit, Nutzerpräferenz)
+
+### 4.12 Echtzeit-Suchvorschläge (Autocomplete)
+
+- **Beschreibung & Nutzen:** Beim Tippen in der Topbar-Suche oder im Suchfeld auf `/exercises` erscheint ein Dropdown mit passenden Übungs- und Kategorie-Vorschlägen. Suggestion-Items sind nach Typ (Übung / Kategorie) beschriftet. Anklicken navigiert direkt zum entsprechenden Ergebnis. Die Übungsnamen werden einmalig pro Layout-Load aus MongoDB geladen und danach clientseitig gefiltert.
+- **Wo umgesetzt:**
+  - **Frontend:** `+layout.svelte` (Suggestions-Dropdown im Topbar-Suchfeld), `exercises/+page.svelte` (lokales Suggestions-Dropdown im Seitensuche-Feld)
+  - **Backend:** `+layout.server.js` (gibt `searchData.exercises` und `searchData.categories` zurück — alle Namen/Slugs für clientseitige Filterung)
+- **Aus Evaluation abgeleitet?:** Post-Evaluation-Verbesserung der Suchfunktion (Issue Prio 1)
+
+### 4.13 Explore-Karussell (3 Slides, täglich wechselnd)
+
+- **Beschreibung & Nutzen:** Der Explore-Bereich auf der Homepage wurde von einem statischen 6er-Grid zu einem 3-Slides-Karussell umgebaut. Jeder Slide zeigt 8 Übungen in einem 2 × 4 Grid. Die Auswahl der 24 Übungen ist deterministisch täglich-rotierend (datum-basierter LCG-Seed), sodass das Karussell ohne Datenbankänderung täglich ein anderes Set präsentiert. Swipe-Gesten auf Mobile werden unterstützt.
+- **Wo umgesetzt:**
+  - **Frontend:** `+page.svelte` (Svelte-basiertes Karussell mit `$state(currentSlide)`, Transitions, Dot-Indikatoren, Touch-Events für Swipe)
+  - **Backend:** `+page.server.js` (Seeded-Shuffle-Funktion `seededShuffle()` mit LCG-Algorithmus, Datum als Seed → `carouselSlides` mit 3 × 8 Übungen)
+- **Aus Evaluation abgeleitet?:** Post-Evaluation-Erweiterung (bessere Exploration, Responsive Design)
+
+### 4.14 Plan-Erstellen-Button auf Plans-Seite
+
+- **Beschreibung & Nutzen:** Die Plans-Seite (`/plans`) ist neu zweigeteilt: obere Hälfte mit prominentem «Neuen Plan erstellen»-Button (navigiert zu `/exercises`), untere Hälfte mit «Meine Pläne»-Liste. Damit können Nutzer:innen direkt von der Planliste einen neuen Plan starten, ohne über die Homepage navigieren zu müssen.
+- **Wo umgesetzt:**
+  - **Frontend:** `plans/+page.svelte` (zweisektionstiges Layout mit Create-Button und Plans-Liste)
+- **Aus Evaluation abgeleitet?:** Post-Evaluation-Verbesserung (fehlender direkter Plan-Erstellen-Einstiegspunkt auf Plans-Seite)
+
+### 4.15 Übungskarte vollflächig klickbar + Timer mit Millisekunden + Bestzeit
+
+- **Beschreibung & Nutzen:**
+  - **Vollflächiger Klick:** Im aktiven Workout kann eine Übung durch Antippen überall auf der Karte als erledigt markiert werden — nicht mehr nur über den Kreis-Button. Implementiert durch einen `onclick`-Handler am `<form>`-Element, der `requestSubmit()` auslöst.
+  - **Timer-Format HH:MM:SS.ms:** Der Timer zählt in 10-ms-Schritten und zeigt die Zeit im Format `HH:MM:SS.ms` (Stunden:Minuten:Sekunden.Millisekunden). Der `<input type=hidden name=elapsedMs>` überträgt die gemessene Zeit beim Abschliessen an den Server.
+  - **Bestzeit-Speicherung:** Der Server speichert die Zeit als `bestTimeMs` im Plan-Dokument (nur wenn Verbesserung). Plan-Einträge in Pläne-Listen zeigen die Bestzeit an.
+- **Wo umgesetzt:**
+  - **Frontend:** `plan/+page.svelte`, `plans/[id]/+page.svelte` (vollflächiger Klick, neues Timer-Format, `elapsedMs`-Input)
+  - **Backend:** `plan/+page.server.js`, `plans/[id]/+page.server.js` (Bestzeit-Logik in `completePlan`-Action)
+- **Aus Evaluation abgeleitet?:** Post-Evaluation-Verbesserungen (UX: Klick-Fläche; Feature: Zeittracking)
+
 ## 5. Projektorganisation [Optional]
 Beispiele:
 - **Repository & Struktur:** _[Link; kurze Strukturübersicht]_  
@@ -476,7 +538,8 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
   - **Code:** Umsetzung aller SvelteKit-Routen und Serverlogik (`+page.server.js`, `db.js`, `planHelper.js`) sowie aller Svelte-Komponenten (`+page.svelte`) für sämtliche Seiten der App: Homepage, Exercises-Liste, Übungsdetailseite, Categories-Übersicht, Kategorie-Detailseite, Your Plan (Draft + Active + Completed), Plan-Detailseite, Add-Exercise-Formular
   - **Plan-Feature:** Vollständige Implementierung des Plan-Workflows (Draft → Active → Completed) inkl. `use:enhance`-Pattern für Live-Updates ohne Seitenreload, `$derived()`-Reaktivität in Svelte 5, MongoDB-Positionaloperator für Array-Updates (`exercises.$`) und `$pull` für Array-Elemente entfernen
   - **Debugging:** Behebung des MongoDB-Verbindungsfehlers (`MONGODB_URI` nicht gefunden), Svelte-5-spezifischer Warnungen (reaktive Props-Destrukturierung) sowie Fix fehlender Live-Updates bei Form-Actions (fehlende `use:enhance`-Callbacks)
-  - **Dokumentation:** Verfassen der technischen Abschnitte der Projektdokumentation (3.4.1 Workflows/Testanleitung, 3.4.2 Technik, 6.x) sowie der `CLAUDE.md` Projektregeln
+  - **Post-Evaluation-Erweiterungen:** Implementierung aller 6 neuen Features nach der Usability-Evaluation: Profilseite mit Contributions-Heatmap, Dark/Light-Mode-Toggle (CSS Custom Properties + localStorage), Echtzeit-Suchvorschläge (Autocomplete-Dropdown), Explore-Karussell (datum-seeded LCG-Shuffle, 3 Slides × 8 Übungen, Swipe-Gesten), Plan-Erstellen-Button auf Plans-Seite, Vollflächiger Übungs-Klick + Millisekunden-Timer + Bestzeit-Tracking
+  - **Dokumentation:** Verfassen der technischen Abschnitte der Projektdokumentation (3.4.1 Workflows/Testanleitung, 3.4.2 Technik, 4.x Erweiterungen, 6.x) sowie der `CLAUDE.md` Projektregeln
   - Teile des Codes und der Inhalte stammen aus KI-Unterstützung, wurden jedoch vom Entwickler geprüft, angepasst und in das Projekt integriert.
 - **Eigene Leistung (Abgrenzung):**
   - Eigenständige Konzeption und Definition aller Projektanforderungen (Ausgangslage, Ziele, Zielgruppen)

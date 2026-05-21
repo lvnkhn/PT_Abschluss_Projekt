@@ -123,7 +123,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: #fff;
+    color: var(--text-primary);
     background: none;
     border: none;
     font-size: 1rem;
@@ -140,7 +140,7 @@
     object-fit: cover;
   }
   .hero-placeholder {
-    background: linear-gradient(135deg, #2A2A2A, #3A3A3A);
+    background: var(--placeholder-gradient);
   }
 
   .cat-badge {
@@ -153,13 +153,13 @@
   }
 
   .anatomy-section {
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 16px;
   }
 
   .description {
-    color: #aaa;
+    color: var(--text-dim);
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0;
@@ -168,7 +168,7 @@
   .instructions-title {
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     margin: 0;
   }
 
@@ -186,15 +186,15 @@
   .step-num {
     width: 28px; height: 28px;
     border-radius: 50%;
-    background: #2A2A2A;
-    color: #ccc;
+    background: var(--bg-card);
+    color: var(--text-dim);
     font-size: 0.85rem; font-weight: 600;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
 
   .step-text {
-    color: #ddd;
+    color: var(--text-primary);
     font-size: 0.9rem;
     line-height: 1.5;
     padding-top: 4px;
@@ -208,14 +208,13 @@
     font-weight: 500;
   }
 
-  /* Add section */
   .add-section { position: relative; }
 
   .btn-add {
     width: 100%;
     padding: 14px;
-    background: #fff;
-    color: #111;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
     border: none;
     border-radius: 14px;
     font-size: 1rem;
@@ -225,11 +224,10 @@
   }
   .btn-add.added { background: #14B8A6; color: #fff; }
 
-  /* Plan picker */
   .plan-picker {
     margin-top: 10px;
-    background: #2A2A2A;
-    border: 1px solid #3A3A3A;
+    background: var(--bg-card);
+    border: 1px solid var(--border-1);
     border-radius: 14px;
     padding: 12px;
     display: flex;
@@ -239,7 +237,7 @@
 
   .picker-label {
     font-size: 0.75rem;
-    color: #666;
+    color: var(--text-secondary);
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -247,15 +245,15 @@
 
   .picker-item {
     width: 100%;
-    background: #333;
-    border: 1px solid #444;
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border-1);
     border-radius: 10px;
-    color: #fff;
+    color: var(--text-primary);
     font-size: 0.9rem;
     padding: 10px 14px;
     cursor: pointer;
     text-align: left;
     transition: background 0.15s;
   }
-  .picker-item:hover { background: #3A3A3A; }
+  .picker-item:hover { background: var(--border-1); }
 </style>

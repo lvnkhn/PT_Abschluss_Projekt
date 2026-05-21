@@ -78,10 +78,22 @@ export const actions = {
   completePlan: async ({ request }) => {
     const data = await request.formData();
     const planId = data.get('planId');
+    const elapsedMs = parseInt(data.get('elapsedMs') ?? '0', 10);
     const col = await getCollection('plans');
+
+    const plan = await col.findOne({ _id: new ObjectId(planId) });
+    const updateFields = { status: 'completed', lastCompletedAt: new Date() };
+
+    // Save as best time if better than existing or no previous time
+    if (elapsedMs > 0) {
+      if (!plan.bestTimeMs || elapsedMs < plan.bestTimeMs) {
+        updateFields.bestTimeMs = elapsedMs;
+      }
+    }
+
     await col.updateOne(
       { _id: new ObjectId(planId) },
-      { $set: { status: 'completed', lastCompletedAt: new Date() } }
+      { $set: updateFields }
     );
   },
 };

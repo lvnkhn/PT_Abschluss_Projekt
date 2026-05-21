@@ -45,12 +45,17 @@ export const actions = {
     }
   },
 
-  completePlan: async ({ params }) => {
+  completePlan: async ({ request, params }) => {
+    const data = await request.formData();
+    const elapsedMs = parseInt(data.get('elapsedMs') ?? '0', 10);
     const col = await getCollection('plans');
-    await col.updateOne(
-      { _id: new ObjectId(params.id) },
-      { $set: { status: 'completed', lastCompletedAt: new Date() } }
-    );
+    const id = new ObjectId(params.id);
+    const plan = await col.findOne({ _id: id });
+    const updateFields = { status: 'completed', lastCompletedAt: new Date() };
+    if (elapsedMs > 0 && (!plan.bestTimeMs || elapsedMs < plan.bestTimeMs)) {
+      updateFields.bestTimeMs = elapsedMs;
+    }
+    await col.updateOne({ _id: id }, { $set: updateFields });
     redirect(303, `/plans/${params.id}`);
   },
 };
