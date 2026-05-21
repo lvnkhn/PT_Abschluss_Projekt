@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   function fmtTime(ms) {
@@ -15,11 +16,11 @@
 
   <!-- Top half: Create Plan -->
   <div class="create-section">
-    <h2 class="title">Pläne</h2>
-    <p class="create-desc">Stelle dir aus deinen Übungen einen neuen Trainingsplan zusammen.</p>
+    <h2 class="title">{i18n.t('Pläne', 'Plans')}</h2>
+    <p class="create-desc">{i18n.t('Stelle dir aus deinen Übungen einen neuen Trainingsplan zusammen.', 'Build a new training plan from your exercises.')}</p>
     <a href="/exercises" class="btn-create">
       <span class="btn-icon">➕</span>
-      Neuen Plan erstellen
+      {i18n.t('Neuen Plan erstellen', 'Create new plan')}
     </a>
   </div>
 
@@ -27,12 +28,12 @@
 
   <!-- Bottom half: My Plans -->
   <div class="plans-section">
-    <h3 class="section-title">Meine Pläne</h3>
+    <h3 class="section-title">{i18n.t('Meine Pläne', 'My Plans')}</h3>
 
     {#if data.plans.length === 0}
       <div class="empty">
-        <p>Noch keine Pläne gespeichert.</p>
-        <a href="/exercises" class="empty-link">Übungen hinzufügen →</a>
+        <p>{i18n.t('Noch keine Pläne gespeichert.', 'No plans saved yet.')}</p>
+        <a href="/exercises" class="empty-link">{i18n.t('Übungen hinzufügen →', 'Add exercises →')}</a>
       </div>
     {:else}
       <div class="plan-list">
@@ -42,25 +43,25 @@
               <div class="plan-header">
                 <p class="plan-name">{plan.name}</p>
                 {#if plan.status === 'active'}
-                  <span class="badge-active">Aktiv</span>
+                  <span class="badge-active">{i18n.t('Aktiv', 'Active')}</span>
                 {:else}
                   <span class="badge-done">✓</span>
                 {/if}
               </div>
               <p class="plan-meta">
-                {plan.exercises.length} Übungen ·
+                {plan.exercises.length} {i18n.t('Übungen', 'exercises')} ·
                 {#if plan.lastCompletedAt}
-                  Zuletzt: {new Date(plan.lastCompletedAt).toLocaleDateString('de-CH')}
+                  {i18n.t('Zuletzt:', 'Last:')} {new Date(plan.lastCompletedAt).toLocaleDateString('de-CH')}
                 {:else}
                   {new Date(plan.createdAt).toLocaleDateString('de-CH')}
                 {/if}
                 {#if plan.bestTimeMs}
-                  · Bestzeit: {fmtTime(plan.bestTimeMs)}
+                  · {i18n.t('Bestzeit:', 'Best time:')} {fmtTime(plan.bestTimeMs)}
                 {/if}
               </p>
             </a>
             <div class="plan-actions">
-              <a href="/plans/{plan._id}/edit" class="action-btn edit-btn" title="Bearbeiten">✏️</a>
+              <a href="/plans/{plan._id}/edit" class="action-btn edit-btn" title={i18n.t('Bearbeiten', 'Edit')}>✏️</a>
               <form method="POST" action="?/activate" use:enhance={() => {
                 return async ({ update }) => { await update({ reset: false }); };
               }}>

@@ -1,18 +1,6 @@
 <script>
-  import { goto } from '$app/navigation';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
-
-  let homeSearch = $state('');
-  let showSuggestions = $state(false);
-
-  // Search suggestions from layout data (inherited via $page.data is not available here,
-  // but layout passes searchData via data prop if needed — we use inline filter)
-  function handleSearch(e) {
-    e.preventDefault();
-    if (homeSearch.trim()) {
-      goto(`/exercises?q=${encodeURIComponent(homeSearch.trim())}`);
-    }
-  }
 
   // Carousel
   let currentSlide = $state(0);
@@ -38,19 +26,9 @@
 
 <div class="page">
 
-  <!-- Greeting + Search -->
+  <!-- Greeting -->
   <section class="section">
     <h2 class="greeting">Hi {data.username ?? 'User'} 👋</h2>
-    <form class="search-bar" onsubmit={handleSearch}>
-      <span class="search-icon">🔍</span>
-      <input
-        type="text"
-        bind:value={homeSearch}
-        placeholder="Übungen oder Kategorien suchen…"
-        class="search-input"
-        autocomplete="off"
-      />
-    </form>
   </section>
 
   <!-- Current Workout -->
@@ -59,18 +37,18 @@
       <div class="card">
         <div class="card-body d-flex justify-content-between align-items-center">
           <div>
-            <p class="card-label">Current Workout</p>
+            <p class="card-label">{i18n.t('Aktuelles Training', 'Current Workout')}</p>
             <p class="card-title">{data.activePlan.name}</p>
           </div>
-          <a href="/plan" class="btn btn-sm fw-semibold btn-continue">Continue</a>
+          <a href="/plan" class="btn btn-sm fw-semibold btn-continue">{i18n.t('Weiter', 'Continue')}</a>
         </div>
       </div>
     {:else}
       <div class="card">
         <div class="card-body">
-          <p class="card-label">Current Workout</p>
-          <p class="no-plan">Kein aktiver Plan.</p>
-          <a href="/plans" class="btn btn-sm mt-2 btn-continue">Plan erstellen</a>
+          <p class="card-label">{i18n.t('Aktuelles Training', 'Current Workout')}</p>
+          <p class="no-plan">{i18n.t('Kein aktiver Plan.', 'No active plan.')}</p>
+          <a href="/plans" class="btn btn-sm mt-2 btn-continue">{i18n.t('Plan erstellen', 'Create plan')}</a>
         </div>
       </div>
     {/if}
@@ -80,7 +58,7 @@
   <section class="section">
     <div class="card">
       <div class="card-body">
-        <p class="card-label">My Plans</p>
+        <p class="card-label">{i18n.t('Meine Pläne', 'My Plans')}</p>
         {#each data.plans as plan}
           <a href="/plans/{plan._id}" class="plan-row">
             <div>
@@ -91,16 +69,16 @@
           </a>
         {/each}
         {#if data.plans.length === 0}
-          <p class="text-secondary" style="font-size:0.85rem">Noch keine Pläne.</p>
+          <p class="text-secondary" style="font-size:0.85rem">{i18n.t('Noch keine Pläne.', 'No plans yet.')}</p>
         {/if}
-        <a href="/plans" class="view-all">View all →</a>
+        <a href="/plans" class="view-all">{i18n.t('Alle anzeigen →', 'View all →')}</a>
       </div>
     </div>
   </section>
 
   <!-- Categories -->
   <section class="section">
-    <h3 class="section-title">Categories</h3>
+    <h3 class="section-title">{i18n.t('Kategorien', 'Categories')}</h3>
     <div class="categories-scroll">
       {#each data.categories as cat}
         <a href="/categories/{cat.slug}" class="cat-tile" style="border-color: {cat.color};">
@@ -114,7 +92,7 @@
   <!-- Recommendations -->
   {#if data.recommended.length > 0}
     <section class="section">
-      <h3 class="section-title">Für dich empfohlen</h3>
+      <h3 class="section-title">{i18n.t('Für dich empfohlen', 'Recommended for you')}</h3>
       <div class="explore-grid">
         {#each data.recommended as ex}
           <a href="/exercises/{ex._id}" class="explore-card">
@@ -134,7 +112,7 @@
   {#if slides.length > 0}
     <section class="section">
       <div class="carousel-header">
-        <h3 class="section-title">Explore</h3>
+        <h3 class="section-title">{i18n.t('Entdecken', 'Explore')}</h3>
         <div class="carousel-dots">
           {#each slides as _, i}
             <button
@@ -192,25 +170,6 @@
     color: var(--text-primary);
     margin-bottom: 12px;
   }
-
-  .search-bar {
-    display: flex;
-    align-items: center;
-    background: var(--bg-card);
-    border-radius: 12px;
-    padding: 10px 14px;
-    gap: 10px;
-  }
-  .search-icon { font-size: 1rem; opacity: 0.5; }
-  .search-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text-primary);
-    width: 100%;
-    font-size: 0.95rem;
-  }
-  .search-input::placeholder { color: var(--text-secondary); }
 
   .card { background: var(--bg-card); border: none; border-radius: 14px; }
   .card-body { padding: 16px; }

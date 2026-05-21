@@ -2,6 +2,7 @@
   import { enhance } from '$app/forms';
   import { toast } from '$lib/toast.svelte.js';
   import BodyMap from '$lib/components/BodyMap.svelte';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
   const ex = data.exercise;
   const cat = data.category;
@@ -56,7 +57,7 @@
 
   <!-- Instructions -->
   {#if ex.instructions?.length}
-    <h3 class="instructions-title">Instructions</h3>
+    <h3 class="instructions-title">{i18n.t('Anleitung', 'Instructions')}</h3>
     <ol class="instructions-list">
       {#each ex.instructions as step, i}
         <li class="step">
@@ -70,24 +71,24 @@
   <!-- Reference link -->
   {#if ex.referenceUrl}
     <a href={ex.referenceUrl} target="_blank" rel="noopener noreferrer" class="ref-link">
-      View Reference ↗
+      {i18n.t('Referenz anzeigen ↗', 'View Reference ↗')}
     </a>
   {/if}
 
   <!-- Add to plan -->
   <div class="add-section">
     {#if added}
-      <button type="button" class="btn-add added">✓ Hinzugefügt</button>
+      <button type="button" class="btn-add added">✓ {i18n.t('Hinzugefügt', 'Added')}</button>
     {:else if data.plans.length > 0}
       <button type="button" class="btn-add" onclick={() => openPicker = !openPicker}>
-        {openPicker ? '× Schliessen' : '+ Zu Plan hinzufügen'}
+        {openPicker ? `× ${i18n.t('Schliessen', 'Close')}` : `+ ${i18n.t('Zu Plan hinzufügen', 'Add to plan')}`}
       </button>
       {#if openPicker}
         <div class="plan-picker">
-          <p class="picker-label">Zu welchem Plan?</p>
+          <p class="picker-label">{i18n.t('Zu welchem Plan?', 'Which plan?')}</p>
           <form method="POST" action="?/addToPlan" use:enhance={handleAdd(null)}>
             <input type="hidden" name="exerciseId" value={ex._id} />
-            <button type="submit" class="picker-item">+ Neuer Entwurf</button>
+            <button type="submit" class="picker-item">+ {i18n.t('Neuer Entwurf', 'New draft')}</button>
           </form>
           {#each data.plans as plan}
             <form method="POST" action="?/addToPlan" use:enhance={handleAdd(plan.name)}>
@@ -104,7 +105,7 @@
         return async ({ update }) => { await update(); toast.show(ex.name); };
       }}>
         <input type="hidden" name="exerciseId" value={ex._id} />
-        <button type="submit" class="btn-add">+ Zu Plan hinzufügen</button>
+        <button type="submit" class="btn-add">+ {i18n.t('Zu Plan hinzufügen', 'Add to plan')}</button>
       </form>
     {/if}
   </div>

@@ -1,6 +1,7 @@
 <script>
   import { enhance } from '$app/forms';
   import { onDestroy } from 'svelte';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   const activePlan  = $derived(data.activePlan);
@@ -59,7 +60,7 @@
   <!-- ── Active workout ───────────────────────────── -->
   {#if activePlan}
     <h2 class="title">{activePlan.name}</h2>
-    <p class="subtitle">{doneCount} / {totalCount} erledigt</p>
+    <p class="subtitle">{doneCount} / {totalCount} {i18n.t('erledigt', 'done')}</p>
 
     <div class="progress-bar">
       <div class="progress-fill" style="width: {totalCount > 0 ? (doneCount / totalCount) * 100 : 0}%"></div>
@@ -114,28 +115,28 @@
         <input type="hidden" name="planId" value={activePlan._id} />
         <input type="hidden" name="elapsedMs" value={elapsedMs} />
         <button type="submit" class="btn-complete">
-          Training abschliessen ({doneCount}/{totalCount})
+          {i18n.t('Training abschliessen', 'Complete workout')} ({doneCount}/{totalCount})
         </button>
       </form>
     {/if}
 
   {:else if !draft}
     <div class="empty">
-      <p class="empty-title">Kein aktiver Plan</p>
-      <p class="empty-sub">Erstelle einen neuen Plan oder starte einen gespeicherten.</p>
+      <p class="empty-title">{i18n.t('Kein aktiver Plan', 'No active plan')}</p>
+      <p class="empty-sub">{i18n.t('Erstelle einen neuen Plan oder starte einen gespeicherten.', 'Create a new plan or start a saved one.')}</p>
     </div>
   {/if}
 
   <!-- ── New plan button ───────────────────────────── -->
   {#if !draft}
-    <a href="/exercises" class="btn-new-plan">➕ Neuen Plan erstellen</a>
+    <a href="/exercises" class="btn-new-plan">➕ {i18n.t('Neuen Plan erstellen', 'Create new plan')}</a>
   {/if}
 
   <!-- ── Draft ─────────────────────────────────────── -->
   {#if draft}
     <div class="draft-section" class:has-active={!!activePlan}>
-      <h3 class="draft-title">Plan in Bearbeitung</h3>
-      <p class="subtitle">{draftCount} Übung{draftCount !== 1 ? 'en' : ''} hinzugefügt</p>
+      <h3 class="draft-title">{i18n.t('Plan in Bearbeitung', 'Plan in progress')}</h3>
+      <p class="subtitle">{draftCount} {i18n.t(draftCount !== 1 ? 'Übungen' : 'Übung', draftCount !== 1 ? 'exercises' : 'exercise')} {i18n.t('hinzugefügt', 'added')}</p>
 
       <div class="exercise-list">
         {#each draft.exercises as ex}
@@ -162,26 +163,31 @@
           return async ({ update }) => { await update({ reset: false }); };
         }} class="name-form">
           <input type="hidden" name="planId" value={draft._id} />
-          <input type="text" name="name" placeholder="Plan benennen…" class="name-input" required />
-          <button type="submit" class="btn-save">Speichern</button>
+          <input type="text" name="name" placeholder={i18n.t('Plan benennen…', 'Name your plan…')} class="name-input" required />
+          <button type="submit" class="btn-save">{i18n.t('Speichern', 'Save')}</button>
         </form>
       {/if}
     </div>
   {/if}
 
   <!-- ── Saved plans ───────────────────────────────── -->
-  {#if savedPlans.length > 0}
-    <div class="divider"></div>
-    <h3 class="section-title">Meine Pläne</h3>
+  <div class="divider"></div>
+  <h3 class="section-title">{i18n.t('Meine Pläne', 'My Plans')}</h3>
+  {#if savedPlans.length === 0}
+    <div class="plans-empty">
+      <p>{i18n.t('Noch keine Pläne gespeichert.', 'No plans saved yet.')}</p>
+      <a href="/exercises" class="plans-empty-link">{i18n.t('Übungen hinzufügen →', 'Add exercises →')}</a>
+    </div>
+  {:else}
     <div class="saved-list">
       {#each savedPlans as p}
         <div class="plan-row">
           <a href="/plans/{p._id}" class="plan-info">
             <p class="plan-name">{p.name}</p>
             <p class="plan-meta">
-              {p.exercises.length} Übungen ·
+              {p.exercises.length} {i18n.t('Übungen', 'exercises')} ·
               {#if p.lastCompletedAt}
-                Zuletzt: {new Date(p.lastCompletedAt).toLocaleDateString('de-CH')}
+                {i18n.t('Zuletzt:', 'Last:')} {new Date(p.lastCompletedAt).toLocaleDateString('de-CH')}
               {:else}
                 {new Date(p.createdAt).toLocaleDateString('de-CH')}
               {/if}
@@ -191,12 +197,12 @@
             </p>
           </a>
           <div class="plan-actions">
-            <a href="/plans/{p._id}/edit" class="action-btn edit-btn" title="Bearbeiten">✏️</a>
+            <a href="/plans/{p._id}/edit" class="action-btn edit-btn" title={i18n.t('Bearbeiten', 'Edit')}>✏️</a>
             <form method="POST" action="?/activatePlan" use:enhance={() => {
               return async ({ update }) => { await update({ reset: false }); };
             }}>
               <input type="hidden" name="planId" value={p._id} />
-              <button type="submit" class="action-btn start-btn" title="Starten">▶</button>
+              <button type="submit" class="action-btn start-btn" title={i18n.t('Starten', 'Start')}>▶</button>
             </form>
           </div>
         </div>
@@ -359,16 +365,23 @@
     align-items: center;
     justify-content: center;
     padding: 14px;
-    background: var(--bg-card);
-    border: 1.5px dashed var(--border-2);
+    background: #14B8A6;
+    border: none;
     border-radius: 14px;
-    color: var(--text-secondary);
+    color: #fff;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
+    transition: background 0.2s;
   }
-  .btn-new-plan:hover { border-color: #14B8A6; color: #14B8A6; }
+  .btn-new-plan:hover { background: #0e9087; color: #fff; }
+
+  .plans-empty {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; text-align: center;
+    color: var(--text-secondary); font-size: 0.88rem;
+  }
+  .plans-empty-link { color: #14B8A6; text-decoration: none; font-size: 0.85rem; }
 
   .divider { height: 1px; background: var(--border-1); margin: 4px 0; }
   .section-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin: 0; }

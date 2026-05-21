@@ -2,6 +2,7 @@
   import { enhance } from '$app/forms';
   import { goto } from '$app/navigation';
   import { toast } from '$lib/toast.svelte.js';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   let searchQuery = $state(data.searchQuery ?? '');
@@ -74,7 +75,7 @@
 
 <div class="page">
 
-  <h2 class="title">Exercises</h2>
+  <h2 class="title">{i18n.t('Übungen', 'Exercises')}</h2>
 
   <!-- Search with suggestions -->
   <div class="search-wrapper">
@@ -84,7 +85,7 @@
         type="text"
         bind:value={searchQuery}
         oninput={onSearchInput}
-        placeholder="Übungen oder Kategorien suchen…"
+        placeholder={i18n.t('Übungen oder Kategorien suchen…', 'Search exercises or categories…')}
         class="search-input"
         autocomplete="off"
       />
@@ -98,7 +99,7 @@
           <button type="button" class="suggestion-item" onclick={() => selectSuggestion(s.href)}>
             <span class="s-icon">{s.icon}</span>
             <span class="s-label">{s.label}</span>
-            <span class="s-type">{s.type === 'category' ? 'Kategorie' : 'Übung'}</span>
+            <span class="s-type">{s.type === 'category' ? i18n.t('Kategorie', 'Category') : i18n.t('Übung', 'Exercise')}</span>
           </button>
         {/each}
       </div>
@@ -118,7 +119,7 @@
   </div>
 
   {#if filteredExercises.length === 0}
-    <p class="empty-hint">Keine Übungen gefunden.</p>
+    <p class="empty-hint">{i18n.t('Keine Übungen gefunden.', 'No exercises found.')}</p>
   {:else}
     <div class="exercise-list">
       {#each filteredExercises as ex}
@@ -147,10 +148,10 @@
               </button>
               {#if openPicker === ex._id}
                 <div class="plan-picker">
-                  <p class="picker-label">Zu Plan hinzufügen:</p>
+                  <p class="picker-label">{i18n.t('Zu Plan hinzufügen:', 'Add to plan:')}</p>
                   <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, null)}>
                     <input type="hidden" name="exerciseId" value={ex._id} />
-                    <button type="submit" class="picker-item">+ Neuer Entwurf</button>
+                    <button type="submit" class="picker-item">+ {i18n.t('Neuer Entwurf', 'New draft')}</button>
                   </form>
                   {#each data.plans as plan}
                     <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, plan.name)}>

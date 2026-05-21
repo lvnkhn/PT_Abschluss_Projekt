@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   // Build 52-week contribution grid (364 days + today)
@@ -72,14 +73,14 @@
     </div>
     <div>
       <h2 class="username">{data.username}</h2>
-      <p class="stats">{totalLogins} Login{totalLogins !== 1 ? 's' : ''} gesamt</p>
+      <p class="stats">{totalLogins} Login{totalLogins !== 1 ? 's' : ''} {i18n.t('gesamt', 'total')}</p>
     </div>
   </div>
 
   <!-- Contribution Map -->
   <div class="contribution-section">
-    <h3 class="section-title">Aktivität</h3>
-    <p class="sub">{totalLogins} Einloggen in den letzten 52 Wochen</p>
+    <h3 class="section-title">{i18n.t('Aktivität', 'Activity')}</h3>
+    <p class="sub">{totalLogins} {i18n.t('Einloggen in den letzten 52 Wochen', 'logins in the last 52 weeks')}</p>
 
     <div class="grid-wrapper">
       <!-- Month labels -->
@@ -119,19 +120,19 @@
 
     <!-- Legend -->
     <div class="legend">
-      <span class="legend-label">Weniger</span>
+      <span class="legend-label">{i18n.t('Weniger', 'Less')}</span>
       <div class="legend-cell" style="background: var(--bg-card-alt)"></div>
       <div class="legend-cell" style="background: #0d4f46"></div>
       <div class="legend-cell" style="background: #0e7a6d"></div>
       <div class="legend-cell" style="background: #11a89a"></div>
       <div class="legend-cell" style="background: #14B8A6"></div>
-      <span class="legend-label">Mehr</span>
+      <span class="legend-label">{i18n.t('Mehr', 'More')}</span>
     </div>
   </div>
 
   <!-- Logout -->
   <form method="POST" action="?/logout" use:enhance>
-    <button type="submit" class="btn-logout">Abmelden</button>
+    <button type="submit" class="btn-logout">{i18n.t('Abmelden', 'Sign out')}</button>
   </form>
 
 </div>

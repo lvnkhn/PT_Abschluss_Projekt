@@ -1,6 +1,7 @@
 <script>
   import { enhance } from '$app/forms';
   import { toast } from '$lib/toast.svelte.js';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
   const cat = data.category;
 
@@ -27,7 +28,7 @@
 
   <!-- Back -->
   <a href="/categories" class="back-btn">
-    <span class="back-arrow">‹</span> Categories
+    <span class="back-arrow">‹</span> {i18n.t('Kategorien', 'Categories')}
   </a>
 
   <!-- Header -->
@@ -68,10 +69,10 @@
             </button>
             {#if openPicker === ex._id}
               <div class="plan-picker">
-                <p class="picker-label">Zu Plan:</p>
+                <p class="picker-label">{i18n.t('Zu Plan:', 'To plan:')}</p>
                 <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, null)}>
                   <input type="hidden" name="exerciseId" value={ex._id} />
-                  <button type="submit" class="picker-item">+ Neuer Entwurf</button>
+                  <button type="submit" class="picker-item">+ {i18n.t('Neuer Entwurf', 'New draft')}</button>
                 </form>
                 {#each data.plans as plan}
                   <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, plan.name)}>

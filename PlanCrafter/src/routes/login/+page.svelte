@@ -1,4 +1,5 @@
 <script>
+  import { i18n } from '$lib/i18n.svelte.js';
   let { form } = $props();
 </script>
 
@@ -11,21 +12,21 @@
 
   <form method="POST" class="auth-form">
     <div class="field">
-      <label for="username">Benutzername</label>
+      <label for="username">{i18n.t('Benutzername', 'Username')}</label>
       <input type="text" id="username" name="username" required class="input" autocomplete="username" />
     </div>
     <div class="field">
-      <label for="password">Passwort</label>
+      <label for="password">{i18n.t('Passwort', 'Password')}</label>
       <input type="password" id="password" name="password" required class="input" autocomplete="current-password" />
     </div>
-    <button type="submit" class="btn-submit">Anmelden</button>
+    <button type="submit" class="btn-submit">{i18n.t('Anmelden', 'Sign in')}</button>
   </form>
 
   <p class="alt-link">
-    Noch kein Konto? <a href="/register">Registrieren</a>
+    {i18n.t('Noch kein Konto?', 'No account yet?')} <a href="/register">{i18n.t('Registrieren', 'Register')}</a>
   </p>
   <p class="alt-link">
-    <a href="/">Ohne Konto fortfahren (Demo)</a>
+    <a href="/">{i18n.t('Ohne Konto fortfahren (Demo)', 'Continue without account (Demo)')}</a>
   </p>
 </div>
 

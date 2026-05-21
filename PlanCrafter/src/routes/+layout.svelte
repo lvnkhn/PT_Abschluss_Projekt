@@ -13,15 +13,16 @@
   import { goto } from '$app/navigation';
   import { browser } from '$app/environment';
   import { toast } from '$lib/toast.svelte.js';
+  import { i18n } from '$lib/i18n.svelte.js';
 
   let { children, data } = $props();
 
   const tabs = [
-    { label: 'Home',       href: '/',             icon: '🏠' },
-    { label: 'Exercises',  href: '/exercises',    icon: '🏋️' },
-    { label: 'Your Plan',  href: '/plan',          icon: '📋' },
-    { label: 'Categories', href: '/categories',   icon: '📦' },
-    { label: 'Add',        href: '/add-exercise',  icon: '➕' },
+    { labelDe: 'Home',        labelEn: 'Home',        href: '/',            icon: '🏠' },
+    { labelDe: 'Exercises',   labelEn: 'Exercises',   href: '/exercises',   icon: '🏋️' },
+    { labelDe: 'Your Plan',   labelEn: 'Your Plan',   href: '/plan',        icon: '📋' },
+    { labelDe: 'Categories',  labelEn: 'Categories',  href: '/categories',  icon: '📦' },
+    { labelDe: 'Hinzufügen',  labelEn: 'Add',         href: '/add-exercise', icon: '➕' },
   ];
 
   function isActive(href) {
@@ -50,6 +51,8 @@
     });
     return results.slice(0, 8);
   });
+
+  function toggleLang() { i18n.toggle(); }
 
   function handleSearch(e) {
     e.preventDefault();
@@ -112,7 +115,7 @@
           type="text"
           bind:value={searchValue}
           oninput={onSearchInput}
-          placeholder="Übungen oder Kategorien suchen…"
+          placeholder={i18n.t('Übungen oder Kategorien suchen…', 'Search exercises or categories…')}
           class="search-topbar-input"
           autofocus
           autocomplete="off"
@@ -125,7 +128,7 @@
             <button type="button" class="suggestion-item" onclick={() => selectSuggestion(s.href)}>
               <span class="suggestion-icon">{s.icon}</span>
               <span class="suggestion-label">{s.label}</span>
-              <span class="suggestion-type">{s.type === 'category' ? 'Kategorie' : 'Übung'}</span>
+              <span class="suggestion-type">{s.type === 'category' ? i18n.t('Kategorie', 'Category') : i18n.t('Übung', 'Exercise')}</span>
             </button>
           {/each}
         </div>
@@ -133,19 +136,27 @@
     {:else}
       <a href="/" class="app-name">PlanCrafter</a>
       <div class="topbar-icons">
-        <button class="icon-btn" onclick={openSearch} title="Suchen" aria-label="Suchen">🔍</button>
+        <button class="icon-btn" onclick={openSearch} title={i18n.t('Suchen', 'Search')} aria-label={i18n.t('Suchen', 'Search')}>🔍</button>
+        <button
+          class="lang-toggle"
+          onclick={toggleLang}
+          title={i18n.t('English', 'Deutsch')}
+          aria-label="Sprache / Language"
+        >
+          {i18n.lang === 'de' ? 'EN' : 'DE'}
+        </button>
         <button
           class="theme-toggle"
           onclick={toggleTheme}
-          title={isDark ? 'Helles Design' : 'Dunkles Design'}
+          title={isDark ? i18n.t('Helles Design', 'Light mode') : i18n.t('Dunkles Design', 'Dark mode')}
           aria-label="Theme wechseln"
         >
           {isDark ? '☀️' : '🌙'}
         </button>
         {#if data.username}
-          <a href="/profile" class="icon-btn" title="Profil" aria-label="Profil">👤</a>
+          <a href="/profile" class="icon-btn" title={i18n.t('Profil', 'Profile')} aria-label={i18n.t('Profil', 'Profile')}>👤</a>
         {:else}
-          <a href="/login" class="icon-btn login-link" title="Anmelden">Anmelden</a>
+          <a href="/login" class="icon-btn login-link" title={i18n.t('Anmelden', 'Sign in')}>{i18n.t('Anmelden', 'Sign in')}</a>
         {/if}
       </div>
     {/if}
@@ -162,7 +173,7 @@
     <span class="toast-check">✓</span>
     <div class="toast-body">
       <p class="toast-name">{toast.message}</p>
-      <a href="/plan" class="toast-link" onclick={() => toast.dismiss()}>Zum Plan →</a>
+      <a href="/plan" class="toast-link" onclick={() => toast.dismiss()}>{i18n.t('Zum Plan →', 'To plan →')}</a>
     </div>
     <button class="toast-close" onclick={() => toast.dismiss()}>✕</button>
   </div>
@@ -172,7 +183,7 @@
   {#each tabs as tab}
     <a href={tab.href} class="tab" class:active={isActive(tab.href)}>
       <span class="tab-icon">{tab.icon}</span>
-      <span class="tab-label">{tab.label}</span>
+      <span class="tab-label">{i18n.t(tab.labelDe, tab.labelEn)}</span>
     </a>
   {/each}
 </nav>
@@ -222,6 +233,20 @@
     border-radius: 20px;
     padding: 4px 12px;
   }
+
+  .lang-toggle {
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border-2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 3px 7px;
+    letter-spacing: 0.05em;
+    transition: background 0.15s;
+  }
+  .lang-toggle:hover { background: var(--border-1); }
 
   .theme-toggle {
     background: none;

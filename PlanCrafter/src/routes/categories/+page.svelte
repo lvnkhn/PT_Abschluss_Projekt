@@ -1,4 +1,5 @@
 <script>
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   let searchQuery = $state('');
@@ -12,7 +13,7 @@
 
 <div class="page">
 
-  <h2 class="title">Categories</h2>
+  <h2 class="title">{i18n.t('Kategorien', 'Categories')}</h2>
 
   <!-- Search -->
   <div class="search-bar">
@@ -20,7 +21,7 @@
     <input
       type="text"
       bind:value={searchQuery}
-      placeholder="Kategorie suchen…"
+      placeholder={i18n.t('Kategorie suchen…', 'Search categories…')}
       class="search-input"
     />
     {#if searchQuery}
@@ -40,7 +41,7 @@
       </a>
     {/each}
     {#if filteredCategories.length === 0}
-      <p class="empty-hint">Keine Kategorie gefunden.</p>
+      <p class="empty-hint">{i18n.t('Keine Kategorie gefunden.', 'No category found.')}</p>
     {/if}
   </div>
 

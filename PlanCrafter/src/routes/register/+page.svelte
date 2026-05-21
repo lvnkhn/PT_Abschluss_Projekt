@@ -1,9 +1,10 @@
 <script>
+  import { i18n } from '$lib/i18n.svelte.js';
   let { form } = $props();
 </script>
 
 <div class="page">
-  <h2 class="title">Registrieren</h2>
+  <h2 class="title">{i18n.t('Registrieren', 'Register')}</h2>
 
   {#if form?.error}
     <p class="error">{form.error}</p>
@@ -11,22 +12,22 @@
 
   <form method="POST" class="auth-form">
     <div class="field">
-      <label for="username">Benutzername</label>
+      <label for="username">{i18n.t('Benutzername', 'Username')}</label>
       <input type="text" id="username" name="username" required class="input" autocomplete="username" />
     </div>
     <div class="field">
-      <label for="password">Passwort</label>
+      <label for="password">{i18n.t('Passwort', 'Password')}</label>
       <input type="password" id="password" name="password" required class="input" autocomplete="new-password" />
     </div>
     <div class="field">
-      <label for="confirm">Passwort bestätigen</label>
+      <label for="confirm">{i18n.t('Passwort bestätigen', 'Confirm password')}</label>
       <input type="password" id="confirm" name="confirm" required class="input" autocomplete="new-password" />
     </div>
-    <button type="submit" class="btn-submit">Konto erstellen</button>
+    <button type="submit" class="btn-submit">{i18n.t('Konto erstellen', 'Create account')}</button>
   </form>
 
   <p class="alt-link">
-    Bereits ein Konto? <a href="/login">Anmelden</a>
+    {i18n.t('Bereits ein Konto?', 'Already have an account?')} <a href="/login">{i18n.t('Anmelden', 'Sign in')}</a>
   </p>
 </div>
 

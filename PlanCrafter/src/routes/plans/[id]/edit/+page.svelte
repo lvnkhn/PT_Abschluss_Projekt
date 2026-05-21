@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   const plan = $derived(data.plan);
@@ -16,10 +17,10 @@
 <div class="page">
 
   <button onclick={() => history.back()} class="back-btn">
-    <span class="back-arrow">‹</span> Zurück
+    <span class="back-arrow">‹</span> {i18n.t('Zurück', 'Back')}
   </button>
 
-  <h2 class="title">Plan bearbeiten</h2>
+  <h2 class="title">{i18n.t('Plan bearbeiten', 'Edit plan')}</h2>
 
   <!-- Rename -->
   <form method="POST" action="?/rename" use:enhance={() => {
@@ -29,17 +30,17 @@
       type="text"
       name="name"
       value={plan.name}
-      placeholder="Plan benennen…"
+      placeholder={i18n.t('Plan benennen…', 'Name your plan…')}
       class="name-input"
       required
     />
-    <button type="submit" class="btn-save">Umbenennen</button>
+    <button type="submit" class="btn-save">{i18n.t('Umbenennen', 'Rename')}</button>
   </form>
 
   <!-- Current exercises -->
-  <h3 class="section-title">Aktuelle Übungen ({plan.exercises.length})</h3>
+  <h3 class="section-title">{i18n.t('Aktuelle Übungen', 'Current exercises')} ({plan.exercises.length})</h3>
   {#if plan.exercises.length === 0}
-    <p class="empty-hint">Noch keine Übungen im Plan.</p>
+    <p class="empty-hint">{i18n.t('Noch keine Übungen im Plan.', 'No exercises in plan yet.')}</p>
   {:else}
     <div class="exercise-list">
       {#each plan.exercises as ex}
@@ -62,7 +63,7 @@
   {/if}
 
   <!-- Add exercises -->
-  <h3 class="section-title">Übungen hinzufügen</h3>
+  <h3 class="section-title">{i18n.t('Übungen hinzufügen', 'Add exercises')}</h3>
   {#each byCategory as cat}
     <div class="cat-group">
       <p class="cat-label" style="color: {cat.color};">{cat.icon} {cat.name}</p>
