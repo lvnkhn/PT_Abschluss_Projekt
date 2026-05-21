@@ -57,6 +57,11 @@
 
 <div class="page">
 
+  <!-- ── Create plan button (always visible when not mid-workout) ── -->
+  {#if !activePlan}
+    <a href="/exercises" class="btn-new-plan">➕ {i18n.t('Neuen Plan erstellen', 'Create new plan')}</a>
+  {/if}
+
   <!-- ── Active workout ───────────────────────────── -->
   {#if activePlan}
     <h2 class="title">{activePlan.name}</h2>
@@ -120,16 +125,6 @@
       </form>
     {/if}
 
-  {:else if !draft}
-    <div class="empty">
-      <p class="empty-title">{i18n.t('Kein aktiver Plan', 'No active plan')}</p>
-      <p class="empty-sub">{i18n.t('Erstelle einen neuen Plan oder starte einen gespeicherten.', 'Create a new plan or start a saved one.')}</p>
-    </div>
-  {/if}
-
-  <!-- ── New plan button ───────────────────────────── -->
-  {#if !draft}
-    <a href="/exercises" class="btn-new-plan">➕ {i18n.t('Neuen Plan erstellen', 'Create new plan')}</a>
   {/if}
 
   <!-- ── Draft ─────────────────────────────────────── -->
@@ -352,13 +347,6 @@
     padding: 12px 20px; background: var(--btn-primary-bg); color: var(--btn-primary-color);
     border: none; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
   }
-
-  .empty {
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 10px; margin-top: 80px; text-align: center;
-  }
-  .empty-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0; }
-  .empty-sub { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
 
   .btn-new-plan {
     display: flex;
