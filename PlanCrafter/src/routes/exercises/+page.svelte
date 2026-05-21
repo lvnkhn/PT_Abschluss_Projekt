@@ -1,11 +1,31 @@
 <script>
   import { enhance } from '$app/forms';
+  import { goto } from '$app/navigation';
   import { toast } from '$lib/toast.svelte.js';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   let searchQuery = $state(data.searchQuery ?? '');
   let added = $state({});
   let openPicker = $state(null);
+  let showSuggestions = $state(false);
+
+  // Suggestions from layout's searchData
+  const suggestions = $derived(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return [];
+    const exercises = data.exercises ?? [];
+    const categories = data.categories ?? [];
+    const results = [];
+
+    categories.filter(c => c.name.toLowerCase().includes(q)).slice(0, 3).forEach(c => {
+      results.push({ type: 'category', label: c.name, href: `/exercises?category=${c.slug}`, icon: '📦' });
+    });
+    exercises.filter(e => e.name.toLowerCase().includes(q)).slice(0, 5).forEach(e => {
+      results.push({ type: 'exercise', label: e.name, href: `/exercises/${e._id}`, icon: '🏋️' });
+    });
+    return results.slice(0, 7);
+  });
 
   const filteredExercises = $derived(
     searchQuery.trim()
@@ -37,23 +57,52 @@
       };
     };
   }
+
+  function onSearchInput() {
+    showSuggestions = searchQuery.trim().length > 0;
+  }
+
+  function selectSuggestion(href) {
+    showSuggestions = false;
+    goto(href);
+  }
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    showSuggestions = false;
+  }
 </script>
 
 <div class="page">
 
-  <h2 class="title">Exercises</h2>
+  <h2 class="title">{i18n.t('Übungen', 'Exercises')}</h2>
 
-  <!-- Search -->
-  <div class="search-bar">
-    <span class="search-icon">🔍</span>
-    <input
-      type="text"
-      bind:value={searchQuery}
-      placeholder="Übungen suchen…"
-      class="search-input"
-    />
-    {#if searchQuery}
-      <button class="clear-btn" onclick={() => searchQuery = ''}>✕</button>
+  <!-- Search with suggestions -->
+  <div class="search-wrapper">
+    <form class="search-bar" onsubmit={handleSearchSubmit}>
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        bind:value={searchQuery}
+        oninput={onSearchInput}
+        placeholder={i18n.t('Übungen oder Kategorien suchen…', 'Search exercises or categories…')}
+        class="search-input"
+        autocomplete="off"
+      />
+      {#if searchQuery}
+        <button class="clear-btn" onclick={() => { searchQuery = ''; showSuggestions = false; }}>✕</button>
+      {/if}
+    </form>
+    {#if showSuggestions && suggestions().length > 0}
+      <div class="suggestions-dropdown">
+        {#each suggestions() as s}
+          <button type="button" class="suggestion-item" onclick={() => selectSuggestion(s.href)}>
+            <span class="s-icon">{s.icon}</span>
+            <span class="s-label">{s.label}</span>
+            <span class="s-type">{s.type === 'category' ? i18n.t('Kategorie', 'Category') : i18n.t('Übung', 'Exercise')}</span>
+          </button>
+        {/each}
+      </div>
     {/if}
   </div>
 
@@ -70,9 +119,8 @@
   </div>
 
   {#if filteredExercises.length === 0}
-    <p class="empty-hint">Keine Übungen gefunden.</p>
+    <p class="empty-hint">{i18n.t('Keine Übungen gefunden.', 'No exercises found.')}</p>
   {:else}
-    <!-- Exercise list -->
     <div class="exercise-list">
       {#each filteredExercises as ex}
         <div class="ex-card">
@@ -91,7 +139,6 @@
             </div>
           </a>
 
-          <!-- Add to plan button / picker -->
           <div class="add-section">
             {#if added[ex._id]}
               <button type="button" class="add-btn added">✓</button>
@@ -101,10 +148,10 @@
               </button>
               {#if openPicker === ex._id}
                 <div class="plan-picker">
-                  <p class="picker-label">Zu Plan hinzufügen:</p>
+                  <p class="picker-label">{i18n.t('Zu Plan hinzufügen:', 'Add to plan:')}</p>
                   <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, null)}>
                     <input type="hidden" name="exerciseId" value={ex._id} />
-                    <button type="submit" class="picker-item">+ Neuer Entwurf</button>
+                    <button type="submit" class="picker-item">+ {i18n.t('Neuer Entwurf', 'New draft')}</button>
                   </form>
                   {#each data.plans as plan}
                     <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, plan.name)}>
@@ -138,30 +185,62 @@
   .title {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-primary);
     margin-bottom: 14px;
   }
 
-  /* Search */
+  /* Search wrapper for suggestions */
+  .search-wrapper {
+    position: relative;
+    margin-bottom: 14px;
+  }
+
   .search-bar {
     display: flex;
     align-items: center;
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 10px 14px;
     gap: 10px;
-    margin-bottom: 14px;
   }
   .search-icon { font-size: 1rem; opacity: 0.5; }
   .search-input {
     background: transparent; border: none; outline: none;
-    color: #fff; width: 100%; font-size: 0.95rem;
+    color: var(--text-primary); width: 100%; font-size: 0.95rem;
   }
-  .search-input::placeholder { color: #666; }
+  .search-input::placeholder { color: var(--text-secondary); }
   .clear-btn {
-    background: none; border: none; color: #666;
+    background: none; border: none; color: var(--text-secondary);
     font-size: 0.85rem; cursor: pointer; flex-shrink: 0;
   }
+
+  /* Suggestions */
+  .suggestions-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-1);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 20px var(--shadow);
+  }
+
+  .suggestion-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px;
+    background: none; border: none; border-bottom: 1px solid var(--border-1);
+    cursor: pointer; text-align: left; color: var(--text-primary); width: 100%;
+  }
+  .suggestion-item:last-child { border-bottom: none; }
+  .suggestion-item:hover { background: var(--bg-card-alt); }
+
+  .s-icon { font-size: 0.95rem; flex-shrink: 0; }
+  .s-label { flex: 1; font-size: 0.88rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s-type { font-size: 0.7rem; color: var(--text-secondary); flex-shrink: 0; }
 
   /* Filter chips */
   .filter-scroll {
@@ -177,24 +256,23 @@
     flex-shrink: 0;
     padding: 7px 16px;
     border-radius: 20px;
-    background: #2A2A2A;
-    color: #aaa;
+    background: var(--bg-card);
+    color: var(--text-secondary);
     font-size: 0.85rem;
     font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
   }
-  .chip.active { background: #fff; color: #111; }
+  .chip.active { background: var(--chip-active-bg); color: var(--chip-active-color); }
 
-  .empty-hint { color: #666; font-size: 0.9rem; margin-top: 20px; text-align: center; }
+  .empty-hint { color: var(--text-secondary); font-size: 0.9rem; margin-top: 20px; text-align: center; }
 
-  /* Exercise cards */
   .exercise-list { display: flex; flex-direction: column; gap: 10px; }
 
   .ex-card {
     display: flex;
     align-items: center;
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 12px;
     gap: 12px;
@@ -213,11 +291,11 @@
     width: 72px; height: 72px;
     border-radius: 10px; object-fit: cover; flex-shrink: 0;
   }
-  .ex-placeholder { background: linear-gradient(135deg, #333, #444); }
+  .ex-placeholder { background: var(--placeholder-gradient); }
 
   .ex-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 
-  .ex-name { font-size: 1rem; font-weight: 600; color: #fff; margin: 0; }
+  .ex-name { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 0; }
 
   .ex-badge {
     display: inline-block; font-size: 0.72rem; font-weight: 600;
@@ -225,29 +303,27 @@
   }
 
   .ex-desc {
-    font-size: 0.8rem; color: #888; margin: 0;
+    font-size: 0.8rem; color: var(--text-secondary); margin: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
-  /* Add section */
   .add-section { position: relative; flex-shrink: 0; }
 
   .add-btn {
     width: 40px; height: 40px; border-radius: 10px;
-    background: #fff; color: #111; border: none;
+    background: var(--btn-primary-bg); color: var(--btn-primary-color); border: none;
     font-size: 1.4rem; font-weight: 300; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.2s;
   }
   .add-btn.added { background: #14B8A6; color: #fff; font-size: 1rem; }
 
-  /* Plan picker */
   .plan-picker {
     position: absolute;
     right: 0;
     top: 46px;
-    background: #1E1E1E;
-    border: 1px solid #3A3A3A;
+    background: var(--bg-card);
+    border: 1px solid var(--border-1);
     border-radius: 12px;
     padding: 10px;
     z-index: 100;
@@ -255,12 +331,12 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 24px var(--shadow);
   }
 
   .picker-label {
     font-size: 0.72rem;
-    color: #666;
+    color: var(--text-secondary);
     margin: 0 0 2px;
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -268,15 +344,15 @@
 
   .picker-item {
     width: 100%;
-    background: #2A2A2A;
-    border: 1px solid #444;
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border-1);
     border-radius: 8px;
-    color: #fff;
+    color: var(--text-primary);
     font-size: 0.85rem;
     padding: 8px 12px;
     cursor: pointer;
     text-align: left;
     transition: background 0.15s;
   }
-  .picker-item:hover { background: #333; }
+  .picker-item:hover { background: var(--border-1); }
 </style>

@@ -1,4 +1,5 @@
 <script>
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   let searchQuery = $state('');
@@ -12,7 +13,7 @@
 
 <div class="page">
 
-  <h2 class="title">Categories</h2>
+  <h2 class="title">{i18n.t('Kategorien', 'Categories')}</h2>
 
   <!-- Search -->
   <div class="search-bar">
@@ -20,7 +21,7 @@
     <input
       type="text"
       bind:value={searchQuery}
-      placeholder="Kategorie suchen…"
+      placeholder={i18n.t('Kategorie suchen…', 'Search categories…')}
       class="search-input"
     />
     {#if searchQuery}
@@ -40,7 +41,7 @@
       </a>
     {/each}
     {#if filteredCategories.length === 0}
-      <p class="empty-hint">Keine Kategorie gefunden.</p>
+      <p class="empty-hint">{i18n.t('Keine Kategorie gefunden.', 'No category found.')}</p>
     {/if}
   </div>
 
@@ -52,15 +53,14 @@
   .title {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-primary);
     margin-bottom: 14px;
   }
 
-  /* Search */
   .search-bar {
     display: flex;
     align-items: center;
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 10px 14px;
     gap: 10px;
@@ -69,11 +69,11 @@
   .search-icon { font-size: 1rem; opacity: 0.5; }
   .search-input {
     background: transparent; border: none; outline: none;
-    color: #fff; width: 100%; font-size: 0.95rem;
+    color: var(--text-primary); width: 100%; font-size: 0.95rem;
   }
-  .search-input::placeholder { color: #666; }
+  .search-input::placeholder { color: var(--text-secondary); }
   .clear-btn {
-    background: none; border: none; color: #666;
+    background: none; border: none; color: var(--text-secondary);
     font-size: 0.85rem; cursor: pointer;
   }
 
@@ -83,7 +83,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 16px;
     border-left: 4px solid;
@@ -92,9 +92,9 @@
 
   .cat-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
   .cat-info { flex: 1; }
-  .cat-name { font-size: 1rem; font-weight: 700; color: #fff; margin: 0; }
-  .cat-count { font-size: 0.8rem; color: #888; margin: 2px 0 0; }
-  .arrow { color: #555; font-size: 1.4rem; }
+  .cat-name { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+  .cat-count { font-size: 0.8rem; color: var(--text-secondary); margin: 2px 0 0; }
+  .arrow { color: var(--text-secondary); font-size: 1.4rem; }
 
-  .empty-hint { color: #666; font-size: 0.9rem; text-align: center; margin-top: 20px; }
+  .empty-hint { color: var(--text-secondary); font-size: 0.9rem; text-align: center; margin-top: 20px; }
 </style>

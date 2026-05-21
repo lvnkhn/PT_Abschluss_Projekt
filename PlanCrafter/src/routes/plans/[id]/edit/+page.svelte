@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
 
   const plan = $derived(data.plan);
@@ -16,10 +17,10 @@
 <div class="page">
 
   <button onclick={() => history.back()} class="back-btn">
-    <span class="back-arrow">‹</span> Zurück
+    <span class="back-arrow">‹</span> {i18n.t('Zurück', 'Back')}
   </button>
 
-  <h2 class="title">Plan bearbeiten</h2>
+  <h2 class="title">{i18n.t('Plan bearbeiten', 'Edit plan')}</h2>
 
   <!-- Rename -->
   <form method="POST" action="?/rename" use:enhance={() => {
@@ -29,17 +30,17 @@
       type="text"
       name="name"
       value={plan.name}
-      placeholder="Plan benennen…"
+      placeholder={i18n.t('Plan benennen…', 'Name your plan…')}
       class="name-input"
       required
     />
-    <button type="submit" class="btn-save">Umbenennen</button>
+    <button type="submit" class="btn-save">{i18n.t('Umbenennen', 'Rename')}</button>
   </form>
 
   <!-- Current exercises -->
-  <h3 class="section-title">Aktuelle Übungen ({plan.exercises.length})</h3>
+  <h3 class="section-title">{i18n.t('Aktuelle Übungen', 'Current exercises')} ({plan.exercises.length})</h3>
   {#if plan.exercises.length === 0}
-    <p class="empty-hint">Noch keine Übungen im Plan.</p>
+    <p class="empty-hint">{i18n.t('Noch keine Übungen im Plan.', 'No exercises in plan yet.')}</p>
   {:else}
     <div class="exercise-list">
       {#each plan.exercises as ex}
@@ -62,7 +63,7 @@
   {/if}
 
   <!-- Add exercises -->
-  <h3 class="section-title">Übungen hinzufügen</h3>
+  <h3 class="section-title">{i18n.t('Übungen hinzufügen', 'Add exercises')}</h3>
   {#each byCategory as cat}
     <div class="cat-group">
       <p class="cat-label" style="color: {cat.color};">{cat.icon} {cat.name}</p>
@@ -104,51 +105,51 @@
 
   .back-btn {
     display: flex; align-items: center; gap: 4px;
-    color: #fff; background: none; border: none;
+    color: var(--text-primary); background: none; border: none;
     font-size: 1rem; font-weight: 600; cursor: pointer; padding: 0;
   }
   .back-arrow { font-size: 1.4rem; line-height: 1; }
 
-  .title { font-size: 1.4rem; font-weight: 700; color: #fff; margin: 0; }
+  .title { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin: 0; }
 
   .name-form { display: flex; gap: 10px; }
   .name-input {
     flex: 1;
-    background: #2A2A2A; border: 1px solid #444; border-radius: 12px;
-    padding: 12px 14px; color: #fff; font-size: 0.95rem; outline: none;
+    background: var(--bg-input); border: 1px solid var(--border-2); border-radius: 12px;
+    padding: 12px 14px; color: var(--text-primary); font-size: 0.95rem; outline: none;
   }
-  .name-input::placeholder { color: #555; }
+  .name-input::placeholder { color: var(--text-secondary); }
   .btn-save {
-    padding: 12px 16px; background: #fff; color: #111;
+    padding: 12px 16px; background: var(--btn-primary-bg); color: var(--btn-primary-color);
     border: none; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer;
     white-space: nowrap;
   }
 
-  .section-title { font-size: 1rem; font-weight: 700; color: #fff; margin: 0; }
-  .empty-hint { color: #666; font-size: 0.85rem; margin: 0; }
+  .section-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+  .empty-hint { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
 
   .exercise-list { display: flex; flex-direction: column; gap: 8px; }
 
   .ex-card {
     display: flex; align-items: center; gap: 12px;
-    background: #2A2A2A; border-radius: 14px; padding: 10px 12px;
+    background: var(--bg-card); border-radius: 14px; padding: 10px 12px;
   }
   .ex-img {
     width: 48px; height: 48px; border-radius: 10px;
     object-fit: cover; flex-shrink: 0;
   }
-  .ex-placeholder { background: linear-gradient(135deg, #333, #444); }
-  .ex-name { flex: 1; font-size: 0.9rem; font-weight: 600; color: #fff; }
+  .ex-placeholder { background: var(--placeholder-gradient); }
+  .ex-name { flex: 1; font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
 
   .remove-btn {
     width: 30px; height: 30px; border-radius: 8px;
-    background: #3A3A3A; color: #888;
+    background: var(--bg-card-alt); color: var(--text-secondary);
     border: none; font-size: 0.8rem; cursor: pointer; flex-shrink: 0;
   }
 
   .add-btn {
     width: 30px; height: 30px; border-radius: 8px;
-    background: #fff; color: #111;
+    background: var(--btn-primary-bg); color: var(--btn-primary-color);
     border: none; font-size: 1.1rem; font-weight: 300; cursor: pointer; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
   }

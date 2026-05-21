@@ -16,6 +16,12 @@ export const actions = {
       return fail(401, { error: 'Ungültiger Benutzername oder Passwort.' });
     }
 
+    // Track login date for contribution map
+    await users.updateOne(
+      { username },
+      { $push: { logins: new Date() } }
+    );
+
     const token = await createSession(username);
     cookies.set('session', token, {
       path: '/',

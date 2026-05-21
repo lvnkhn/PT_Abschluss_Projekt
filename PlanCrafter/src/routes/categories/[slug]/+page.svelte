@@ -1,6 +1,7 @@
 <script>
   import { enhance } from '$app/forms';
   import { toast } from '$lib/toast.svelte.js';
+  import { i18n } from '$lib/i18n.svelte.js';
   let { data } = $props();
   const cat = data.category;
 
@@ -27,7 +28,7 @@
 
   <!-- Back -->
   <a href="/categories" class="back-btn">
-    <span class="back-arrow">‹</span> Categories
+    <span class="back-arrow">‹</span> {i18n.t('Kategorien', 'Categories')}
   </a>
 
   <!-- Header -->
@@ -68,10 +69,10 @@
             </button>
             {#if openPicker === ex._id}
               <div class="plan-picker">
-                <p class="picker-label">Zu Plan:</p>
+                <p class="picker-label">{i18n.t('Zu Plan:', 'To plan:')}</p>
                 <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, null)}>
                   <input type="hidden" name="exerciseId" value={ex._id} />
-                  <button type="submit" class="picker-item">+ Neuer Entwurf</button>
+                  <button type="submit" class="picker-item">+ {i18n.t('Neuer Entwurf', 'New draft')}</button>
                 </form>
                 {#each data.plans as plan}
                   <form method="POST" action="?/addToPlan" use:enhance={handleAddEnhance(ex._id, plan.name)}>
@@ -103,7 +104,7 @@
 
   .back-btn {
     display: flex; align-items: center; gap: 4px;
-    color: #fff; text-decoration: none;
+    color: var(--text-primary); text-decoration: none;
     font-size: 1rem; font-weight: 600; width: fit-content;
   }
   .back-arrow { font-size: 1.4rem; line-height: 1; }
@@ -111,14 +112,14 @@
   .cat-header { display: flex; flex-direction: column; gap: 4px; padding: 4px 0 8px; }
   .cat-icon { font-size: 2rem; }
   .cat-name { font-size: 1.6rem; font-weight: 700; margin: 0; }
-  .cat-count { color: #888; font-size: 0.85rem; margin: 0; }
+  .cat-count { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
 
   .exercise-list { display: flex; flex-direction: column; gap: 10px; }
 
   .ex-card {
     display: flex;
     align-items: center;
-    background: #2A2A2A;
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 12px;
     gap: 12px;
@@ -133,61 +134,59 @@
     width: 72px; height: 72px;
     border-radius: 10px; object-fit: cover; flex-shrink: 0;
   }
-  .ex-placeholder { background: linear-gradient(135deg, #333, #444); }
+  .ex-placeholder { background: var(--placeholder-gradient); }
 
   .ex-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-  .ex-name { font-size: 1rem; font-weight: 600; color: #fff; margin: 0; }
+  .ex-name { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 0; }
 
   .bodyparts { display: flex; flex-wrap: wrap; gap: 4px; }
   .part-badge {
     font-size: 0.68rem; font-weight: 500;
     padding: 2px 8px; border-radius: 6px;
-    background: #383838; color: #aaa;
+    background: var(--bg-card-alt); color: var(--text-dim);
   }
 
   .ex-desc {
-    font-size: 0.78rem; color: #888; margin: 0;
+    font-size: 0.78rem; color: var(--text-secondary); margin: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
-  /* Add section */
   .add-section { position: relative; flex-shrink: 0; }
 
   .add-btn {
     width: 40px; height: 40px; border-radius: 10px;
-    background: #fff; color: #111; border: none;
+    background: var(--btn-primary-bg); color: var(--btn-primary-color); border: none;
     font-size: 1.4rem; font-weight: 300; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.2s;
   }
   .add-btn.added { background: #14B8A6; color: #fff; font-size: 1rem; }
 
-  /* Plan picker */
   .plan-picker {
     position: absolute;
     right: 0; top: 46px;
-    background: #1E1E1E;
-    border: 1px solid #3A3A3A;
+    background: var(--bg-card);
+    border: 1px solid var(--border-1);
     border-radius: 12px;
     padding: 10px;
     z-index: 100;
     min-width: 170px;
     display: flex; flex-direction: column; gap: 6px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 24px var(--shadow);
   }
 
   .picker-label {
-    font-size: 0.72rem; color: #666; margin: 0 0 2px;
+    font-size: 0.72rem; color: var(--text-secondary); margin: 0 0 2px;
     text-transform: uppercase; letter-spacing: 0.4px;
   }
 
   .picker-item {
     width: 100%;
-    background: #2A2A2A; border: 1px solid #444;
-    border-radius: 8px; color: #fff;
+    background: var(--bg-card-alt); border: 1px solid var(--border-1);
+    border-radius: 8px; color: var(--text-primary);
     font-size: 0.85rem; padding: 8px 12px;
     cursor: pointer; text-align: left;
     transition: background 0.15s;
   }
-  .picker-item:hover { background: #333; }
+  .picker-item:hover { background: var(--border-1); }
 </style>

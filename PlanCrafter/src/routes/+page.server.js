@@ -1,5 +1,16 @@
 import { getCollection, serialize } from '$lib/server/db.js';
 
+function seededShuffle(arr, seed) {
+  const a = [...arr];
+  let s = seed;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    const j = s % (i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 export async function load({ locals }) {
   const userId = locals.userId;
   const [plansCol, categoriesCol, exercisesCol] = await Promise.all([
@@ -8,7 +19,7 @@ export async function load({ locals }) {
     getCollection('exercises'),
   ]);
 
-  const [myPlans, allPlans, categories, explore] = await Promise.all([
+  const [myPlans, allPlans, categories, allExercises] = await Promise.all([
     plansCol
       .find({ userId, status: { $in: ['active', 'completed'] } })
       .sort({ createdAt: -1 })
@@ -18,7 +29,7 @@ export async function load({ locals }) {
       .find({ userId, status: { $in: ['active', 'completed'] } })
       .toArray(),
     categoriesCol.find().toArray(),
-    exercisesCol.find().limit(6).toArray(),
+    exercisesCol.find().toArray(),
   ]);
 
   const activePlan = await plansCol.findOne(
@@ -26,7 +37,7 @@ export async function load({ locals }) {
     { sort: { lastActivatedAt: -1, createdAt: -1 } }
   );
 
-  // Recommendations based on most-used category in user's plans
+  // Recommendations based on most-used category
   const allPlanCategories = allPlans.flatMap(p => p.exercises.map(e => e.categoryId));
   let recommended = [];
   if (allPlanCategories.length > 0) {
@@ -38,5 +49,15 @@ export async function load({ locals }) {
     }
   }
 
-  return serialize({ activePlan, plans: myPlans, categories, explore, recommended });
+  // Date-seeded random exercises for carousel (3 slides × 8 = 24)
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  const shuffled = seededShuffle(allExercises, seed);
+  const carouselSlides = [
+    shuffled.slice(0, 8),
+    shuffled.slice(8, 16),
+    shuffled.slice(16, 24),
+  ];
+
+  return serialize({ activePlan, plans: myPlans, categories, carouselSlides, recommended });
 }
