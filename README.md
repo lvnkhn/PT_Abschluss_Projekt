@@ -1,4 +1,4 @@
-# Projektdokumentation - [Projekttitel]
+# Projektdokumentation - [PlanCrafter]
 
 ## Inhaltsverzeichnis
 
@@ -207,9 +207,9 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 
 ##### Workflow 6: Eigene Übung erfassen
 
-1. Navigation → *Add* → Formular mit Name, Kategorie (Dropdown), Referenz-URL
-2. **Speichern** → eigene Übung wird in MongoDB gespeichert (`isCustom: true`)
-3. Übung erscheint in der Exercises-Liste der gewählten Kategorie
+1. Navigation → *Add* → Formular mit Name, Kategorie (Dropdown), **Muskelgruppen** (anklickbare Checkbox-Pills für 14 Body-Parts) und Referenz-URL
+2. **«Übung speichern»** → eigene Übung wird in MongoDB gespeichert (`isCustom: true`, `userId` des eingeloggten Nutzers)
+3. Weiterleitung zu `/exercises` → eigene Übung erscheint in der Liste der gewählten Kategorie
 
 ##### Workflow 7: Home-Navigation, Empfehlungen & Explore-Karussell
 
@@ -257,11 +257,12 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   │   │   ├── auth.js            # Passwort-Hashing (scrypt), Session-Verwaltung
   │   │   ├── db.js              # MongoDB-Verbindung, serialize(), USER_ID (Fallback)
   │   │   └── planHelper.js      # Shared-Helfer: Draft holen/erstellen, Übung hinzufügen/Plan zuweisen
+  │   ├── i18n.svelte.js         # Reaktiver DE/EN-Sprachstate (Svelte-5-Klasse, localStorage-Persist)
   │   └── toast.svelte.js        # Reaktiver Toast-State (Svelte-5-Klasse, seitenübergreifend)
   ├── routes/
   │   ├── +layout.server.js      # Load: username aus Session → an Layout übergeben
   │   ├── +layout.svelte         # Bootstrap CDN, globales Layout, Bottom-Navigation, Topbar-Suche
-  │   ├── +page.svelte           # Homepage (Suche, Empfehlungen, Explore)
+  │   ├── +page.svelte           # Homepage (Empfehlungen, Explore-Karussell)
   │   ├── +page.server.js        # Load: activePlan, myPlans, categories, explore, recommended
   │   ├── categories/
   │   │   ├── +page.svelte       # Alle 7 Kategorien mit Suchfilter
@@ -278,9 +279,6 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   │   ├── login/
   │   │   ├── +page.svelte       # Login-Formular
   │   │   └── +page.server.js    # Passwort verifizieren, Session erstellen
-  │   ├── logout/
-  │   │   ├── +page.svelte       # (leer, nur für Form-Action)
-  │   │   └── +page.server.js    # Session löschen, Cookie entfernen
   │   ├── profile/
   │   │   ├── +page.svelte       # Profilseite: Avatar, Contributions-Heatmap, Logout-Button
   │   │   └── +page.server.js    # Load: logins[]; Action logout: Session löschen
@@ -296,12 +294,12 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   │   │       └── edit/
   │   │           ├── +page.svelte   # Plan bearbeiten (Umbenennen, Übungen verwalten)
   │   │           └── +page.server.js
-  │   └── register/
-  │       ├── +page.svelte       # Registrierungs-Formular
-  │       └── +page.server.js    # User anlegen, Session erstellen
-  ├── add-exercise/
-  │   ├── +page.svelte           # Formular eigene Übung erfassen
-  │   └── +page.server.js        # addExercise Action (isCustom: true)
+  │   ├── register/
+  │   │   ├── +page.svelte       # Registrierungs-Formular
+  │   │   └── +page.server.js    # User anlegen, Session erstellen
+  │   └── add-exercise/
+  │       ├── +page.svelte       # Formular eigene Übung erfassen (Name, Kategorie, Muskelgruppen, Referenz-URL)
+  │       └── +page.server.js    # create Action (isCustom: true), Redirect zu /exercises
   └── app.css                    # Dark Theme, CSS-Variablen
   ```
 
@@ -403,7 +401,7 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus. Alle 9 Erweiterungen 
 
 - **Beschreibung & Nutzen:** Das 🔍-Icon in der Topbar und die Suchleisten auf der Exercises- und Categories-Seite sind nun funktional. Nutzer:innen können Übungen und Kategorien reaktiv filtern, ohne die Seite neu zu laden. Die Topbar-Suche navigiert zu `/exercises?q=...`.
 - **Wo umgesetzt:**
-  - **Frontend:** `+layout.svelte` (Topbar-Suche, inline Eingabefeld mit Toggle), `exercises/+page.svelte` (Suchfeld + `$derived`-Filterung), `categories/+page.svelte` (Suchfeld + `$derived`-Filterung), `+page.svelte` (Homepage-Suchformular navigiert zu Exercises)
+  - **Frontend:** `+layout.svelte` (Topbar-Suche, inline Eingabefeld mit Toggle), `exercises/+page.svelte` (Suchfeld + `$derived`-Filterung), `categories/+page.svelte` (Suchfeld + `$derived`-Filterung)
   - **Backend:** `exercises/+page.server.js` liest den URL-Parameter `?q=` und gibt ihn als `searchQuery` zurück (Client übernimmt die Filterung reaktiv)
 - **Aus Evaluation abgeleitet?:** Ja, Issue Prio 1 — «Suchfunktion aktivieren»
 
@@ -518,6 +516,13 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus. Alle 9 Erweiterungen 
   - **Backend:** `plan/+page.server.js`, `plans/[id]/+page.server.js` (Bestzeit-Logik in `completePlan`-Action)
 - **Aus Evaluation abgeleitet?:** Post-Evaluation-Verbesserungen (UX: Klick-Fläche; Feature: Zeittracking)
 
+### 4.16 DE/EN-Sprachtoggle
+
+- **Beschreibung & Nutzen:** Ein «DE / EN»-Button in der Topbar schaltet die gesamte App-Oberfläche zwischen Deutsch und Englisch um. Die Einstellung wird im `localStorage` gespeichert und beim nächsten Besuch wiederhergestellt. Alle sichtbaren Texte (Labels, Platzhalter, Buttons, Navigation) werden über eine zentrale `i18n.t(de, en)`-Funktion übersetzt, ohne die Seite neu zu laden.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/lib/i18n.svelte.js` (Svelte-5-Klasse mit `$state(lang)`, `toggle()`-Methode, `t(de, en)`-Übersetzungsfunktion, localStorage-Persist), `+layout.svelte` (DE/EN-Button in der Topbar, `toggleLang()`-Handler), alle `+page.svelte`-Dateien (Texte via `i18n.t(...)`)
+- **Aus Evaluation abgeleitet?:** Post-Evaluation-Erweiterung (Internationalisierung / Zugänglichkeit für englischsprachige Nutzende)
+
 ## 5. Projektorganisation [Optional]
 Beispiele:
 - **Repository & Struktur:** _[Link; kurze Strukturübersicht]_  
@@ -538,7 +543,7 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
   - **Code:** Umsetzung aller SvelteKit-Routen und Serverlogik (`+page.server.js`, `db.js`, `planHelper.js`) sowie aller Svelte-Komponenten (`+page.svelte`) für sämtliche Seiten der App: Homepage, Exercises-Liste, Übungsdetailseite, Categories-Übersicht, Kategorie-Detailseite, Your Plan (Draft + Active + Completed), Plan-Detailseite, Add-Exercise-Formular
   - **Plan-Feature:** Vollständige Implementierung des Plan-Workflows (Draft → Active → Completed) inkl. `use:enhance`-Pattern für Live-Updates ohne Seitenreload, `$derived()`-Reaktivität in Svelte 5, MongoDB-Positionaloperator für Array-Updates (`exercises.$`) und `$pull` für Array-Elemente entfernen
   - **Debugging:** Behebung des MongoDB-Verbindungsfehlers (`MONGODB_URI` nicht gefunden), Svelte-5-spezifischer Warnungen (reaktive Props-Destrukturierung) sowie Fix fehlender Live-Updates bei Form-Actions (fehlende `use:enhance`-Callbacks)
-  - **Post-Evaluation-Erweiterungen:** Implementierung aller 6 neuen Features nach der Usability-Evaluation: Profilseite mit Contributions-Heatmap, Dark/Light-Mode-Toggle (CSS Custom Properties + localStorage), Echtzeit-Suchvorschläge (Autocomplete-Dropdown), Explore-Karussell (datum-seeded LCG-Shuffle, 3 Slides × 8 Übungen, Swipe-Gesten), Plan-Erstellen-Button auf Plans-Seite, Vollflächiger Übungs-Klick + Millisekunden-Timer + Bestzeit-Tracking
+  - **Post-Evaluation-Erweiterungen:** Implementierung aller neuen Features nach der Usability-Evaluation: Profilseite mit Contributions-Heatmap, Dark/Light-Mode-Toggle (CSS Custom Properties + localStorage), Echtzeit-Suchvorschläge (Autocomplete-Dropdown), Explore-Karussell (datum-seeded LCG-Shuffle, 3 Slides × 8 Übungen, Swipe-Gesten), Plan-Erstellen-Button auf Plans-Seite, Vollflächiger Übungs-Klick + Millisekunden-Timer + Bestzeit-Tracking, **DE/EN-Sprachtoggle** (Svelte-5-Klasse `i18n.svelte.js`, alle UI-Texte via `i18n.t(de, en)`, localStorage-Persist)
   - **Dokumentation:** Verfassen der technischen Abschnitte der Projektdokumentation (3.4.1 Workflows/Testanleitung, 3.4.2 Technik, 4.x Erweiterungen, 6.x) sowie der `CLAUDE.md` Projektregeln
   - Teile des Codes und der Inhalte stammen aus KI-Unterstützung, wurden jedoch vom Entwickler geprüft, angepasst und in das Projekt integriert.
 - **Eigene Leistung (Abgrenzung):**
