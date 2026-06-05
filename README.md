@@ -125,18 +125,18 @@ Im Rahmen einer Crazy-8s-Session wurden zwei Varianten für die App-Struktur ski
 
 #### 3.4.1 Entwurf (Design)
 
-![Home](PlanCrafter/static/img/Home.png)
-![Exercises](PlanCrafter/static/img/Exercises.png)
-![Exercise Detail 1](PlanCrafter/static/img/Detail_1.png)
-![Exercise Detail 2](PlanCrafter/static/img/Detail_2.png)
-![Categories Overview](PlanCrafter/static/img/Categories.png)
-![Categories Detail](PlanCrafter/static/img/Categories_Detail.png)
-![YourPlan Overview](PlanCrafter/static/img/Your_Plan_Overview.png)
-![YourPlan Detail](PlanCrafter/static/img/Your_Plan_Detail.png)
-![YourPlan New](PlanCrafter/static/img/Your_Plan_new_plan.png)
-![Add Exercise](PlanCrafter/static/img/Add_Exercise.png)
-![Profile](PlanCrafter/static/img/Profile.png)
-![Login](PlanCrafter/static/img/Login.png)
+![Home](img/Home.png)
+![Exercises](img/Exercises.png)
+![Exercise Detail 1](img/Detail_1.png)
+![Exercise Detail 2](img/Detail_2.png)
+![Categories Overview](img/Categories.png)
+![Categories Detail](img/Categories_Detail.png)
+![YourPlan Overview](img/Your_Plan_Overview.png)
+![YourPlan Detail](img/Your_Plan_Detail.png)
+![YourPlan New](img/Your_Plan_new_plan.png)
+![Add Exercise](img/Add_Exercise.png)
+![Profile](img/Profile.png)
+![Login](img/Login.png)
 
 
 ##### Informationsarchitektur
