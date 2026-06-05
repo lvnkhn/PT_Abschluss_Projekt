@@ -22,10 +22,10 @@
 <!-- Diese Vorlage ist für eine README.md im Repository gedacht. Abschnitte mit [Optional] können weggelassen werden, wenn in den Übungen nichts anderes verlangt wird. -->
 
 ## 1. Ausgangslage
-- **Problem:** Viele Sportler:innen und Studierende verbringen unverhältnismässig viel Zeit damit, passende Übungen zu recherchieren und einen sinnvollen Trainingsplan zusammenzustellen. Die schiere Menge an Trainingsmethoden – von klassischem Krafttraining über Mobility und Plyometrics bis hin zu Kettlebell und Agility – führt zu Entscheidungsmüdigkeit und Unsicherheit. Bestehende Lösungen sind entweder zu komplex und abo-basiert (z. B. Freeletics, Fitbod), zu starr mit vorgefertigten Plänen, oder reine Nachschlagewerke ohne interaktive Planungsfunktion (z. B. MuscleWiki, ExRx.net). Es fehlt ein schlankes Tool, das Übungen nach Muskelgruppe *und* Trainingskategorie filterbar macht und mit wenigen Klicks einen individuellen Trainingsplan generiert.
+- **Problem:** Viele Sportler:innen und Studierende verbringen unverhältnismässig viel Zeit damit, passende Übungen zu recherchieren und einen sinnvollen Trainingsplan zusammenzustellen. Die schiere Menge an Trainingsmethoden – von klassischem Krafttraining über Mobility und Plyometrics bis hin zu Kettlebell und Agility – führt zu Entscheidungsmüdigkeit und Unsicherheit. Bestehende Lösungen sind entweder zu komplex und abo-basiert (z. B. Freeletics, Fitbod), zu starr mit vorgefertigten Plänen, oder reine Nachschlagewerke ohne interaktive Planungsfunktion (z. B. MuscleWiki, ExRx.net). Es fehlt ein schlankes Tool, das Übungen Trainingskategorie filterbar macht und mit wenigen Klicks einen individuellen Trainingsplan generiert.
 - **Ziele:**
   - Eine Web-App entwickeln, mit der Nutzer:innen in unter 2 Minuten einen individuellen Trainingsplan zusammenstellen können
-  - Übungen sind filterbar nach Muskelgruppe und Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation)
+  - Übungen sind filterbar nach Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation)
   - Per Klick werden Übungen in eine visuelle Trainingsplan-Übersicht übernommen
   - Jede Trainingskategorie verfügt über eine eigene Detailseite mit allen zugehörigen Übungen
   - Minimalistisches, intuitives UI – keine Registrierung, kein Abo, keine Überfrachtung
@@ -34,13 +34,13 @@
 ## 2. Lösungsidee
  
 - **Kernfunktionalität:** Der zentrale Workflow der Web-App gliedert sich in drei Schritte:
-  1. **Filtern** – Nutzer:innen wählen eine oder mehrere Muskelgruppen und/oder Trainingskategorien aus.
+  1. **Filtern** – Nutzer:innen wählen eine Trainingskategorie aus.
   2. **Auswählen** – Alle passenden Übungen werden angezeigt. Per Klick auf eine Übung wird diese direkt in die Trainingsplan-Übersicht aufgenommen.
   3. **Übersicht** – Der zusammengestellte Trainingsplan wird als kompakte visuelle Übersicht dargestellt, die alle gewählten Übungen für die aktuelle Session enthält.
   Ergänzend verfügt jede Trainingskategorie (Athletic, Mobility, Plyometrics, Isometrics, Kraft, Kettlebell, Rotation) über eine eigene Detailseite, auf der alle Übungen dieser Kategorie aufgelistet und beschrieben sind.
 - **Annahmen [Optional]:**
   - Nutzer:innen wissen grundsätzlich, welche Muskelgruppe(n) sie trainieren möchten, benötigen aber Unterstützung bei der konkreten Übungsauswahl.
-  - Die Kombination aus Muskelgruppen-Filter und Kategorien-Filter bietet genügend Steuerung, um relevante Übungen schnell einzugrenzen.
+  - Der Kategorien-Filter bietet genügend Steuerung, um relevante Übungen schnell einzugrenzen.
   - Ein minimalistischer «Klick-zum-Plan»-Workflow wird gegenüber algorithmisch generierten Plänen bevorzugt, da er den Nutzer:innen mehr Kontrolle überlässt.
 - **Abgrenzung [Optional]:**
   - Kein automatisch generierter Trainingsplan (kein AI-Coach, keine Periodisierung)
@@ -93,7 +93,10 @@ Im Rahmen einer Crazy-8s-Session wurden zwei Varianten für die App-Struktur ski
   | **Detail Page** | Übungsillustration, Beschreibung, nummerierte Schritte | Gleich, ergänzt um Referenz-Link |
 - **Skizzen:**
   - **Variante A** (Crazy-8s, Seite 1): Karussell-basierte Homepage mit separater Help-Seite. Alle Kernfunktionen (Plan, Exercises, Categories) nur über Navigation erreichbar.
+
   - **Variante B** (überarbeitete Skizze, Seite 3): Dashboard-Homepage mit «Hi \<User\>»-Begrüssung, Suchleiste, Container für Recent Workout, My Plans, Categories und Explore. Help-Seite durch Add Exercise ersetzt. Floating «+»-Button für schnellen Zugriff.
+
+    ![Skizze Variante B](img/PT-Skizze-3.jpg)
 ### 3.3 Decide
  
 - **Gewählte Variante & Begründung:** Variante B – Dashboard-Homepage. Die Homepage ist der Einstiegspunkt und prägt den ersten Eindruck am stärksten. Das ursprüngliche Karussell (Variante A) nutzte den verfügbaren Platz nicht aus und zwang Nutzende, aktiv weiterzuklicken, um an die Kernfunktionen zu gelangen. Das Dashboard-Layout zeigt alle wichtigen Bereiche (aktueller Plan, My Plans, Kategorien, Explore) direkt auf der Startseite als Container an.
@@ -105,23 +108,38 @@ Im Rahmen einer Crazy-8s-Session wurden zwei Varianten für die App-Struktur ski
   1. Die Help-Seite wirkte als eigene Hauptseite überflüssig → Umfunktionierung zu einer **Add Exercise**-Seite mit Formular (Name, Bodypart, Category, References) und Liste eigener Übungen.
   2. Die Homepage sollte nutzerfreundlicher gestaltet werden, indem die wichtigsten Features als Container auf derselben Seite dargestellt werden → **Dashboard-Layout** mit Containern für Recent Workout, My Plans, Categories und Explore.
   3. Kategorien sollen visuell und funktional klar unterscheidbar sein → **Farbkodierung und Icons** pro Kategorie; Überschneidungen werden später über Tags abgebildet.
-- **End-to-End-Ablauf:** _[Beschreibung inkl. User Journey Map]_  
-- **Mockup:** _[URL, z. B. Figma; Screenshots mit kurzen Beschreibungen]_  
+- **End-to-End-Ablauf:**
 
-### 3.4 Prototype
+  Der zentrale Nutzungsflow gliedert sich in vier Schritte:
 
-#### 3.4.1. Entwurf (Design)
-**TODO** Anpassen und Screenshots einfügen (Final version)**TODO**
-Beschreibt die Gestaltung und Interaktion.
-> **Hinweis:** Hier wird der **Prototyp** beschrieben, nicht das **Mockup**.
-- **Informationsarchitektur:** _[z. B. Seiten/Navigation: Konzept, nicht die technische Umsetzung]_
-- **User Interface Design:** _[wichtige Screens: Screenshots mit kurzen Erläuterungen]_  
-- **Designentscheidungen:** _[zentrale Entscheidungen und Begründungen]_
-## 3.4 Prototype
+  1. **Einstieg (Home):** Nutzer:in öffnet die App; die Homepage zeigt den aktiven Plan (falls vorhanden), die zwei neuesten eigenen Pläne sowie alle Trainingskategorien als Kacheln.
+  2. **Übungen finden:** Via *Exercises* (Kategorie-Chip-Filter) oder *Categories* (direkter Kategorie-Einstieg) werden passende Übungen gesucht. Die Detailseite zeigt Bild, Muskelgruppen-Visualisierung und Schritt-für-Schritt-Anleitung.
+  3. **Plan zusammenstellen:** «+»-Button fügt eine Übung dem Draft-Plan hinzu (bei mehreren aktiven Plänen: Inline-Picker zur Zuweisung). *Your Plan* zeigt alle gewählten Übungen; Plan benennen → Speichern.
+  4. **Workout durchführen:** Plan über *Plans* starten, Timer aktivieren, Übungen abhaken; Plan schliesst automatisch ab wenn alle erledigt – oder manuell via «Training abschliessen».
 
-### 3.4.1 Entwurf (Design)
+- **Mockup:** Referenz-Mockup (High-Fidelity) erstellt in Figma, basierend auf Variantenentscheid B (Dashboard-Homepage). Abgedeckte Screens: Home, Exercises, Your Plan, Categories und Übungsdetail.
 
-#### Informationsarchitektur
+  ![Mockup](img/mockup.png)
+
+#### 3.4 Prototype
+
+#### 3.4.1 Entwurf (Design)
+
+![Home](img/Home.png)
+![Exercises](img/Exercises.png)
+![Exercise Detail 1](img/Detail_1.png)
+![Exercise Detail 2](img/Detail_2.png)
+![Categories Overview](img/Categories.png)
+![Categories Detail](img/Categories_Detail.png)
+![YourPlan Overview](img/Your_Plan_Overview.png)
+![YourPlan Detail](img/Your_Plan_Detail.png)
+![YourPlan New](img/Your_Plan_new_plan.png)
+![Add Exercise](img/Add_Exercise.png)
+![Profile](img/Profile.png)
+![Login](img/Login.png)
+
+
+##### Informationsarchitektur
 
 Der Prototyp ist um fünf Hauptbereiche organisiert, die über eine persistente Bottom-Navigation jederzeit erreichbar sind:
 
@@ -133,7 +151,7 @@ Der Prototyp ist um fünf Hauptbereiche organisiert, die über eine persistente 
 
 Die Navigationsstruktur ist flach gehalten – alle zentralen Funktionen sind mit maximal zwei Taps erreichbar. Detailansichten öffnen sich kontextuell aus den Listenansichten.
 
-#### User Interface Design
+##### User Interface Design
 
 Die wichtigsten Screens des Prototyps und ihre Interaktionen:
 
@@ -144,7 +162,7 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
 - **Add Exercise:** Formular mit Dropdown für Kategorien; "Save Exercise" speichert und kehrt zur Übersicht zurück.
 - **Übungsdetail:** Zeigt Bild, Tags und Schritt-für-Schritt-Anweisungen zur Übung.
 
-#### Designentscheidungen
+##### Designentscheidungen
 
 - **Dark Mode:** Reduziert Blendwirkung beim Training, schont den Akku auf OLED-Displays und entspricht den Konventionen gängiger Fitness-Apps.
 - **Bottom-Navigation:** Permanente Erreichbarkeit der fünf Hauptbereiche reduziert den Navigationsaufwand und folgt etablierten Mobile-Patterns.
@@ -153,13 +171,13 @@ Die wichtigsten Screens des Prototyps und ihre Interaktionen:
 - **Farbliche Akzente pro Kategorie:** Verbessern die Wiedererkennbarkeit und unterstützen die visuelle Orientierung.
 - **Flache Navigationshierarchie:** Hält den Klickpfad kurz und vermeidet unnötige Zwischenebenen.
 
-#### Workflows & Testanleitung
+##### Workflows & Testanleitung
 
 Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werden (`npm run dev` im Ordner `PlanCrafter`). Die App unterstützt Login/Registrierung; ohne Account läuft alles unter dem Demo-User (`userId: "demo"`).
 
 ---
 
-##### Workflow 1: Registrierung, Login & Profil
+###### Workflow 1: Registrierung, Login & Profil
 
 1. «Anmelden»-Link in der Topbar antippen → Weiterleitung zu `/login`
 2. «Registrieren»-Link antippen → `/register` → Benutzername (min. 3 Zeichen) und Passwort (min. 6 Zeichen) eingeben → «Konto erstellen»
@@ -168,7 +186,7 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 5. **Abmelden:** auf der Profilseite «Abmelden» antippen → Session wird gelöscht, Weiterleitung zu `/login`
 6. **Ohne Account:** «Ohne Konto fortfahren (Demo)» antippen → App funktioniert mit `userId: "demo"`
 
-##### Workflow 2: Übungen durchsuchen und suchen
+###### Workflow 2: Übungen durchsuchen und suchen
 
 1. Navigation → *Exercises* → alle Übungen werden geladen
 2. Kategorie-Chip (z. B. «Kraft») antippen → Liste filtert auf diese Kategorie
@@ -176,13 +194,13 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 4. Alternativ: 🔍-Icon in der Topbar antippen → Sucheingabe erscheint inline mit **Autocomplete-Dropdown** für Übungen & Kategorien
 5. Übung antippen → Detailseite mit Bild, Kategorie-Badge, bodyParts-Badges, **BodyMap-Anatomieübersicht**, Schritt-für-Schritt-Anleitung und Referenz-Link
 
-##### Workflow 3: Kategoriebasiert suchen
+###### Workflow 3: Kategoriebasiert suchen
 
 1. Navigation → *Categories* → alle 7 Kategorien mit Übungsanzahl; **Suchfeld** filtert Kategorien reaktiv
 2. Kategorie antippen → Übungsliste dieser Kategorie
 3. Übung antippen → Detailseite (Zurück-Button navigiert zur Kategorie zurück)
 
-##### Workflow 4: Plan erstellen und Workout durchführen
+###### Workflow 4: Plan erstellen und Workout durchführen
 
 1. Auf einer Übungsliste (Exercises, Categories oder Detailseite) den **+**-Button antippen
    - **Kein aktiver Plan vorhanden:** Übung wird direkt einem Draft-Plan hinzugefügt
@@ -196,7 +214,7 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 8. Übungen abhaken: Überall auf das Übungs-Feld tippen (nicht nur auf den Kreis) → Übung wird als erledigt markiert (live, kein Reload); sobald alle erledigt: Plan automatisch abgeschlossen
 9. **Partieller Abschluss:** «Training abschliessen (x/y)»-Button antippen → Plan wird abgeschlossen; **gemessene Zeit wird gespeichert und als Bestzeit angezeigt**
 
-##### Workflow 5: Gespeicherte Pläne verwalten
+###### Workflow 5: Gespeicherte Pläne verwalten
 
 1. Navigation → *Plans* → **obere Hälfte:** «Neuen Plan erstellen»-Button; **untere Hälfte:** alle gespeicherten Pläne mit direkten Aktions-Buttons:
    - **✏️ (Bearbeiten):** Öffnet die Bearbeitungsseite (`/plans/[id]/edit`) → Umbenennen, Übungen hinzufügen/entfernen
@@ -205,13 +223,13 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 3. Abgeschlossener Plan: «Erneut starten» → Haken werden zurückgesetzt, Plan wird wieder aktiv
 4. Home → *My Plans* zeigt die 2 neuesten Pläne; **View all** → vollständige Planliste
 
-##### Workflow 6: Eigene Übung erfassen
+###### Workflow 6: Eigene Übung erfassen
 
 1. Navigation → *Add* → Formular mit Name, Kategorie (Dropdown), **Muskelgruppen** (anklickbare Checkbox-Pills für 14 Body-Parts) und Referenz-URL
 2. **«Übung speichern»** → eigene Übung wird in MongoDB gespeichert (`isCustom: true`, `userId` des eingeloggten Nutzers)
 3. Weiterleitung zu `/exercises` → eigene Übung erscheint in der Liste der gewählten Kategorie
 
-##### Workflow 7: Home-Navigation, Empfehlungen & Explore-Karussell
+###### Workflow 7: Home-Navigation, Empfehlungen & Explore-Karussell
 
 1. *Current Workout*-Card zeigt den aktiven/nicht abgeschlossenen Plan → Antippen öffnet *Your Plan*
 2. *My Plans* zeigt die 2 neuesten Pläne → direkt anwählbar
@@ -221,7 +239,7 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
 6. ☀️/🌙-Toggle in der Topbar → wechselt zwischen Dark Mode und Light Mode (Einstellung wird in localStorage gespeichert)
 7. «PlanCrafter»-Schriftzug oben → navigiert immer zur Homepage
 
-##### Workflow 8: Profil & Aktivitäts-Heatmap
+###### Workflow 8: Profil & Aktivitäts-Heatmap
 
 1. 👤-Icon in der Topbar antippen (wenn angemeldet) → Profilseite `/profile`
 2. **Contributions-Heatmap:** 52-Wochen-Grid à 7 Tage (ähnlich GitHub/GitLab); Farbintensität zeigt Anzahl Logins pro Tag
@@ -316,7 +334,7 @@ Alle Funktionalitäten können lokal unter `http://localhost:5173` getestet werd
   - **Reaktivität:** `use:enhance` (SvelteKit) sendet Form-Actions per Fetch ohne Reload; `update({ reset: false })` löst die Load-Funktion erneut aus, sodass UI-Updates sofort sichtbar sind. Berechnete Werte (`doneCount`, `isActive`) werden mit Svelte-5-`$derived()` reaktiv gehalten
   - **Form Actions** decken alle schreibenden Operationen ab: `addToPlan`, `saveName`, `toggleDone`, `removeExercise`, `restart`, `completePlan`, `activate` — jede in der `+page.server.js` der zugehörigen Route
 
-- **Deployment:** Lokale Entwicklungsumgebung (`http://localhost:5173`), kein produktives Deployment
+- **Deployment:** [https://plancrafter.netlify.app/](https://plancrafter.netlify.app/) (Netlify). Lokal via `npm run dev` unter `http://localhost:5173`.
 
 - **Besondere Entscheidungen:**
   - `categoryId` als Slug-String statt ObjectId: Vereinfacht den manuellen Datenimport erheblich, da keine Cross-Collection-Referenzen beim Import in Compass notwendig sind
@@ -524,10 +542,19 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus. Alle 9 Erweiterungen 
 - **Aus Evaluation abgeleitet?:** Post-Evaluation-Erweiterung (Internationalisierung / Zugänglichkeit für englischsprachige Nutzende)
 
 ## 5. Projektorganisation [Optional]
-Beispiele:
-- **Repository & Struktur:** _[Link; kurze Strukturübersicht]_  
-- **Issue-Management:** _[Vorgehen kurz beschreiben]_  
-- **Commit-Praxis:** _[z. B. sprechende Commits]_
+
+- **Repository & Struktur:** [github.com/lvnkhn/PT_Abschluss_Projekt](https://github.com/lvnkhn/PT_Abschluss_Projekt)
+
+  Das Repository ist öffentlich zugänglich und enthält den vollständigen Sourcecode (`PlanCrafter/`), die Projektdokumentation (`README.md`), die Netlify-Konfiguration (`netlify.toml`) sowie Hilfsdaten und Skripte (`data/`, `scripts/`).
+
+- **Commit-Praxis:** Commits folgen einer sprechenden, präfixbasierten Konvention:
+  - `feat:` für neue Funktionen (z. B. `feat: post-evaluation improvements – profile, dark mode, search suggestions, carousel, timer`)
+  - `fix:` für Bugfixes (z. B. `fix: always show create plan button at top of /plan when not mid-workout`)
+  - `chore:` für Wartungsarbeiten (z. B. `chore: remove dead code and unused files`)
+
+  Commit-Nachrichten beschreiben das *Was* der Änderung auf Funktionsebene. Jeder Commit entspricht einem abgeschlossenen, lauffähigen Arbeitsschritt.
+
+- **Issue-Management:** Es wurde kein separates Issue-Tracker-System eingesetzt. Offene Aufgaben wurden direkt aus der Usability-Evaluation (Kap. 3.5) als priorisierte Liste abgeleitet und in der Dokumentation geführt. Die neun identifizierten Usability-Issues (Priorität 1–9) wurden vollständig implementiert und in Kap. 4 als Erweiterungen dokumentiert.
 
 ## 6. KI-Deklaration
 Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im Projekt.
