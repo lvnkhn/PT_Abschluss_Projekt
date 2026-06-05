@@ -125,18 +125,18 @@ Im Rahmen einer Crazy-8s-Session wurden zwei Varianten für die App-Struktur ski
 
 #### 3.4.1 Entwurf (Design)
 
-![Home](img/Home.png)
-![Exercises](img/Exercises.png)
-![Exercise Detail 1](img/Detail_1.png)
-![Exercise Detail 2](img/Detail_2.png)
-![Categories Overview](img/Categories.png)
-![Categories Detail](img/Categories_Detail.png)
-![YourPlan Overview](img/Your_Plan_Overview.png)
-![YourPlan Detail](img/Your_Plan_Detail.png)
-![YourPlan New](img/Your_Plan_new_plan.png)
-![Add Exercise](img/Add_Exercise.png)
-![Profile](img/Profile.png)
-![Login](img/Login.png)
+![Home](static/img/Home.png)
+![Exercises](static/img/Exercises.png)
+![Exercise Detail 1](static/img/Detail_1.png)
+![Exercise Detail 2](static/img/Detail_2.png)
+![Categories Overview](static/img/Categories.png)
+![Categories Detail](static/img/Categories_Detail.png)
+![YourPlan Overview](static/img/Your_Plan_Overview.png)
+![YourPlan Detail](static/img/Your_Plan_Detail.png)
+![YourPlan New](static/img/Your_Plan_new_plan.png)
+![Add Exercise](static/img/Add_Exercise.png)
+![Profile](static/img/Profile.png)
+![Login](static/img/Login.png)
 
 
 ##### Informationsarchitektur
